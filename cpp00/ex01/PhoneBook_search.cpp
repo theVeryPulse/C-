@@ -65,13 +65,13 @@ void PhoneBook::search()
     if (Index >= 0 && Index <= 7)
     {
         if (this->ContactFilled[Index])
-        {
+        { // clang-format off
             std::cout << "First name: " + Contacts[Index].FirstName + '\n'
                 + "Last name: " + Contacts[Index].LastName + '\n'
                 + "Nickname: " +Contacts[Index].Nickname + '\n'
                 + "Phone number: " +Contacts[Index].PhoneNumber + '\n'
                 + "Darkest secret: " +Contacts[Index].DarkestSecret + '\n';
-        }
+        } // clang-format on
         else
             std::cout << "Index " << Index << " is not recorded yet.\n";
     }
