@@ -4,33 +4,33 @@
 #include "Contact.hpp"
 #include <string>
 
-enum Field
-{
-    FirstName,
-    LastName,
-    Nickname,
-    PhoneNumber,
-    DarkestSecret
-};
 
 class PhoneBook
 {
   public:
-    Contact Contacts[8];
-    bool ContactFilled[8];
+    Contact contacts_[8];
+    bool contact_filled_[8];
+    enum Field
+    {
+        FirstName,
+        LastName,
+        Nickname,
+        PhoneNumber,
+        DarkestSecret
+    };
 
     PhoneBook(void)
     {
-        ContactIndex = 0;
-        for (int i = 0; i < PhoneBookSize; i++)
-            ContactFilled[i] = false;
+        contact_index_ = 0;
+        for (int i = 0; i < phone_book_size_; i++)
+            contact_filled_[i] = false;
     }
     void addContact(void);
     void search();
 
   private:
-    int ContactIndex;
-    const static int PhoneBookSize = 8;
+    int contact_index_;
+    const static int phone_book_size_ = 8;
 
     // Helper functions for addContact();
 

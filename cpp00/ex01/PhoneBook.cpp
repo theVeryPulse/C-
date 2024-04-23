@@ -4,39 +4,39 @@
 
 void PhoneBook::addContact(void)
 {
-    if (ContactIndex >= PhoneBookSize)
-        ContactIndex = 0;
+    if (contact_index_ >= phone_book_size_)
+        contact_index_ = 0;
     std::cout << "Adding new contact...\n";
-    ContactFilled[ContactIndex] = true;
-    fillField(FirstName, &Contacts[ContactIndex]);
-    fillField(LastName, &Contacts[ContactIndex]);
-    fillField(Nickname, &Contacts[ContactIndex]);
-    fillField(PhoneNumber, &Contacts[ContactIndex]);
-    fillField(DarkestSecret, &Contacts[ContactIndex]);
-    ++ContactIndex;
+    contact_filled_[contact_index_] = true;
+    fillField(FirstName, &contacts_[contact_index_]);
+    fillField(LastName, &contacts_[contact_index_]);
+    fillField(Nickname, &contacts_[contact_index_]);
+    fillField(PhoneNumber, &contacts_[contact_index_]);
+    fillField(DarkestSecret, &contacts_[contact_index_]);
+    ++contact_index_;
     std::cout << "Contact added.\n";
 };
 
 void PhoneBook::fillField(enum Field Field, Contact *ThisContact)
 {
-    std::string YesNo = "";
-    std::string Prompt = PhoneBook::promptFor(Field);
-    std::string *Slot = PhoneBook::slotFor(Field, ThisContact);
-    std::string Input;
+    std::string answer = "";
+    std::string prompt = PhoneBook::promptFor(Field);
+    std::string *slot = PhoneBook::slotFor(Field, ThisContact);
+    std::string input;
 
-    while (std::cin.eof() == false && YesNo[0] != 'Y' && YesNo[0] != 'y')
+    while (std::cin.eof() == false && answer[0] != 'Y' && answer[0] != 'y')
     {
-        std::cout << Prompt + ": ";
-        std::getline(std::cin, Input);
-        *Slot = Input;
-        std::cout << Prompt + " is \"" + *Slot + "\".\nConfirm?(Y/n) ";
-        std::getline(std::cin, YesNo);
+        std::cout << prompt + ": ";
+        std::getline(std::cin, input);
+        *slot = input;
+        std::cout << prompt + " is \"" + *slot + "\".\nConfirm?(Y/n) ";
+        std::getline(std::cin, answer);
     }
 }
 
-std::string PhoneBook::promptFor(enum Field Field)
+std::string PhoneBook::promptFor(enum Field field)
 {
-    switch (Field)
+    switch (field)
     {
     case FirstName:
         return "First name";
@@ -62,19 +62,19 @@ std::string *PhoneBook::slotFor(enum Field Field, Contact *ThisContact)
     switch (Field)
     {
     case FirstName:
-        return &ThisContact->FirstName;
+        return &ThisContact->first_name_;
         break;
     case LastName:
-        return &ThisContact->LastName;
+        return &ThisContact->last_name_;
         break;
     case Nickname:
-        return &ThisContact->Nickname;
+        return &ThisContact->nickname_;
         break;
     case PhoneNumber:
-        return &ThisContact->PhoneNumber;
+        return &ThisContact->phone_number_;
         break;
     case DarkestSecret:
-        return &ThisContact->DarkestSecret;
+        return &ThisContact->darkest_secret_;
         break;
     }
     return NULL;
