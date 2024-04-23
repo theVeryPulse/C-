@@ -15,7 +15,7 @@ enum Field
 
 class PhoneBook
 {
-public:
+  public:
     Contact Contacts[8];
     bool ContactFilled[8];
 
@@ -28,7 +28,7 @@ public:
     void addContact(void);
     void search();
 
-private:
+  private:
     int ContactIndex;
 
     void fillField(enum Field Field, Contact *ThisContact);
