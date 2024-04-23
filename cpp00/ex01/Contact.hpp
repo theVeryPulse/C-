@@ -1,3 +1,5 @@
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 #include <string>
 
 ///\brief Contact information: first name, last name, nickname, phone number,
@@ -11,3 +13,5 @@ class Contact
     std::string phone_number_;
     std::string darkest_secret_;
 };
+
+#endif
