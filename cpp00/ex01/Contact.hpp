@@ -1,13 +1,13 @@
 #include <string>
 
-///  first name, 
-///  last name, 
+///  first name,
+///  last name,
 ///  nickname,
 ///  phone number,
 ///  darkest secret
 class Contact
 {
-public:
+  public:
     std::string FirstName;
     std::string LastName;
     std::string Nickname;

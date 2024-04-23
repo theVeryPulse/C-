@@ -1,14 +1,14 @@
 #include "PhoneBook.hpp"
-#include <iostream>
-#include <iomanip>
-#include <string>
 #include <cstdlib>
+#include <iomanip>
+#include <iostream>
+#include <string>
 
 void rightAlignedWidth10(std::string *content)
 {
     if ((*content).length() > 10)
     {
-        std::cout << std::right << std::setw(9)<< (*content).substr(0, 9);
+        std::cout << std::right << std::setw(9) << (*content).substr(0, 9);
         std::cout << '.';
     }
     else

@@ -24,7 +24,7 @@ void PhoneBook::fillField(enum Field Field, Contact *ThisContact)
     std::string *Slot = PhoneBook::slotFor(Field, ThisContact);
     std::string Input;
 
-    while (std::cin.eof() == false && YesNo[0] != 'Y' && YesNo[0] != 'y' )
+    while (std::cin.eof() == false && YesNo[0] != 'Y' && YesNo[0] != 'y')
     {
         std::cout << Prompt + ": ";
         std::getline(std::cin, Input);
@@ -53,7 +53,7 @@ std::string PhoneBook::promptFor(enum Field Field)
     case DarkestSecret:
         return "Darkest Secret";
         break;
-   }
+    }
 }
 
 std::string *PhoneBook::slotFor(enum Field Field, Contact *ThisContact)

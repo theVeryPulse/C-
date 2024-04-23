@@ -1,5 +1,5 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 int main()
 {
@@ -14,18 +14,18 @@ int main()
     MyFile.close();
 
     // Create a text string, which is used to output the text file
-    std::string myText;
+    std::string MyText;
 
     // Read from the text file
     std::ifstream MyReadFile("file.txt");
 
     // Use a while loop together with the getline() function to read the file line by line
-    while (std::getline(MyReadFile, myText))
+    while (std::getline(MyReadFile, MyText))
     {
         // Output the text from the file
-        std::cout << myText + '\n';
+        std::cout << MyText + '\n';
     }
 
-// Close the file
-MyReadFile.close(); 
+    // Close the file
+    MyReadFile.close();
 }
