@@ -4,7 +4,7 @@
 
 void PhoneBook::addContact(void)
 {
-    if (ContactIndex > 7)
+    if (ContactIndex >= PhoneBookSize)
         ContactIndex = 0;
     std::cout << "Adding new contact...\n";
     ContactFilled[ContactIndex] = true;
@@ -54,6 +54,7 @@ std::string PhoneBook::promptFor(enum Field Field)
         return "Darkest Secret";
         break;
     }
+    return "";
 }
 
 std::string *PhoneBook::slotFor(enum Field Field, Contact *ThisContact)
@@ -76,4 +77,5 @@ std::string *PhoneBook::slotFor(enum Field Field, Contact *ThisContact)
         return &ThisContact->DarkestSecret;
         break;
     }
+    return NULL;
 }

@@ -22,7 +22,7 @@ class PhoneBook
     PhoneBook(void)
     {
         ContactIndex = 0;
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < PhoneBookSize; i++)
             ContactFilled[i] = false;
     }
     void addContact(void);
@@ -30,10 +30,18 @@ class PhoneBook
 
   private:
     int ContactIndex;
+    const static int PhoneBookSize = 8;
+
+    // Helper functions for addContact();
 
     void fillField(enum Field Field, Contact *ThisContact);
     std::string promptFor(enum Field Field);
     std::string *slotFor(enum Field Field, Contact *ThisContact);
+
+    // Helper functions for search();
+    
+    int displayAddedContacts();
+    void displayRequiredContact();
 };
 
 #endif

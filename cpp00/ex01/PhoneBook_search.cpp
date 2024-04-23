@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-void rightAlignedWidth10(std::string *content)
+static void rightAlignedWidth10(std::string *content)
 {
     if ((*content).length() > 10)
     {
@@ -29,18 +29,22 @@ void rightAlignedWidth10(std::string *content)
  */
 void PhoneBook::search()
 {
+    if (displayAddedContacts() == 0)
+        displayRequiredContact();
+}
+
+int PhoneBook::displayAddedContacts()
+{
     int i = 0;
-    std::string Input;
-    int Index;
 
     if (ContactFilled[0])
         std::cout << "|     Index|First Name| Last Name|  Nickname|\n";
     else
     {
         std::cout << "No contacts yet, you can add contacts by typing ADD.\n";
-        return;
+        return 1;
     }
-    while (i < 7 && this->ContactFilled[i])
+    while (i < PhoneBookSize && ContactFilled[i])
     {
         std::cout << '|';
         std::cout << std::setw(10) << std::right << i;
@@ -53,6 +57,13 @@ void PhoneBook::search()
         std::cout << "|\n";
         i++;
     }
+    return 0;
+}
+
+void PhoneBook::displayRequiredContact()
+{
+    std::string Input;
+    int Index;
 
     std::cout << "Index to check: ";
     std::getline(std::cin, Input);
@@ -62,21 +73,18 @@ void PhoneBook::search()
         return;
     }
     Index = atoi(Input.c_str());
-    if (Index >= 0 && Index <= 7)
-    {
-        if (this->ContactFilled[Index])
-        { // clang-format off
-            std::cout << "First name: " + Contacts[Index].FirstName + '\n'
-                + "Last name: " + Contacts[Index].LastName + '\n'
-                + "Nickname: " +Contacts[Index].Nickname + '\n'
-                + "Phone number: " +Contacts[Index].PhoneNumber + '\n'
-                + "Darkest secret: " +Contacts[Index].DarkestSecret + '\n';
-        } // clang-format on
-        else
-            std::cout << "Index " << Index << " is not recorded yet.\n";
-    }
-    else if (Index < 0 || Index > 7)
+    if (Index < 0 || Index >= PhoneBookSize)
         std::cout << "Input is out of range.\n";
+    else if (ContactFilled[Index] == false)
+        std::cout << "Index " << Index << " is not recorded yet.\n";
+    else if (ContactFilled[Index] == true)
+    { // clang-format off
+        std::cout << "First name: " + Contacts[Index].FirstName + '\n'
+            + "Last name: " + Contacts[Index].LastName + '\n'
+            + "Nickname: " +Contacts[Index].Nickname + '\n'
+            + "Phone number: " +Contacts[Index].PhoneNumber + '\n'
+            + "Darkest secret: " +Contacts[Index].DarkestSecret + '\n';
+    } // clang-format on
     else
         std::cout << "Unrecognized input.\n";
 }

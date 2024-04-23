@@ -1,10 +1,7 @@
 #include <string>
 
-///  first name,
-///  last name,
-///  nickname,
-///  phone number,
-///  darkest secret
+///\brief Contact information: first name, last name, nickname, phone number,
+///       and darkest secret
 class Contact
 {
   public:
