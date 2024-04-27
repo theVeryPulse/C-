@@ -1,16 +1,25 @@
 NAME := megaphone
+FILES := megaphone.cpp
 FLAGS := -Wall -Wextra -Werror -std=c++98
-all : $(NAME)
+OFILES := $(patsubst %.cpp, build/%.o, $(FILES))
 
-$(NAME) : megaphone.cpp
-	c++ $^ -o $@ $(FLAGS)
+all: $(NAME)
 
-clean :
-	rm -f megaphone
+$(NAME): $(OFILES)
+	@c++ $(OFILES) -o $@ $(FLAGS)
+	@echo "\033[0;32m$@\nDONE\033[0m"
 
-fclean :
-	rm -f megaphone
+build/%.o: %.cpp
+	@mkdir -p $(@D)
+	@c++ $< -c -o $@ $(FLAGS)
+	@echo "\033[0;32m* $^\033[0m"
 
-re : clean all
+clean:
+	rm -rf build
 
-.PHONY: all, clean, re
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONE: all, clean, fclean, re

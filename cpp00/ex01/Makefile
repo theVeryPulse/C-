@@ -8,11 +8,13 @@ OFILES := $(patsubst %.cpp, build/%.o, $(FILES))
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	c++ $(OFILES) -o $@ $(FLAGS)
+	@c++ $(OFILES) -o $@ $(FLAGS)
+	@echo "\033[0;32m$@\nDONE\033[0m"
 
 build/%.o: %.cpp
 	@mkdir -p $(@D)
-	c++ $< -c -o $@ $(FLAGS)
+	@c++ $< -c -o $@ $(FLAGS)
+	@echo "\033[0;32m* $^\033[0m"
 
 clean:
 	rm -rf build
