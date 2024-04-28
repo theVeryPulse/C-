@@ -7,7 +7,7 @@ all: $(NAME)
 
 $(NAME): $(OFILES)
 	@c++ $(OFILES) -o $@ $(FLAGS)
-	@echo "\033[0;32m$@\nDONE\033[0m"
+	@echo "\033[0;32m> $@\033[0m"
 
 build/%.o: %.cpp
 	@mkdir -p $(@D)
