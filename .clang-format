@@ -1,1 +1,5 @@
 BasedOnStyle: microsoft
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+ColumnLimit: 80
+PointerAlignment: Left
