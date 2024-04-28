@@ -79,11 +79,11 @@ void PhoneBook::displayRequiredContact()
         std::cout << "Index " << index << " is not recorded yet.\n";
     else if (contact_filled_[index] == true)
     { // clang-format off
-        std::cout << "First name: " + contacts_[index].first_name_ + '\n'
-            + "Last name: " + contacts_[index].last_name_ + '\n'
-            + "Nickname: " +contacts_[index].nickname_ + '\n'
-            + "Phone number: " +contacts_[index].phone_number_ + '\n'
-            + "Darkest secret: " +contacts_[index].darkest_secret_ + '\n';
+        std::cout << "First name: " + contacts_[index].first_name_     + '\n'
+               + "Last name: "      + contacts_[index].last_name_      + '\n'
+               + "Nickname: "       + contacts_[index].nickname_       + '\n'
+               + "Phone number: "   + contacts_[index].phone_number_   + '\n'
+               + "Darkest secret: " + contacts_[index].darkest_secret_ + '\n';
     } // clang-format on
     else
         std::cout << "Unrecognized input.\n";
