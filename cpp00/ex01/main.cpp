@@ -5,7 +5,7 @@
 int main(void)
 {
     std::string input;
-    PhoneBook phone_book;
+    PhoneBook   phone_book;
 
     std::cout << "Welcome to your phone book.\n"
                  "To start, type in ADD, SEARCH, or EXIT.\n";

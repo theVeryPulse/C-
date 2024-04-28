@@ -1,15 +1,15 @@
+#pragma once
 #ifndef PHONE_BOOK
 #define PHONE_BOOK
 
 #include "Contact.hpp"
 #include <string>
 
-
 class PhoneBook
 {
   public:
     Contact contacts_[8];
-    bool contact_filled_[8];
+    bool    contact_filled_[8];
     enum Field
     {
         FirstName,
@@ -29,18 +29,18 @@ class PhoneBook
     void search();
 
   private:
-    int contact_index_;
+    int              contact_index_;
     const static int phone_book_size_ = 8;
 
     // Helper functions for addContact();
 
-    void fillField(enum Field Field, Contact *ThisContact);
-    std::string promptFor(enum Field Field);
-    std::string *slotFor(enum Field Field, Contact *ThisContact);
+    void         fillField(const enum Field field, Contact& contact);
+    std::string  promptFor(const enum Field field);
+    std::string& slotFor(const enum Field field, Contact& contact);
 
     // Helper functions for search();
-    
-    int displayAddedContacts();
+
+    int  displayAddedContacts();
     void displayRequiredContact();
 };
 

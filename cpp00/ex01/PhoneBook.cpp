@@ -8,33 +8,33 @@ void PhoneBook::addContact(void)
         contact_index_ = 0;
     std::cout << "Adding new contact...\n";
     contact_filled_[contact_index_] = true;
-    fillField(FirstName, &contacts_[contact_index_]);
-    fillField(LastName, &contacts_[contact_index_]);
-    fillField(Nickname, &contacts_[contact_index_]);
-    fillField(PhoneNumber, &contacts_[contact_index_]);
-    fillField(DarkestSecret, &contacts_[contact_index_]);
+    fillField(FirstName, contacts_[contact_index_]);
+    fillField(LastName, contacts_[contact_index_]);
+    fillField(Nickname, contacts_[contact_index_]);
+    fillField(PhoneNumber, contacts_[contact_index_]);
+    fillField(DarkestSecret, contacts_[contact_index_]);
     ++contact_index_;
     std::cout << "Contact added.\n";
 };
 
-void PhoneBook::fillField(enum Field Field, Contact *ThisContact)
+void PhoneBook::fillField(const enum Field field, Contact& contact)
 {
-    std::string answer = "";
-    std::string prompt = PhoneBook::promptFor(Field);
-    std::string *slot = PhoneBook::slotFor(Field, ThisContact);
-    std::string input;
+    std::string  answer = "";
+    std::string  prompt = PhoneBook::promptFor(field);
+    std::string& slot   = PhoneBook::slotFor(field, contact);
+    std::string  input;
 
     while (std::cin.eof() == false && answer[0] != 'Y' && answer[0] != 'y')
     {
         std::cout << prompt + ": ";
         std::getline(std::cin, input);
-        *slot = input;
-        std::cout << prompt + " is \"" + *slot + "\".\nConfirm?(Y/n) ";
+        slot = input;
+        std::cout << prompt + " is \"" + slot + "\".\nConfirm?(Y/n) ";
         std::getline(std::cin, answer);
     }
 }
 
-std::string PhoneBook::promptFor(enum Field field)
+std::string PhoneBook::promptFor(const enum Field field)
 {
     switch (field)
     {
@@ -57,25 +57,26 @@ std::string PhoneBook::promptFor(enum Field field)
     return "";
 }
 
-std::string *PhoneBook::slotFor(enum Field Field, Contact *ThisContact)
+std::string& PhoneBook::slotFor(const enum Field field, Contact& ThisContact)
 {
-    switch (Field)
+    switch (field)
     {
     case FirstName:
-        return &ThisContact->first_name_;
+        return ThisContact.first_name_;
         break;
     case LastName:
-        return &ThisContact->last_name_;
+        return ThisContact.last_name_;
         break;
     case Nickname:
-        return &ThisContact->nickname_;
+        return ThisContact.nickname_;
         break;
     case PhoneNumber:
-        return &ThisContact->phone_number_;
+        return ThisContact.phone_number_;
         break;
     case DarkestSecret:
-        return &ThisContact->darkest_secret_;
+        return ThisContact.darkest_secret_;
         break;
+    default:
+        throw;
     }
-    return NULL;
 }

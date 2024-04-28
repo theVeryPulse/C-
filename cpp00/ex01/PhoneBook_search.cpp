@@ -4,14 +4,14 @@
 #include <iostream>
 #include <string>
 
-static void rightAlignedWidth10(std::string *content);
+static void rightAlignedWidth10(std::string& content);
 
-/// @brief 
+/// @brief
 /// Display the saved contacts as a list of 4 columns: index, first name, last
 /// name and nickname.
 /// Each column must be 10 characters wide. A pipe character (’|’) separates
 /// them. The text must be right-aligned. If the text is longer than the column,
-/// it must be truncated and the last displayable character must be replaced by 
+/// it must be truncated and the last displayable character must be replaced by
 /// a dot (’.’).
 /// Then, prompt the user again for the index of the entry to display. If the
 /// index is out of range or wrong, define a relevant behavior. Otherwise,
@@ -38,32 +38,32 @@ int PhoneBook::displayAddedContacts()
         std::cout << '|';
         std::cout << std::setw(10) << std::right << i;
         std::cout << '|';
-        rightAlignedWidth10(&(contacts_[i].first_name_));
+        rightAlignedWidth10(contacts_[i].first_name_);
         std::cout << '|';
-        rightAlignedWidth10(&(contacts_[i].last_name_));
+        rightAlignedWidth10(contacts_[i].last_name_);
         std::cout << '|';
-        rightAlignedWidth10(&(contacts_[i].nickname_));
+        rightAlignedWidth10(contacts_[i].nickname_);
         std::cout << "|\n";
         i++;
     }
     return 0;
 }
 
-static void rightAlignedWidth10(std::string *content)
+static void rightAlignedWidth10(std::string& content)
 {
-    if ((*content).length() > 10)
+    if (content.length() > 10)
     {
-        std::cout << std::right << std::setw(9) << (*content).substr(0, 9);
+        std::cout << std::right << std::setw(9) << content.substr(0, 9);
         std::cout << '.';
     }
     else
-        std::cout << std::setw(10) << std::right << *content;
+        std::cout << std::setw(10) << std::right << content;
 }
 
 void PhoneBook::displayRequiredContact()
 {
     std::string input;
-    int index;
+    int         index;
 
     std::cout << "Index to check: ";
     std::getline(std::cin, input);
