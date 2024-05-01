@@ -8,14 +8,11 @@
 class Contact
 {
   public:
-    friend class PhoneBook; // Allows PhoneBook class to access Contact class's
-                            // private members.
     Contact();
 
     void isFilled(bool filled);
     bool isFilled();
 
-  private:
     bool        is_filled_;
     std::string first_name_;
     std::string last_name_;
