@@ -8,7 +8,7 @@ void PhoneBook::addContact()
         contact_index_ = 0;
     Contact& target_contact = contacts_[contact_index_++];
     std::cout << "Adding new contact...\n";
-    target_contact.setFilled(true);
+    target_contact.isFilled(true);
     fillField(FirstName, target_contact);
     fillField(LastName, target_contact);
     fillField(Nickname, target_contact);

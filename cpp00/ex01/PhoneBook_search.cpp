@@ -24,7 +24,7 @@ void PhoneBook::search()
 
 int PhoneBook::displayAddedContacts()
 {
-    if (contacts_[0].is_filled_)
+    if (contacts_[0].isFilled())
         std::cout << "|     Index|First Name| Last Name|  Nickname|\n";
     else
     {
@@ -32,7 +32,7 @@ int PhoneBook::displayAddedContacts()
         return 1;
     }
     int i = 0;
-    while (i < phone_book_size_ && contacts_[i].is_filled_)
+    while (i < phone_book_size_ && contacts_[i].isFilled())
     {
         std::cout << '|';
         std::cout << std::setw(10) << std::right << i;
@@ -74,9 +74,9 @@ void PhoneBook::displayRequiredContact()
     index = atoi(input.c_str());
     if (index < 0 || index >= phone_book_size_)
         std::cout << "Input is out of range.\n";
-    else if (contacts_[index].is_filled_ == false)
+    else if (contacts_[index].isFilled() == false)
         std::cout << "Index " << index << " is not recorded yet.\n";
-    else if (contacts_[index].is_filled_ == true)
+    else if (contacts_[index].isFilled() == true)
     { // clang-format off
         std::cout << "First name: " + contacts_[index].first_name_     + '\n'
                + "Last name: "      + contacts_[index].last_name_      + '\n'

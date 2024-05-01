@@ -12,7 +12,8 @@ class Contact
                             // private members.
     Contact();
 
-    void setFilled(bool filled);
+    void isFilled(bool filled);
+    bool isFilled();
 
   private:
     bool        is_filled_;
