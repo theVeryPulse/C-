@@ -6,14 +6,14 @@ void PhoneBook::addContact()
 {
     if (contact_index_ >= phone_book_size_)
         contact_index_ = 0;
+    Contact& target_contact = contacts_[contact_index_++];
     std::cout << "Adding new contact...\n";
-    contact_filled_[contact_index_] = true;
-    fillField(FirstName, contacts_[contact_index_]);
-    fillField(LastName, contacts_[contact_index_]);
-    fillField(Nickname, contacts_[contact_index_]);
-    fillField(PhoneNumber, contacts_[contact_index_]);
-    fillField(DarkestSecret, contacts_[contact_index_]);
-    ++contact_index_;
+    target_contact.setFilled(true);
+    fillField(FirstName, target_contact);
+    fillField(LastName, target_contact);
+    fillField(Nickname, target_contact);
+    fillField(PhoneNumber, target_contact);
+    fillField(DarkestSecret, target_contact);
     std::cout << "Contact added.\n";
 };
 

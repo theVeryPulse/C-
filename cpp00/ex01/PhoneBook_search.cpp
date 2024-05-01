@@ -6,7 +6,7 @@
 
 static void rightAlignedWidth10(std::string& content);
 
-/// @brief
+/// \brief
 /// Display the saved contacts as a list of 4 columns: index, first name, last
 /// name and nickname.
 /// Each column must be 10 characters wide. A pipe character (’|’) separates
@@ -24,16 +24,15 @@ void PhoneBook::search()
 
 int PhoneBook::displayAddedContacts()
 {
-    int i = 0;
-
-    if (contact_filled_[0])
+    if (contacts_[0].is_filled_)
         std::cout << "|     Index|First Name| Last Name|  Nickname|\n";
     else
     {
         std::cout << "No contacts yet, you can add contacts by typing ADD.\n";
         return 1;
     }
-    while (i < phone_book_size_ && contact_filled_[i])
+    int i = 0;
+    while (i < phone_book_size_ && contacts_[i].is_filled_)
     {
         std::cout << '|';
         std::cout << std::setw(10) << std::right << i;
@@ -75,9 +74,9 @@ void PhoneBook::displayRequiredContact()
     index = atoi(input.c_str());
     if (index < 0 || index >= phone_book_size_)
         std::cout << "Input is out of range.\n";
-    else if (contact_filled_[index] == false)
+    else if (contacts_[index].is_filled_ == false)
         std::cout << "Index " << index << " is not recorded yet.\n";
-    else if (contact_filled_[index] == true)
+    else if (contacts_[index].is_filled_ == true)
     { // clang-format off
         std::cout << "First name: " + contacts_[index].first_name_     + '\n'
                + "Last name: "      + contacts_[index].last_name_      + '\n'

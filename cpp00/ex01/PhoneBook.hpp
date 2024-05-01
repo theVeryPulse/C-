@@ -18,11 +18,10 @@ class PhoneBook
     };
 
     PhoneBook();
+    ~PhoneBook();
+
     void addContact();
     void search();
-
-    Contact contacts_[8];
-    bool    contact_filled_[8];
 
   private:
     // Helper functions for addContact();
@@ -36,6 +35,10 @@ class PhoneBook
     int  displayAddedContacts();
     void displayRequiredContact();
 
+    // Variables
+
+    // bool             contact_filled_[8];
+    Contact          contacts_[8];
     int              contact_index_;
     const static int phone_book_size_ = 8;
 };

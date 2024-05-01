@@ -1,5 +1,6 @@
 NAME := phone_book
 FILES := main.cpp \
+	Contact.cpp \
 	PhoneBook_addContact.cpp \
 	PhoneBook_search.cpp \
 	PhoneBook.cpp
@@ -10,7 +11,7 @@ all: $(NAME)
 
 $(NAME): $(OFILES)
 	@c++ $(OFILES) -o $@ $(FLAGS)
-	@echo "\033[0;32m> $@\033[0m"
+	@echo "\033[0;32m\n>>> ./$@\n\033[0m"
 
 build/%.o: %.cpp
 	@mkdir -p $(@D)
