@@ -17,8 +17,8 @@ class PhoneBook
         DarkestSecret
     };
 
-    PhoneBook(void);
-    void addContact(void);
+    PhoneBook();
+    void addContact();
     void search();
 
     Contact contacts_[8];

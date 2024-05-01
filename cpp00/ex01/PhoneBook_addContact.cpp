@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-void PhoneBook::addContact(void)
+void PhoneBook::addContact()
 {
     if (contact_index_ >= phone_book_size_)
         contact_index_ = 0;

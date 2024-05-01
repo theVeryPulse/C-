@@ -18,16 +18,16 @@ class MyClass // The class
     {
         std::cout << "Goodbye!";
     }
-    void printMessage(void);
+    void printMessage();
     void myNum(int num);
     void setPrivateNum(int num);
-    int  getPrivateNum(void);
+    int  getPrivateNum();
 
   private:
     int PrivateNum;
 };
 
-void MyClass::printMessage(void)
+void MyClass::printMessage()
 {
     std::cout << "A message from my class\n";
 }
@@ -40,7 +40,7 @@ void MyClass::setPrivateNum(int num)
 {
     PrivateNum = num;
 }
-int MyClass::getPrivateNum(void)
+int MyClass::getPrivateNum()
 {
     return PrivateNum;
 }

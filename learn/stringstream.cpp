@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-int main(void)
+int main()
 {
     std::string input;
     double length;

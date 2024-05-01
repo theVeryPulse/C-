@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-int main(void)
+int main()
 {
     std::string name;
     std::string address;
