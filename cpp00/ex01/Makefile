@@ -1,5 +1,6 @@
 NAME := phone_book
 FILES := main.cpp \
+	PhoneBook_addContact.cpp \
 	PhoneBook_search.cpp \
 	PhoneBook.cpp
 FLAGS := -Wall -Wextra -Werror -std=c++98

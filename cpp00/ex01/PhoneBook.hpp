@@ -8,8 +8,6 @@
 class PhoneBook
 {
   public:
-    Contact contacts_[8];
-    bool    contact_filled_[8];
     enum Field
     {
         FirstName,
@@ -19,19 +17,14 @@ class PhoneBook
         DarkestSecret
     };
 
-    PhoneBook(void)
-    {
-        contact_index_ = 0;
-        for (int i = 0; i < phone_book_size_; i++)
-            contact_filled_[i] = false;
-    }
+    PhoneBook(void);
     void addContact(void);
     void search();
 
-  private:
-    int              contact_index_;
-    const static int phone_book_size_ = 8;
+    Contact contacts_[8];
+    bool    contact_filled_[8];
 
+  private:
     // Helper functions for addContact();
 
     void         fillField(const enum Field field, Contact& contact);
@@ -42,6 +35,9 @@ class PhoneBook
 
     int  displayAddedContacts();
     void displayRequiredContact();
+
+    int              contact_index_;
+    const static int phone_book_size_ = 8;
 };
 
 #endif
