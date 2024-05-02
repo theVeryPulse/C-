@@ -7,7 +7,6 @@ int main()
     std::string input;
     PhoneBook   phone_book;
 
-    std::cout << "Welcome to your phone book.\n";
     while (std::cin.eof() == false)
     {
         std::cout << "> ";
