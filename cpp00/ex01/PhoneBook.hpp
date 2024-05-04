@@ -21,23 +21,22 @@ class PhoneBook
     ~PhoneBook();
 
     void addContact();
-    void search();
+    void search() const;
 
   private:
     // Helper functions for addContact();
 
     void         fillField(const enum Field field, Contact& contact);
-    std::string  promptFor(const enum Field field);
-    std::string& slotFor(const enum Field field, Contact& contact);
+    std::string  promptFor(const enum Field field) const;
+    std::string& slotFor(const enum Field field, Contact& contact) const;
 
     // Helper functions for search();
 
-    int  displayAddedContacts();
-    void displayRequiredContact();
+    int  displayAddedContacts() const;
+    void displayRequiredContact() const;
 
     // Variables
 
-    // bool             contact_filled_[8];
     Contact          contacts_[8];
     int              contact_index_;
     const static int phone_book_size_ = 8;

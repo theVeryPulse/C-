@@ -11,7 +11,7 @@ class Contact
     Contact();
 
     void isFilled(bool filled);
-    bool isFilled();
+    bool isFilled() const;
 
     bool        is_filled_;
     std::string first_name_;

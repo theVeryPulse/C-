@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-static void rightAlignedWidth10(std::string& content);
+static void rightAlignedWidth10(const std::string& content);
 
 /// \brief
 /// Display the saved contacts as a list of 4 columns: index, first name, last
@@ -16,13 +16,13 @@ static void rightAlignedWidth10(std::string& content);
 /// Then, prompt the user again for the index of the entry to display. If the
 /// index is out of range or wrong, define a relevant behavior. Otherwise,
 /// display the contact information, one field per line.
-void PhoneBook::search()
+void PhoneBook::search() const
 {
     if (displayAddedContacts() == 0)
         displayRequiredContact();
 }
 
-int PhoneBook::displayAddedContacts()
+int PhoneBook::displayAddedContacts() const
 {
     if (contacts_[0].isFilled())
         std::cout << "|     Index|First Name| Last Name|  Nickname|\n";
@@ -48,7 +48,7 @@ int PhoneBook::displayAddedContacts()
     return 0;
 }
 
-static void rightAlignedWidth10(std::string& content)
+static void rightAlignedWidth10(const std::string& content)
 {
     if (content.length() > 10)
     {
@@ -59,7 +59,7 @@ static void rightAlignedWidth10(std::string& content)
         std::cout << std::setw(10) << std::right << content;
 }
 
-void PhoneBook::displayRequiredContact()
+void PhoneBook::displayRequiredContact() const
 {
     std::string input;
     int         index;

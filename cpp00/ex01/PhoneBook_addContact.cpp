@@ -34,7 +34,7 @@ void PhoneBook::fillField(const enum Field field, Contact& contact)
     }
 }
 
-std::string PhoneBook::promptFor(const enum Field field)
+std::string PhoneBook::promptFor(const enum Field field) const
 {
     switch (field)
     {
@@ -57,7 +57,8 @@ std::string PhoneBook::promptFor(const enum Field field)
     return "";
 }
 
-std::string& PhoneBook::slotFor(const enum Field field, Contact& ThisContact)
+std::string& PhoneBook::slotFor(const enum Field field,
+                                Contact&         ThisContact) const
 {
     switch (field)
     {
