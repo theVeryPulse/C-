@@ -1,9 +1,8 @@
 #include "Zombie.hpp"
 #include <iostream>
 
-Zombie::Zombie(std::string name)
+Zombie::Zombie(std::string name) : name_(name)
 {
-    this->name_ = name;
 }
 
 Zombie::~Zombie()

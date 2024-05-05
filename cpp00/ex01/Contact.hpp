@@ -19,6 +19,9 @@ class Contact
     std::string nickname_;
     std::string phone_number_;
     std::string darkest_secret_;
+  
+  private:
+    static int slot_count_;
 };
 
 #endif

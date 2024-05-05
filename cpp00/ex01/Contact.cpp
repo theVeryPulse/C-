@@ -1,10 +1,12 @@
 #include "Contact.hpp"
 #include <iostream>
 
-Contact::Contact()
+int Contact::slot_count_ = 0;
+
+Contact::Contact() : is_filled_(false)
 {
-    is_filled_ = false;
-    std::cout << "Initializing contact slot.\n";
+    std::cout << "Initializing contact slot " << slot_count_ << ".\n";
+    slot_count_ += 1;
 }
 
 void Contact::isFilled(bool filled)
