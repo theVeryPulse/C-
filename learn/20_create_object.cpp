@@ -22,10 +22,6 @@ class Entity
         std::cout << name_ << " is destroyed...\n";
     }
 
-    const std::string& getName()
-    {
-        return name_;
-    }
   private:
     std::string name_;
     int         score_;
@@ -39,7 +35,7 @@ Entity* createEntity(const std::string& name)
 
 int main()
 {
-    Entity entity; // create an Entity object on stack
+    Entity  entity; // create an Entity object on stack
     Entity* player = createEntity("player");
     delete player;
     return 0;
