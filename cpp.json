@@ -1,0 +1,41 @@
+{
+	"C++ Canonical Class": {
+		"prefix": "canonical class",
+		"body": [
+			"class ${1:MyClass}",
+			"{",
+			"  public:",
+			"    // - types: classes, enums, and aliases (using)",
+			"    // - constructors, assignments, destructor",
+			"	${1:MyClass}();",
+			"	~${1:MyClass}();",
+			"    // - functions",
+			"    // - data",
+			"",
+			"  protected:",
+			"    // - types: classes, enums, and aliases (using)",
+			"    // - constructors, assignments, destructor",
+			"    // - functions",
+			"    // - data",
+			"",
+			"  private:",
+			"    // - types: classes, enums, and aliases (using)",
+			"    // - constructors, assignments, destructor",
+			"    // - functions",
+			"    // - data",
+			"};"
+		],
+		"description": "C++ Canonical Class"
+	},
+	"Include guard": {
+		"prefix": "C++ guard",
+		"body": [
+			"#pragma once",
+			"#ifndef ${1:HEADER_FILE}_H",
+			"#define ${1:HEADER_FILE}_H",
+			"",
+			"#endif /* ${1:HEADER_FILE}_H */"
+		],
+		"description": "Include guard for header file"
+	}
+}
