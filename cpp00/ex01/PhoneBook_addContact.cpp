@@ -9,75 +9,50 @@ void PhoneBook::addContact()
     Contact& target_contact = contacts_[contact_index_++];
     std::cout << "Adding new contact...\n";
     target_contact.isFilled(true);
-    fillField(FirstName, target_contact);
-    fillField(LastName, target_contact);
-    fillField(Nickname, target_contact);
-    fillField(PhoneNumber, target_contact);
-    fillField(DarkestSecret, target_contact);
+    fillField(Contact::FirstName, target_contact);
+    fillField(Contact::LastName, target_contact);
+    fillField(Contact::Nickname, target_contact);
+    fillField(Contact::PhoneNumber, target_contact);
+    fillField(Contact::DarkestSecret, target_contact);
     std::cout << "Contact added.\n";
 };
 
-void PhoneBook::fillField(const enum Field field, Contact& contact)
+void PhoneBook::fillField(Contact::Field field, Contact& contact)
 {
-    std::string  answer = "";
-    std::string  prompt = PhoneBook::promptFor(field);
-    std::string& slot   = PhoneBook::slotFor(field, contact);
-    std::string  input;
+    std::string answer = "";
+    std::string prompt = PhoneBook::promptFor(field);
+    std::string input;
 
     while (std::cin.eof() == false && answer[0] != 'Y' && answer[0] != 'y')
     {
         std::cout << prompt + ": ";
         std::getline(std::cin, input);
-        slot = input;
-        std::cout << prompt + " is \"" + slot + "\".\nConfirm?(Y/n) ";
+        contact.setFiled(field, input);
+        std::cout << prompt + " is \"" + contact.getField(field) +
+                         "\".\nConfirm?(Y/n) ";
         std::getline(std::cin, answer);
     }
 }
 
-std::string PhoneBook::promptFor(const enum Field field) const
+std::string PhoneBook::promptFor(Contact::Field field) const
 {
     switch (field)
     {
-    case FirstName:
+    case Contact::FirstName:
         return "First name";
         break;
-    case LastName:
+    case Contact::LastName:
         return "Last name";
         break;
-    case Nickname:
+    case Contact::Nickname:
         return "Nickname";
         break;
-    case PhoneNumber:
+    case Contact::PhoneNumber:
         return "Phone number";
         break;
-    case DarkestSecret:
+    case Contact::DarkestSecret:
         return "Darkest Secret";
         break;
     }
     return "";
-}
-
-std::string& PhoneBook::slotFor(const enum Field field,
-                                Contact&         ThisContact) const
-{
-    switch (field)
-    {
-    case FirstName:
-        return ThisContact.first_name_;
-        break;
-    case LastName:
-        return ThisContact.last_name_;
-        break;
-    case Nickname:
-        return ThisContact.nickname_;
-        break;
-    case PhoneNumber:
-        return ThisContact.phone_number_;
-        break;
-    case DarkestSecret:
-        return ThisContact.darkest_secret_;
-        break;
-    default:
-        throw;
-    }
 }

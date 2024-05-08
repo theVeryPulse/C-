@@ -8,15 +8,6 @@
 class PhoneBook
 {
   public:
-    enum Field
-    {
-        FirstName,
-        LastName,
-        Nickname,
-        PhoneNumber,
-        DarkestSecret
-    };
-
     PhoneBook();
     ~PhoneBook();
 
@@ -26,9 +17,8 @@ class PhoneBook
   private:
     // Helper functions for addContact();
 
-    void         fillField(const enum Field field, Contact& contact);
-    std::string  promptFor(const enum Field field) const;
-    std::string& slotFor(const enum Field field, Contact& contact) const;
+    void        fillField(Contact::Field field, Contact& contact);
+    std::string promptFor(Contact::Field field) const;
 
     // Helper functions for search();
 

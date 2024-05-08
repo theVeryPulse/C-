@@ -37,11 +37,11 @@ int PhoneBook::displayAddedContacts() const
         std::cout << '|';
         std::cout << std::setw(10) << std::right << i;
         std::cout << '|';
-        rightAlignedWidth10(contacts_[i].first_name_);
+        rightAlignedWidth10(contacts_[i].getField(Contact::FirstName));
         std::cout << '|';
-        rightAlignedWidth10(contacts_[i].last_name_);
+        rightAlignedWidth10(contacts_[i].getField(Contact::LastName));
         std::cout << '|';
-        rightAlignedWidth10(contacts_[i].nickname_);
+        rightAlignedWidth10(contacts_[i].getField(Contact::Nickname));
         std::cout << "|\n";
         i++;
     }
@@ -62,7 +62,7 @@ static void rightAlignedWidth10(const std::string& content)
 void PhoneBook::displayRequiredContact() const
 {
     std::string input;
-    int         index;
+    int         i;
 
     std::cout << "Index to check: ";
     std::getline(std::cin, input);
@@ -71,19 +71,24 @@ void PhoneBook::displayRequiredContact() const
         std::cout << "Unrecognized input.\n";
         return;
     }
-    index = atoi(input.c_str());
-    if (index < 0 || index >= phone_book_size_)
+    i = atoi(input.c_str());
+    if (i < 0 || i >= phone_book_size_)
         std::cout << "Input is out of range.\n";
-    else if (contacts_[index].isFilled() == false)
-        std::cout << "Index " << index << " is not recorded yet.\n";
-    else if (contacts_[index].isFilled() == true)
-    { // clang-format off
-        std::cout << "First name: " + contacts_[index].first_name_     + '\n'
-               + "Last name: "      + contacts_[index].last_name_      + '\n'
-               + "Nickname: "       + contacts_[index].nickname_       + '\n'
-               + "Phone number: "   + contacts_[index].phone_number_   + '\n'
-               + "Darkest secret: " + contacts_[index].darkest_secret_ + '\n';
-    } // clang-format on
+    else if (contacts_[i].isFilled() == false)
+        std::cout << "Index " << i << " is not recorded yet.\n";
+    else if (contacts_[i].isFilled() == true)
+    {
+        std::cout << "First name: " +
+                         contacts_[i].getField(Contact::FirstName) + '\n' +
+                         "Last name: " +
+                         contacts_[i].getField(Contact::LastName) + '\n' +
+                         "Nickname: " +
+                         contacts_[i].getField(Contact::Nickname) + '\n' +
+                         "Phone number: " +
+                         contacts_[i].getField(Contact::PhoneNumber) + '\n' +
+                         "Darkest secret: " +
+                         contacts_[i].getField(Contact::DarkestSecret) + '\n';
+    }
     else
         std::cout << "Unrecognized input.\n";
 }
