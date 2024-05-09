@@ -22,7 +22,7 @@ class Zombie
 
 Zombie* newZombie(std::string name);
 void    randomChump(std::string name);
-Zombie* zombieHorde(int n, std::string name);
+Zombie* zombieHorde(int N, std::string name);
 
 } // namespace zmb
 
