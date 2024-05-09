@@ -4,8 +4,8 @@
 ///        of the function scope.
 /// \param name Name of the zombie.
 /// \return Pointer to the new Zombie object which is dynamically allocated.
-zmb::Zombie* zmb::newZombie(std::string name)
+Zombie* newZombie(std::string name)
 {
-    zmb::Zombie* new_zombie = new zmb::Zombie(name);
+    Zombie* new_zombie = new Zombie(name);
     return new_zombie;
 }
