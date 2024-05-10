@@ -7,32 +7,16 @@
 class HumanB
 {
   public:
-    // - types: classes, enums, and aliases (using)
-    // - constructors, assignments, destructor
-    HumanB();
-    ~HumanB();
-    HumanB(const HumanB& other); // Copy constructor
-    HumanB& operator=(const HumanB& other); // Copy assignment operator
-    // - functions
+    HumanB(const std::string& name);
 
+    void setWeapon(const Weapon& weapon);
     void attack() const;
 
-    // - data
-
-  protected:
-    // - types: classes, enums, and aliases (using)
-    // - constructors, assignments, destructor
-    // - functions
-    // - data
-
   private:
-    // - types: classes, enums, and aliases (using)
-    // - constructors, assignments, destructor
-    // - functions
-    // - data
+    HumanB();
 
-    std::string name_;
-    Weapon weapon_;
+    std::string   name_;
+    const Weapon* weapon_;
 };
 
 #endif /* HUMANB_HPP */

@@ -7,30 +7,14 @@
 class Weapon
 {
   public:
-    // - types: classes, enums, and aliases (using)
-    // - constructors, assignments, destructor
-    Weapon();
-    ~Weapon();
-    Weapon(const Weapon& other); // Copy constructor
-    Weapon& operator=(const Weapon& other); // Copy assignment operator
-    // - functions
+    Weapon(std::string type);
 
-    const std::string& getType();
-    void               setType(std::string type);
-    
-    // - data
-
-  protected:
-    // - types: classes, enums, and aliases (using)
-    // - constructors, assignments, destructor
-    // - functions
-    // - data
+    const std::string& getType() const;
+    void               setType(const std::string& type);
 
   private:
-    // - types: classes, enums, and aliases (using)
-    // - constructors, assignments, destructor
-    // - functions
-    // - data
+    Weapon();
+
     std::string type_;
 };
 
