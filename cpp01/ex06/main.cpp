@@ -37,19 +37,14 @@ static ComplaintLevel getComplaintLevel(const char* arg)
 {
     std::string level(arg);
 
-    if (level == "DEBUG")
-        return Debug;
-    else if (level == "INFO")
-        return Info;
-    else if (level == "WARNING")
-        return Warning;
-    else if (level == "ERROR")
-        return Error;
-    else
+    static const std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+    for (int i = 0; i < 4; i++)
     {
-        std::cout << "Probably complaining about insignificant problem.\n";
-        exit(Success);
+        if (level == levels[i])
+            return ((ComplaintLevel)i);
     }
+    std::cout << "Probably complaining about insignificant problem.\n";
+    exit(Success);
 }
 static void filteredComplain(const Harl& harl, ComplaintLevel complaint_level)
 {
