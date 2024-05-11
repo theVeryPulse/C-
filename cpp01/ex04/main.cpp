@@ -81,6 +81,8 @@ static void writeNewContentToOutfile(const char*   old_string,
     std::string old_s(old_string);
     std::string new_s(new_string);
 
+    if (old_s.empty())
+        exit(0);
     std::getline(infile, line);
     while (!(line.empty()))
     {
