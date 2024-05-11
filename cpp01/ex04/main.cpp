@@ -12,27 +12,27 @@ enum ExitStatus
     OutfileError
 };
 
-static void check_argc(int argc);
-static void open_infile(std::fstream& infile, const char* infile_name);
-static void open_outfile(std::fstream& outfile, std::string& outfile_name,
-                         std::fstream& infile);
-static void write_new_content_to_outfile(const char*   old_string,
-                                         const char*   new_string,
-                                         std::fstream& infile,
-                                         std::fstream& outfile);
+static void checkArgc(int argc);
+static void openInfile(std::fstream& infile, const char* infile_name);
+static void openOutfile(std::fstream& outfile, std::string& outfile_name,
+                        std::fstream& infile);
+static void writeNewContentToOutfile(const char*   old_string,
+                                     const char*   new_string,
+                                     std::fstream& infile,
+                                     std::fstream& outfile);
 
 int main(int argc, char const* argv[])
 {
-    check_argc(argc);
+    checkArgc(argc);
 
     std::fstream infile;
-    open_infile(infile, argv[1]);
+    openInfile(infile, argv[1]);
 
     std::string  outfile_name(std::string(argv[1]).append(".replace"));
     std::fstream outfile;
-    open_outfile(outfile, outfile_name, infile);
+    openOutfile(outfile, outfile_name, infile);
 
-    write_new_content_to_outfile(argv[2], argv[3], infile, outfile);
+    writeNewContentToOutfile(argv[2], argv[3], infile, outfile);
 
     infile.close();
     outfile.close();
@@ -40,7 +40,7 @@ int main(int argc, char const* argv[])
     return 0;
 }
 
-static void check_argc(int argc)
+static void checkArgc(int argc)
 {
     if (argc != 4)
     {
@@ -50,7 +50,7 @@ static void check_argc(int argc)
     }
 }
 
-static void open_infile(std::fstream& infile, const char* infile_name)
+static void openInfile(std::fstream& infile, const char* infile_name)
 {
     infile.open(infile_name, std::fstream::in);
     if (infile.good() == false)
@@ -60,8 +60,8 @@ static void open_infile(std::fstream& infile, const char* infile_name)
     }
 }
 
-static void open_outfile(std::fstream& outfile, std::string& outfile_name,
-                         std::fstream& infile)
+static void openOutfile(std::fstream& outfile, std::string& outfile_name,
+                        std::fstream& infile)
 {
     outfile.open(outfile_name.c_str(), std::fstream::out | std::fstream::trunc);
     if (outfile.good() == false)
@@ -72,10 +72,10 @@ static void open_outfile(std::fstream& outfile, std::string& outfile_name,
     }
 }
 
-static void write_new_content_to_outfile(const char*   old_string,
-                                         const char*   new_string,
-                                         std::fstream& infile,
-                                         std::fstream& outfile)
+static void writeNewContentToOutfile(const char*   old_string,
+                                     const char*   new_string,
+                                     std::fstream& infile,
+                                     std::fstream& outfile)
 {
     std::string line;
     std::string old_s(old_string);
