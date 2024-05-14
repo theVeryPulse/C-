@@ -21,8 +21,8 @@ class Fixed
     int  getRawBits() const;
     void setRawBits(const int raw);
 
-    float toFloat( void ) const;
-    int toInt( void ) const;
+    float toFloat() const;
+    int   toInt() const;
 
   private:
     // - data
