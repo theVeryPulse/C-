@@ -15,10 +15,9 @@ Fixed::Fixed(const Fixed& other) : value_(other.value_)
 /// @param value 
 /// @note int:   0x7fffffff
 ///       fixed: 0x7ffffff0
-Fixed::Fixed(const int value)
+Fixed::Fixed(const int value) : value_(value & integer_part)
 {
     std::cout << "Fixed: int constructor.\n";
-    value_ = value & integer_part;
 }
 
 // [ ]
