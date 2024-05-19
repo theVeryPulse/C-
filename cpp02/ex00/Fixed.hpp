@@ -17,5 +17,5 @@ class Fixed
     // - data
 
     int              value_;
-    static const int fractional_bits = 8;
+    static const int fractional_bits_ = 8;
 };
