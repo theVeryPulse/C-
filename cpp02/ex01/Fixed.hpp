@@ -24,13 +24,19 @@ class Fixed
     float toFloat() const;
     int   toInt() const;
 
+    Fixed operator+(const Fixed& addend);
+    Fixed operator-(const Fixed& subtrahend);
+    Fixed operator*(const Fixed& multiplicator);
+    Fixed operator/(const Fixed& divisor);
+
   private:
     // - data
 
     int              value_;
-    static const int fractional_bits = 8;
-    // static const int fractional_bytes = fractional_bits / 8;
-    static const int integer_part = 0xffffffff << fractional_bits;
+    static const int fractional_bits_ = 8;
+    // static const int fractional_bytes_ = fractional_bits_ / 8;
+    static const int integer_part_ = 0xffffffff << fractional_bits_;
+    static const int fixed_unit_one_ = 1 << fractional_bits_;
 };
 
 std::ostream& operator<<(std::ostream& stream, const Fixed& fixed);

@@ -3,6 +3,12 @@
 
 int main()
 {
+    Fixed test1(0.0059f);
+    Fixed test2(2.7f);
+
+    float test_result = test1.toFloat();
+    std::cout << "Hello!\n";
+
     Fixed       a;
     Fixed const b(10);
     Fixed const c(42.42f);
