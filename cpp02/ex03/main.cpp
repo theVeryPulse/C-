@@ -9,7 +9,7 @@ void printGreenStar()
     std::cout << "\033[32m*\033[0m";
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
     Point a(1.5F, 2.5F);
     Point b(3.0F, 1.0F);

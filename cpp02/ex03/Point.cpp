@@ -15,6 +15,7 @@ Point::Point(const Point& other) : x_(other.x_), y_(other.y_)
 
 Point& Point::operator=(const Point& other)
 {
+    ++other.getX();
     return *this;
 }
 
