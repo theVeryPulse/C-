@@ -9,7 +9,7 @@ class Point
     Point();
     Point(const float x, const float y);
     ~Point();
-    Point(const Point& other); // Copy constructor
+    Point(const Point& other);            // Copy constructor
     Point& operator=(const Point& other); // Copy assignment operator
 
     //=============================== Functions ================================
@@ -33,6 +33,4 @@ class Point
 
     const Fixed x_;
     const Fixed y_;
-
-
 };

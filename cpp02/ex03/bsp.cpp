@@ -1,6 +1,6 @@
 #include "Point.hpp"
 
-static double area(const Point &a, const Point &b, const Point &c)
+static double area(const Point& a, const Point& b, const Point& c)
 {
     double x1 = a.getX().toFloat();
     double y1 = a.getY().toFloat();
@@ -21,7 +21,7 @@ static double area(const Point &a, const Point &b, const Point &c)
 /// \param c Vertex
 /// \param point Point to check
 /// \return `true` if point is inside the triangle, `false` if point is on the
-///         edge of or outside the triangle. 
+///         edge of or outside the triangle.
 bool bsp(const Point a, const Point b, const Point c, const Point point)
 {
     double area1      = area(a, b, point);
