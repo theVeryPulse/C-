@@ -13,6 +13,7 @@ $(NAME): $(OFILES)
 build/%.o: %.cpp
 	@mkdir -p $(@D)
 	@c++ $< -c -o $@ $(CFLAGS)
+	@echo "\033[0;32m* $^\033[0m"
 
 clean:
 	rm -rf build
