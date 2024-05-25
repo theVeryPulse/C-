@@ -1,4 +1,5 @@
 #include "FragTrap.hpp"
+#include <iostream>
 
 int main()
 {
@@ -11,6 +12,9 @@ int main()
     may.beRepaired(100);
     may.takeDamage(50);
     may.highFiveGuys();
+    std::cout << "FragTrap's destructor> \n";
+    may.~FragTrap();
+    std::cout << "<FragTrap's destructor\n";
 
     return 0;
 }

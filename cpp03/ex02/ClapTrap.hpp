@@ -11,7 +11,7 @@ class ClapTrap
     //----------------- Constructors, Assignments, Destructor ------------------
 
     ClapTrap(const std::string& name);
-    ~ClapTrap();
+    virtual ~ClapTrap();
     ClapTrap(const ClapTrap& other);            // Copy constructor
     ClapTrap& operator=(const ClapTrap& other); // Copy assignment operator
 
