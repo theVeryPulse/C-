@@ -4,9 +4,9 @@
 class Entity
 {
   public:
-    virtual std::string getName()
     // with `virtual` keyword, this function will be overridden by the version
     // in derived class: Player class in this case.
+    virtual std::string getName()
     {
         return "Entity";
     }
