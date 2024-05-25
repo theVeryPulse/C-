@@ -1,7 +1,8 @@
-NAME   := ScavTrap
+NAME   := FragTrap
 FILES  := main.cpp \
 	ClapTrap.cpp \
 	colored_text.cpp \
+	FragTrap.cpp \
 	ScavTrap.cpp
 
 FLAGS  := -Wall -Wextra -Werror -std=c++98

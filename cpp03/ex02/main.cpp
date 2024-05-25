@@ -1,18 +1,16 @@
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main()
 {
-    ScavTrap ellie("Ellie");
-    ScavTrap amy("Amy");
-    ellie = amy;
+    FragTrap may("May");
+    FragTrap may_copy(may);
+    FragTrap temp("Temp");
+    temp = may_copy;
 
-    amy.attack("Nazgul");
-    amy.beRepaired(15);
-    amy.takeDamage(10);
-
-    ScavTrap amy2(amy);
-    amy2.attack("Happy");
-    amy.guardGate();
+    may.attack("Bowser");
+    may.beRepaired(100);
+    may.takeDamage(50);
+    may.highFiveGuys();
 
     return 0;
 }
