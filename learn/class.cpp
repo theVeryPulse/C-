@@ -1,46 +1,60 @@
-#include <string>
 #include <iostream>
+#include <string>
 
 /// @brief sadfasdf
-class MyClass            // The class 
+class MyClass // The class
 {
-public:                  // Access specifier
-    int MyNum;             // Attribute (int variable)
-    std::string MyString;  // Attribute (string variable)
-    MyClass(int Num, std::string String)              // constructor: a function with the same name
-    {
-        MyNum = Num;
-        MyString = String;
-    }
-    void printMessage(void);
+  public:                   // Access specifier
+    int         my_num_;    // Attribute (int variable)
+    std::string my_string_; // Attribute (string variable)
 
-    void setNum(int Num)
-    {
-        PrivateNum = Num;
+    MyClass(int num, std::string string) // constructor: a function with the
+    {                                    // same name as class
+        my_num_    = num;
+        my_string_ = string;
+        std::cout << "Hello!";
     }
-    int getNum(void)
+    ~MyClass()
     {
-       return PrivateNum;
+        std::cout << "Goodbye!";
     }
-private:
+    void printMessage();
+    void myNum(int num);
+    void setPrivateNum(int num);
+    int  getPrivateNum();
+
+  private:
     int PrivateNum;
 };
 
-void MyClass::printMessage(void)
+void MyClass::printMessage()
 {
     std::cout << "A message from my class\n";
 }
 
-int main(int argc, char const *argv[])
+void MyClass::myNum(int num)
 {
-    MyClass MyObject(12, "Hello Class\n");
+    my_num_ = num;
+}
+void MyClass::setPrivateNum(int num)
+{
+    PrivateNum = num;
+}
+int MyClass::getPrivateNum()
+{
+    return PrivateNum;
+}
 
-    std::cout << MyObject.MyNum << " " << MyObject.MyString;
-    MyObject.printMessage();
-    
-    MyObject.setNum(10);
-    std::cout << "Private number of my class is now " << MyObject.getNum()
-        << '\n';
-    
+int main(int argc, char const* argv[])
+{
+    MyClass my_object_(12, "Hello Class\n");
+
+    std::cout << my_object_.my_num_ << " " << my_object_.my_string_;
+    my_object_.printMessage();
+
+    my_object_.setPrivateNum(10);
+    std::cout << "Private number of my class is now "
+              << my_object_.getPrivateNum() << '\n';
+
     return 0;
 }

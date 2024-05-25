@@ -1,0 +1,43 @@
+{
+	"C++ Canonical Class": {
+		"prefix": "canonical class",
+		"body": [
+			"class ${1:MyClass}",
+			"{",
+			"  public://=====================================================================",
+			"    //--------------- Types: Classes, Enums, and Aliases (using) ---------------",
+			"    //----------------- Constructors, Assignments, Destructor ------------------",
+			"    ${1:MyClass}();",
+			"    ~${1:MyClass}();",
+			"    ${1:MyClass}(const ${1:MyClass}& other); // Copy constructor",
+			"    ${1:MyClass}& operator=(const ${1:MyClass}& other); // Copy assignment operator",
+			"    //------------------------------- Functions --------------------------------",
+			"    //---------------------------------- Data ----------------------------------",
+			"",
+			"  protected://==================================================================",
+			"    //--------------- Types: Classes, Enums, and Aliases (using) ---------------",
+			"    //----------------- Constructors, Assignments, Destructor ------------------",
+			"    //------------------------------- Functions --------------------------------",
+			"    //---------------------------------- Data ----------------------------------",
+			"",
+			"  private://====================================================================",
+			"    //--------------- Types: Classes, Enums, and Aliases (using) ---------------",
+			"    //----------------- Constructors, Assignments, Destructor ------------------",
+			"    //------------------------------- Functions --------------------------------",
+			"    //---------------------------------- Data ----------------------------------",
+			"};"
+		],
+		"description": "C++ Canonical Class"
+	},
+	"Include guard": {
+		"prefix": "C++ guard",
+		"body": [
+			"#pragma once",
+			"#ifndef ${1:HEADER_FILE}_H",
+			"#define ${1:HEADER_FILE}_H",
+			"",
+			"#endif /* ${1:HEADER_FILE}_H */"
+		],
+		"description": "Include guard for header file"
+	}
+}

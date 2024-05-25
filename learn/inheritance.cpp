@@ -1,34 +1,33 @@
-#include <string>
 #include <iostream>
+#include <string>
 
 // Base class
 class Vehicle
 {
-public:
+  public:
     std::string Brand = "Ford";
 
-    void honk(void)
+    void honk()
     {
-        std::cout << "Tuut, tuut! \n" ;
+        std::cout << "Tuut, tuut! \n";
     }
-
 };
 
 class Tractor
 {
-public:
+  public:
     std::string Brand = "Porsche";
 
-    void honk(void)
+    void honk()
     {
         std::cout << "BUBUBUBU\n";
     }
 };
 
 // Derived class
-class Car: public Vehicle
+class Car : public Vehicle
 {
-public:
+  public:
     std::string model = "Mustang";
 };
 

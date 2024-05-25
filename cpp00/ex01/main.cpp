@@ -1,24 +1,24 @@
 #include "PhoneBook.hpp"
+#include <iostream>
 #include <string>
 
-int main(void) {
-  std::string Input;
-  PhoneBook MyPhoneBook;
+int main()
+{
+    std::string input;
+    PhoneBook   phone_book;
 
-  std::cout << "Welcome to you phone book.\n"
-               "To start, type in ADD, SEARCH, or EXIT.\n";
-  while (true) {
-    std::cout << "> ";
-    std::cin >> Input;
-    if (Input == "ADD") {
-      MyPhoneBook.addContact();
-    } else if (Input == "SEARCH") {
-      ;
-    } else if (Input == "EXIT") {
-
-      return 0;
-    } else {
-      std::cout << Input + ": Unrecognized command\n";
+    while (std::cin.eof() == false)
+    {
+        std::cout << "> ";
+        std::getline(std::cin, input);
+        if (input == "ADD")
+            phone_book.addContact();
+        else if (input == "SEARCH")
+            phone_book.search();
+        else if (input == "EXIT")
+            return 0;
+        else if (!input.empty())
+            std::cout << input + ": Unrecognized command\n";
+        input = "";
     }
-  }
 }

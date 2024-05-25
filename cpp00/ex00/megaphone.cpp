@@ -1,6 +1,6 @@
 #include <iostream>
 
-/* 
+/*
 
 Target:
 
@@ -14,7 +14,7 @@ $>./megaphone
 * LOUD AND UNBEARABLE FEEDBACK NOISE *
 
 */
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
     std::string copy;
 
