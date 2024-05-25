@@ -2,6 +2,8 @@
 #ifndef COLORED_TEXT_HPP
 #define COLORED_TEXT_HPP
 
+#include <string>
+
 enum Color
 {
     Reset   = 0,
