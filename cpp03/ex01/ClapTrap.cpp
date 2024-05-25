@@ -85,9 +85,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    std::cout << coloredText(Cyan, name_) << " takes " << amount << " damage"
-              << " [HP: " << hit_point_ << "]"
-              << "\n";
+    std::cout << coloredText(Cyan, name_) << " takes " << amount << " damage";
     if (amount >= hit_point_)
     {
         hit_point_ = 0;
@@ -95,4 +93,5 @@ void ClapTrap::takeDamage(unsigned int amount)
     }
     else
         hit_point_ -= amount;
+    std::cout << " [HP: " << hit_point_ << "]\n";
 }
