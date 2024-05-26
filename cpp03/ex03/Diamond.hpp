@@ -2,12 +2,12 @@
 #ifndef DIAMOND_HPP
 #define DIAMOND_HPP
 
-#include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 class DiamondTrap : public ScavTrap, public FragTrap
 {
-  public://=====================================================================
+  public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
 
@@ -19,15 +19,19 @@ class DiamondTrap : public ScavTrap, public FragTrap
     DiamondTrap& operator=(const DiamondTrap& other);
 
     //------------------------------- Functions --------------------------------
+
+    void attack(const std::string& target);
+    void whoAmI();
+
     //---------------------------------- Data ----------------------------------
 
-  protected://==================================================================
+  protected:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
 
-  private://====================================================================
+  private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
 

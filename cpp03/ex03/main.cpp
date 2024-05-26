@@ -1,5 +1,5 @@
-#include "FragTrap.hpp"
 #include "Diamond.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
 int main()
@@ -18,7 +18,21 @@ int main()
     // std::cout << "<FragTrap's destructor\n";
 
     DiamondTrap diamond("Diamond");
-    diamond.ClapTrap::attack("DEDEDE");
+    DiamondTrap diamond_copy(diamond);
+    DiamondTrap diamond_assign = diamond;
+    // Defined in ClapTrap
+
+    diamond.attack("DEDEDE");
+    diamond.beRepaired(10);
+    diamond.takeDamage(75);
+
+    // Defined in ScavTrap
+    diamond.guardGate();
+
+    // Defined in FragTrap
+    diamond.highFiveGuys();
+
+    diamond.whoAmI();
 
     return 0;
 }

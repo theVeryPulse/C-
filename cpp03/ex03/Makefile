@@ -1,7 +1,8 @@
-NAME   := FragTrap
+NAME   := Diamond
 FILES  := main.cpp \
 	ClapTrap.cpp \
 	colored_text.cpp \
+	Diamond.cpp \
 	FragTrap.cpp \
 	ScavTrap.cpp
 
