@@ -9,7 +9,7 @@ class Animal
   public://=====================================================================
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    Animal(const std::string& type);
+    Animal();
     ~Animal();
     Animal(const Animal& other); // Copy constructor
     Animal& operator=(const Animal& other); // Copy assignment operator
@@ -28,9 +28,6 @@ class Animal
   private://====================================================================
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-
-    Animal();
-
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
 };
