@@ -7,7 +7,7 @@ WrongCat::WrongCat() : WrongAnimal("WrongCat")
 
 WrongCat::~WrongCat()
 {
-    std::cout << type_ << ": gone.\n";
+    std::cout << type_ << " (WrongCat): gone.\n";
 }
 
 WrongCat::WrongCat(const WrongCat& other) : WrongAnimal(other.type_)
@@ -22,5 +22,5 @@ WrongCat& WrongCat::operator=(const WrongCat& other)
 
 void WrongCat::makeSound() const
 {
-    std::cout << type_ << ": meow meow.\n";
+    std::cout << type_ << " (WrongCat): meow meow.\n";
 }

@@ -7,7 +7,7 @@ Dog::Dog() : Animal("Dog")
 
 Dog::~Dog()
 {
-    std::cout << type_ << ": gone.\n";
+    std::cout << type_ << " (Dog): gone.\n";
 }
 
 Dog::Dog(const Dog& other) : Animal(other.type_)
@@ -22,5 +22,5 @@ Dog& Dog::operator=(const Dog& other)
 
 void Dog::makeSound() const
 {
-    std::cout << type_ << ": woof woof.\n";
+    std::cout << type_ << " (Dog): woof woof.\n";
 }

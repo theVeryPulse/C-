@@ -11,7 +11,7 @@ WrongAnimal::WrongAnimal(const std::string& type) : type_(type)
 
 WrongAnimal::~WrongAnimal()
 {
-    std::cout << type_ << ": gone.\n";
+    std::cout << type_ << " (WrongAnimal): gone.\n";
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& other) : type_(other.type_)
@@ -26,7 +26,7 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal& other)
 
 void WrongAnimal::makeSound() const
 {
-    std::cout << type_ << ": making sounding.\n";
+    std::cout << type_ << " (WrongAnimal): making sounding.\n";
 }
 
 std::string WrongAnimal::getType() const
