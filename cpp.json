@@ -41,7 +41,7 @@
             "",
 			"${1:MyClass}& ${1:MyClass}::operator=(const ${1:MyClass}& other)",
 			"{",
-			"}",
+			"}"
 		],
 		"description": "C++ Canonical Class"
 	},
