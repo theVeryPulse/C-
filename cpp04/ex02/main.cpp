@@ -19,5 +19,7 @@ int main()
     Cat origin;
     Cat copy;
     copy = origin;
+
+    // Animal test_animal;
     return 0;
 }

@@ -18,7 +18,7 @@ class Animal
 
     //------------------------------- Functions --------------------------------
 
-    virtual void makeSound() const;
+    virtual void makeSound() const = 0;
     std::string  getType() const;
 
     //---------------------------------- Data ----------------------------------
