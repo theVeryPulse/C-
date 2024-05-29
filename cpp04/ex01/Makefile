@@ -1,6 +1,7 @@
 NAME   := Animal
 FILES  := main.cpp \
 	Animal.cpp \
+	Brain.cpp \
 	Cat.cpp \
 	Dog.cpp \
 	WrongAnimal.cpp \
