@@ -1,18 +1,18 @@
 #pragma once
-#ifndef CAT_HPP
-#define CAT_HPP
+#ifndef WRONGCAT_HPP
+#define WRONGCAT_HPP
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-class Cat : public Animal
+class WrongCat : public WrongAnimal
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    Cat();
-    ~Cat();
-    Cat(const Cat& other);            // Copy constructor
-    Cat& operator=(const Cat& other); // Copy assignment operator
+    WrongCat();
+    ~WrongCat();
+    WrongCat(const WrongCat& other);            // Copy constructor
+    WrongCat& operator=(const WrongCat& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
 
@@ -33,4 +33,4 @@ class Cat : public Animal
     //---------------------------------- Data ----------------------------------
 };
 
-#endif /* CAT_HPP */
+#endif /* WRONGCAT_HPP */

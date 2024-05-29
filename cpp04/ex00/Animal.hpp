@@ -6,17 +6,24 @@
 
 class Animal
 {
-  public://=====================================================================
+  public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
+
     Animal();
-    ~Animal();
-    Animal(const Animal& other); // Copy constructor
+    Animal(const std::string& type);
+    virtual ~Animal();
+    Animal(const Animal& other);            // Copy constructor
     Animal& operator=(const Animal& other); // Copy assignment operator
+
     //------------------------------- Functions --------------------------------
+
+    virtual void makeSound() const;
+    std::string  getType() const;
+
     //---------------------------------- Data ----------------------------------
 
-  protected://==================================================================
+  protected:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
@@ -24,8 +31,7 @@ class Animal
 
     std::string type_;
 
-
-  private://====================================================================
+  private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------

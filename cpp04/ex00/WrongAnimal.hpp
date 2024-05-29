@@ -1,22 +1,25 @@
 #pragma once
-#ifndef CAT_HPP
-#define CAT_HPP
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
-#include "Animal.hpp"
+#include <string>
 
-class Cat : public Animal
+class WrongAnimal
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    Cat();
-    ~Cat();
-    Cat(const Cat& other);            // Copy constructor
-    Cat& operator=(const Cat& other); // Copy assignment operator
+
+    WrongAnimal();
+    WrongAnimal(const std::string& type);
+    virtual ~WrongAnimal();
+    WrongAnimal(const WrongAnimal& other);
+    WrongAnimal& operator=(const WrongAnimal& other);
 
     //------------------------------- Functions --------------------------------
 
-    void makeSound() const;
+    void        makeSound() const;
+    std::string getType() const;
 
     //---------------------------------- Data ----------------------------------
 
@@ -26,6 +29,8 @@ class Cat : public Animal
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
 
+    std::string type_;
+
   private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
@@ -33,4 +38,4 @@ class Cat : public Animal
     //---------------------------------- Data ----------------------------------
 };
 
-#endif /* CAT_HPP */
+#endif /* WRONGANIMAL_HPP */
