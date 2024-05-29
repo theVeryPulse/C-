@@ -3,13 +3,14 @@
 #define DOG_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog : public Animal
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    
+
     Dog();
     ~Dog();
     Dog(const Dog& other);            // Copy constructor
@@ -32,6 +33,9 @@ class Dog : public Animal
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
+
+    Brain* brain_;
+
 };
 
 #endif /* DOG_HPP */

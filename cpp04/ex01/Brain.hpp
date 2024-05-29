@@ -1,25 +1,25 @@
 #pragma once
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
-#include "Animal.hpp"
+#include <iostream>
 
-class Dog : public Animal
+class Brain
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    
-    Dog();
-    ~Dog();
-    Dog(const Dog& other);            // Copy constructor
-    Dog& operator=(const Dog& other); // Copy assignment operator
+
+    Brain();
+    ~Brain();
+    Brain(const Brain& other);            // Copy constructor
+    Brain& operator=(const Brain& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
-
-    void makeSound() const;
-
     //---------------------------------- Data ----------------------------------
+
+    static const int idea_count_ = 100;
+    std::string      ideas_[100];
 
   protected:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
@@ -34,4 +34,4 @@ class Dog : public Animal
     //---------------------------------- Data ----------------------------------
 };
 
-#endif /* DOG_HPP */
+#endif /* BRAIN_HPP */
