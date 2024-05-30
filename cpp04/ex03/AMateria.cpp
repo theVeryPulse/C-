@@ -32,5 +32,5 @@ void AMateria::setType(const std::string& type)
 
 void AMateria::use(ICharacter& target)
 {
-    std::cout << target.getName() << " uses " << type_ << "\n";
+    std::cout << "uses " << type_ << " on " << target.getName() << ".\n";
 }

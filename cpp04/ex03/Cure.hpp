@@ -18,6 +18,7 @@ class Cure : public AMateria
     //------------------------------- Functions --------------------------------
 
     Cure* clone() const;
+    void  use(ICharacter& target);
 
     //---------------------------------- Data ----------------------------------
 

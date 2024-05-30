@@ -19,6 +19,7 @@ class Ice : public AMateria
     //------------------------------- Functions --------------------------------
 
     Ice* clone() const;
+    void use(ICharacter& target);
 
     //---------------------------------- Data ----------------------------------
 
