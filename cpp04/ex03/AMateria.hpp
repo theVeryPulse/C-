@@ -13,7 +13,7 @@ class AMateria
     //----------------- Constructors, Assignments, Destructor ------------------
 
     AMateria(std::string const& type);
-    ~AMateria();
+    virtual ~AMateria();
     AMateria(const AMateria& other);            // Copy constructor
     AMateria& operator=(const AMateria& other); // Copy assignment operator
 
