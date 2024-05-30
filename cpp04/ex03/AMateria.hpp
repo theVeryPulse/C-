@@ -20,6 +20,7 @@ class AMateria
     //------------------------------- Functions --------------------------------
 
     const std::string& getType() const;
+    void               setType(const std::string& type);
     virtual AMateria*  clone() const = 0;
     virtual void       use(ICharacter& target);
 
@@ -35,7 +36,7 @@ class AMateria
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
 
-    AMateria::AMateria();
+    AMateria();
 
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------

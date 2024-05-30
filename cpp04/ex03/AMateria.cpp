@@ -25,6 +25,11 @@ const std::string& AMateria::getType() const
     return type_;
 }
 
+void AMateria::setType(const std::string& type)
+{
+    type_ = type;
+}
+
 void AMateria::use(ICharacter& target)
 {
     std::cout << target.getName() << " uses " << type_ << "\n";
