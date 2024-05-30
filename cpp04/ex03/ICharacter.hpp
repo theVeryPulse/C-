@@ -13,6 +13,7 @@ class ICharacter
     //----------------- Constructors, Assignments, Destructor ------------------
 
     ICharacter();
+    ICharacter(const std::string& name);
     virtual ~ICharacter();
     ICharacter(const ICharacter& other);            // Copy constructor
     ICharacter& operator=(const ICharacter& other); // Copy assignment operator
@@ -31,6 +32,8 @@ class ICharacter
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
+
+    std::string name_;
 
   private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
