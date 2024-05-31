@@ -1,4 +1,6 @@
 #include "Character.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
 #include <iostream>
 
 Character::Character()
@@ -17,19 +19,45 @@ Character::Character(const std::string& name) : ICharacter(name)
 
 Character::~Character()
 {
+    for (int i = 0; i < Character::max_item_count_; ++i)
+    {
+        if (items[i])
+            delete items[i];
+    }
     std::cout << "Character destructed: " << getName() << ".\n";
 }
 
 Character::Character(const Character& other) : ICharacter(other.name_)
 {
     for (int i = 0; i < Character::max_item_count_; ++i)
-        items[i] = NULL;
+    {
+        if (other.items[i] == NULL)
+            this->items[i] = NULL;
+        else if (other.items[i]->getType() == "ice")
+            this->items[i] = new Ice();
+        else if (other.items[i]->getType() == "cure")
+            this->items[i] = new Cure();
+    }
     std::cout << "Character copy constructed: " << getName() << ".\n";
 }
 
 Character& Character::operator=(const Character& other)
 {
     this->name_ = other.name_;
+    for (int i = 0; i < Character::max_item_count_; ++i)
+    {
+        if (this->items[i])
+        {
+            delete this->items[i];
+            this->items[i] = NULL;
+        }
+        if (other.items[i] == NULL)
+            continue;
+        else if (other.items[i]->getType() == "ice")
+            this->items[i] = new Ice();
+        else if (other.items[i]->getType() == "cure")
+            this->items[i] = new Cure();
+    }
     std::cout << "Character copy assigned: " << getName() << ".\n";
     return *this;
 }
@@ -43,19 +71,16 @@ void Character::equip(AMateria* materia)
 {
     if (!materia)
         return;
+    int first_empty_slot = -1;
     for (int i = 0; i < Character::max_item_count_; ++i)
     { // Checks if the item was already equipped
         if (items[i] == materia)
             return;
+        if (first_empty_slot == -1 && items[i] == NULL)
+            first_empty_slot = i;
     }
-    for (int i = 0; i < Character::max_item_count_; ++i)
-    {
-        if (items[i] == NULL)
-        {
-            items[i] = materia;
-            return;
-        }
-    }
+    if (first_empty_slot != -1)
+        items[first_empty_slot] = materia;
 }
 
 void Character::unequip(int idx)
