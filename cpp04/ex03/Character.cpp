@@ -33,10 +33,8 @@ Character::Character(const Character& other) : ICharacter(other.name_)
     {
         if (other.items[i] == NULL)
             this->items[i] = NULL;
-        else if (other.items[i]->getType() == "ice")
-            this->items[i] = new Ice();
-        else if (other.items[i]->getType() == "cure")
-            this->items[i] = new Cure();
+        else
+            this->items[i] = other.items[i]->clone();
     }
     std::cout << "Character copy constructed: " << getName() << ".\n";
 }
@@ -53,10 +51,8 @@ Character& Character::operator=(const Character& other)
         }
         if (other.items[i] == NULL)
             continue;
-        else if (other.items[i]->getType() == "ice")
-            this->items[i] = new Ice();
-        else if (other.items[i]->getType() == "cure")
-            this->items[i] = new Cure();
+        else
+            this->items[i] = other.items[i]->clone();
     }
     std::cout << "Character copy assigned: " << getName() << ".\n";
     return *this;
