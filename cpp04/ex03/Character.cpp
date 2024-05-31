@@ -45,12 +45,9 @@ Character& Character::operator=(const Character& other)
     for (int i = 0; i < Character::max_item_count_; ++i)
     {
         if (this->items[i])
-        {
             delete this->items[i];
-            this->items[i] = NULL;
-        }
         if (other.items[i] == NULL)
-            continue;
+            this->items[i] = NULL;
         else
             this->items[i] = other.items[i]->clone();
     }
