@@ -26,8 +26,10 @@ Cure& Cure::operator=(const Cure& other)
 
 Cure* Cure::clone() const
 {
+    std::cout << "Cure: cloning.\n";
+    Cure* cloned = new Cure();
     std::cout << "Cure: cloned.\n";
-    return new Cure();
+    return cloned;
 }
 
 void Cure::use(ICharacter& target)

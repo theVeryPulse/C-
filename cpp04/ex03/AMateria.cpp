@@ -4,19 +4,23 @@
 
 AMateria::AMateria(std::string const& type) : type_(type)
 {
+    std::cout << "AMateria: constructed. Type: " << type_ << ".\n";
 }
 
 AMateria::~AMateria()
 {
+    std::cout << "AMateria: destructed. Type: " << type_ << ".\n";
 }
 
 AMateria::AMateria(const AMateria& other) : type_(other.type_)
 {
+    std::cout << "AMateria: copy constructed. Type: " << type_ << ".\n";
 }
 
 AMateria& AMateria::operator=(const AMateria& other)
 {
     this->type_ = other.type_;
+    std::cout << "AMateria: copy assigned. Type: " << type_ << ".\n";
     return *this;
 }
 

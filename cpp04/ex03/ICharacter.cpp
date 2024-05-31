@@ -8,12 +8,12 @@ ICharacter::ICharacter() : name_("Charname")
 
 ICharacter::ICharacter(const std::string& name) : name_(name)
 {
-    std::cout << "ICharacter constructed.\n";
+    std::cout << "ICharacter constructed: "<< name_ << ".\n";
 }
 
 ICharacter::~ICharacter()
 {
-    std::cout << "ICharacter destructed.\n";
+    std::cout << "ICharacter destructed: "<< name_ << ".\n";
 }
 
 ICharacter::ICharacter(const ICharacter& other)
