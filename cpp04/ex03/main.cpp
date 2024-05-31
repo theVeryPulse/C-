@@ -2,10 +2,11 @@
 #include "Character.hpp"
 #include "Cure.hpp"
 #include "Ice.hpp"
+#include "MateriaSource.hpp"
 
 int main()
 {
-    // /*
+    /*
     {
         Ice*      ice1  = new Ice();
         Cure*     cure1 = new Cure();
@@ -27,16 +28,44 @@ int main()
         delete ice1_ptr;
         delete cure1_ptr;
     } // */
+    /*
     {
         Ice*      ice1 = new Ice();
         Character original("original");
         original.equip(ice1);
-        std::cout << "------\n";
+        std::cout << "------------------------------------------------------\n";
         Character copy1(original);
-        std::cout << "------\n";
+        std::cout << "------------------------------------------------------\n";
         Character copy2 = copy1;
-        std::cout << "------\n";
+        std::cout << "------------------------------------------------------\n";
         copy2 = original;
-        std::cout << "------\n";
+        std::cout << "------------------------------------------------------\n";
+    } // */
+    {
+        IMateriaSource* src = new MateriaSource();
+        std::cout << "------------------------------------------------------\n";
+        Ice*  ice1  = new Ice();
+        Cure* cure1 = new Cure();
+        src->learnMateria(ice1);
+        std::cout << "------------------------------------------------------\n";
+        src->learnMateria(cure1);
+        std::cout << "------------------------------------------------------\n";
+
+        ICharacter* me = new Character("Jinx");
+        AMateria*   tmp;
+        tmp = src->createMateria("ice");
+        me->equip(tmp);
+        tmp = src->createMateria("cure");
+        me->equip(tmp);
+        std::cout << "------------------------------------------------------\n";
+
+        ICharacter* bob = new Character("Vi");
+        me->use(0, *bob);
+        me->use(1, *bob);
+        std::cout << "------------------------------------------------------\n";
+
+        delete bob;
+        delete me;
+        delete src;
     }
 }
