@@ -19,7 +19,8 @@ class Dog : public Animal
     //------------------------------- Functions --------------------------------
 
     void makeSound() const;
-
+    void changeIdea(int idx, const std::string& new_idea);
+  
     //---------------------------------- Data ----------------------------------
 
   protected:

@@ -12,6 +12,7 @@ int main()
     delete cat1;
 
     Dog basic;
+    basic.changeIdea(0, "FOOD");
     {
         Dog tmp = basic;
     }
