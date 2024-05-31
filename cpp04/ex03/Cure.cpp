@@ -26,6 +26,7 @@ Cure& Cure::operator=(const Cure& other)
 
 Cure* Cure::clone() const
 {
+    std::cout << "Cure: cloned.\n";
     return new Cure();
 }
 

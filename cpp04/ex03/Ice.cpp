@@ -25,6 +25,7 @@ Ice& Ice::operator=(const Ice& other)
 
 Ice* Ice::clone() const
 {
+    std::cout << "Ice: cloned.\n";
     return new Ice();
 }
 
