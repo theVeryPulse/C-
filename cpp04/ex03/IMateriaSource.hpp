@@ -22,11 +22,15 @@ class IMateriaSource
 
     //---------------------------------- Data ----------------------------------
 
+    static const int materia_max_count_ = 4;
+
   protected:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
+
+    AMateria* materia_slots_[4];
 
   private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
