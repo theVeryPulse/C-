@@ -3,6 +3,7 @@
 #define BRAIN_HPP
 
 #include <iostream>
+#include <string>
 
 class Brain
 {
@@ -16,6 +17,9 @@ class Brain
     Brain& operator=(const Brain& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
+
+    void changeIdea(int idx, const std::string& new_idea);
+
     //---------------------------------- Data ----------------------------------
 
     static const int brain_size_ = 100;

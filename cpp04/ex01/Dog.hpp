@@ -18,7 +18,9 @@ class Dog : public Animal
 
     //------------------------------- Functions --------------------------------
 
-    void makeSound() const;
+    void        makeSound() const;
+    void        changeIdea(int idx, const std::string& new_idea);
+    std::string sayIdea(int idx);
 
     //---------------------------------- Data ----------------------------------
 

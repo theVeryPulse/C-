@@ -24,3 +24,10 @@ Brain& Brain::operator=(const Brain& other)
         this->ideas_[i] = other.ideas_[i];
     return *this;
 }
+
+void Brain::changeIdea(int idx, const std::string& new_idea)
+{
+    if (idx < 0 || idx >= Brain::brain_size_)
+        return;
+    ideas_[idx] = new_idea;
+}

@@ -30,3 +30,16 @@ void Dog::makeSound() const
 {
     std::cout << type_ << " (Dog): woof woof.\n";
 }
+
+void Dog::changeIdea(int idx, const std::string& new_idea)
+{
+    this->brain_->changeIdea(idx, new_idea);
+}
+
+std::string Dog::sayIdea(int idx)
+{
+    if (idx < 0 || idx >= Brain::brain_size_)
+        return "";
+    return brain_->ideas_[idx];
+}
+
