@@ -18,7 +18,7 @@ class Brain
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
 
-    static const int idea_count_ = 100;
+    static const int brain_size_ = 100;
     std::string      ideas_[100];
 
   protected:
