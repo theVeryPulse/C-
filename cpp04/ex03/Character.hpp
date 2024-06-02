@@ -1,25 +1,32 @@
 #pragma once
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef CHARACTER_HPP
+#define CHARACTER_HPP
 
-#include "Animal.hpp"
+#include "AMateria.hpp"
+#include "ICharacter.hpp"
 
-class Dog : public Animal
+class Character : public ICharacter
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    
-    Dog();
-    ~Dog();
-    Dog(const Dog& other);            // Copy constructor
-    Dog& operator=(const Dog& other); // Copy assignment operator
+
+    Character();
+    Character(const std::string& name);
+    ~Character();
+    Character(const Character& other);            // Copy constructor
+    Character& operator=(const Character& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
 
-    void makeSound() const;
+    const std::string& getName() const;
+    void               equip(AMateria* materia);
+    void               unequip(int idx);
+    void               use(int idx, ICharacter& target);
 
     //---------------------------------- Data ----------------------------------
+
+    static const int max_item_count_ = 4;
 
   protected:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
@@ -32,6 +39,8 @@ class Dog : public Animal
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
+
+    AMateria* items[4];
 };
 
-#endif /* DOG_HPP */
+#endif /* CHARACTER_HPP */

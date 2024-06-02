@@ -1,23 +1,25 @@
 #pragma once
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef MATERIASOURCE_HPP
+#define MATERIASOURCE_HPP
 
-#include "Animal.hpp"
+#include "IMateriaSource.hpp"
+#include "AMateria.hpp"
 
-class Dog : public Animal
+class MateriaSource : public IMateriaSource
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    
-    Dog();
-    ~Dog();
-    Dog(const Dog& other);            // Copy constructor
-    Dog& operator=(const Dog& other); // Copy assignment operator
+
+    MateriaSource();
+    ~MateriaSource();
+    MateriaSource(const MateriaSource& other);
+    MateriaSource& operator=(const MateriaSource& other);
 
     //------------------------------- Functions --------------------------------
 
-    void makeSound() const;
+    void      learnMateria(AMateria* materia);
+    AMateria* createMateria(std::string const& type);
 
     //---------------------------------- Data ----------------------------------
 
@@ -34,4 +36,4 @@ class Dog : public Animal
     //---------------------------------- Data ----------------------------------
 };
 
-#endif /* DOG_HPP */
+#endif /* MATERIASOURCE_HPP */

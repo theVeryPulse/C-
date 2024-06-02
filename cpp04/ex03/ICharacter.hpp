@@ -1,23 +1,29 @@
 #pragma once
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef ICHARACTER_HPP
+#define ICHARACTER_HPP
 
-#include "Animal.hpp"
+#include <string>
 
-class Dog : public Animal
+class AMateria;
+
+class ICharacter
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    
-    Dog();
-    ~Dog();
-    Dog(const Dog& other);            // Copy constructor
-    Dog& operator=(const Dog& other); // Copy assignment operator
+
+    ICharacter();
+    ICharacter(const std::string& name);
+    virtual ~ICharacter();
+    ICharacter(const ICharacter& other);            // Copy constructor
+    ICharacter& operator=(const ICharacter& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
 
-    void makeSound() const;
+    virtual const std::string& getName() const                  = 0;
+    virtual void               equip(AMateria* m)               = 0;
+    virtual void               unequip(int idx)                 = 0;
+    virtual void               use(int idx, ICharacter& target) = 0;
 
     //---------------------------------- Data ----------------------------------
 
@@ -27,6 +33,8 @@ class Dog : public Animal
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
 
+    std::string name_;
+
   private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
@@ -34,4 +42,4 @@ class Dog : public Animal
     //---------------------------------- Data ----------------------------------
 };
 
-#endif /* DOG_HPP */
+#endif /* ICHARACTER_HPP */

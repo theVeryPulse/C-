@@ -1,23 +1,25 @@
 #pragma once
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef ICE_HPP
+#define ICE_HPP
 
-#include "Animal.hpp"
+#include "AMateria.hpp"
+#include <iostream>
 
-class Dog : public Animal
+class Ice : public AMateria
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    
-    Dog();
-    ~Dog();
-    Dog(const Dog& other);            // Copy constructor
-    Dog& operator=(const Dog& other); // Copy assignment operator
+
+    Ice();
+    ~Ice();
+    Ice(const Ice& other);            // Copy constructor
+    Ice& operator=(const Ice& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
 
-    void makeSound() const;
+    Ice* clone() const;
+    void use(ICharacter& target);
 
     //---------------------------------- Data ----------------------------------
 
@@ -34,4 +36,4 @@ class Dog : public Animal
     //---------------------------------- Data ----------------------------------
 };
 
-#endif /* DOG_HPP */
+#endif /* ICE_HPP */

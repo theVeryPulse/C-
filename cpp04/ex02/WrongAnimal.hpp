@@ -1,23 +1,25 @@
 #pragma once
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
-#include "Animal.hpp"
+#include <string>
 
-class Dog : public Animal
+class WrongAnimal
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    
-    Dog();
-    ~Dog();
-    Dog(const Dog& other);            // Copy constructor
-    Dog& operator=(const Dog& other); // Copy assignment operator
+
+    WrongAnimal();
+    WrongAnimal(const std::string& type);
+    virtual ~WrongAnimal();
+    WrongAnimal(const WrongAnimal& other);
+    WrongAnimal& operator=(const WrongAnimal& other);
 
     //------------------------------- Functions --------------------------------
 
-    void makeSound() const;
+    void        makeSound() const;
+    std::string getType() const;
 
     //---------------------------------- Data ----------------------------------
 
@@ -27,6 +29,8 @@ class Dog : public Animal
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
 
+    std::string type_;
+
   private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
@@ -34,4 +38,4 @@ class Dog : public Animal
     //---------------------------------- Data ----------------------------------
 };
 
-#endif /* DOG_HPP */
+#endif /* WRONGANIMAL_HPP */

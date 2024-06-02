@@ -1,23 +1,24 @@
 #pragma once
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef CURE_HPP
+#define CURE_HPP
 
-#include "Animal.hpp"
+#include "AMateria.hpp"
 
-class Dog : public Animal
+class Cure : public AMateria
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-    
-    Dog();
-    ~Dog();
-    Dog(const Dog& other);            // Copy constructor
-    Dog& operator=(const Dog& other); // Copy assignment operator
+
+    Cure();
+    ~Cure();
+    Cure(const Cure& other);            // Copy constructor
+    Cure& operator=(const Cure& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
 
-    void makeSound() const;
+    Cure* clone() const;
+    void  use(ICharacter& target);
 
     //---------------------------------- Data ----------------------------------
 
@@ -34,4 +35,4 @@ class Dog : public Animal
     //---------------------------------- Data ----------------------------------
 };
 
-#endif /* DOG_HPP */
+#endif /* CURE_HPP */
