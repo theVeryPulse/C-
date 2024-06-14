@@ -1,4 +1,4 @@
-#include "Vec3.h"
+#include "Vector3.hpp"
 #include <cmath>
 
 using std::sqrt;
