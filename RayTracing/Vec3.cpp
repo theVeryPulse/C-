@@ -61,11 +61,11 @@ double& Vector3::operator[](int i)
     }
 }
 
-Vector3& Vector3::operator+=(const Vector3& v)
+Vector3& Vector3::operator+=(const Vector3& addend)
 {
-    x_ += v.x_;
-    y_ += v.y_;
-    z_ += v.z_;
+    x_ += addend.x_;
+    y_ += addend.y_;
+    z_ += addend.z_;
     return *this;
 }
 

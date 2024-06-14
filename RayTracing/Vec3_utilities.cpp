@@ -4,52 +4,62 @@
 
 inline std::ostream& operator<<(std::ostream& out, const Vector3& v)
 {
-    return out << v.x_ << ' ' << v.y_ << ' ' << v.z_;
+    return out << '(' << v.x_ << ", " << v.y_ << ", " << v.z_ << ')';
 }
 
-inline Vector3 operator+(const Vector3& u, const Vector3& v)
+inline Vector3 operator+(const Vector3& addend1, const Vector3& addend2)
 {
-    return Vector3(u.x_ + v.x_, u.y_ + v.y_, u.z_ + v.z_);
+    return Vector3(addend1.x_ + addend2.x_,
+                   addend1.y_ + addend2.y_,
+                   addend1.z_ + addend2.z_);
 }
 
-inline Vector3 operator-(const Vector3& u, const Vector3& v)
+inline Vector3 operator-(const Vector3& minuend, const Vector3& subtrahend)
 {
-    return Vector3(u.x_ - v.x_, u.y_ - v.y_, u.z_ - v.z_);
+    return Vector3(minuend.x_ - subtrahend.x_,
+                   minuend.y_ - subtrahend.y_,
+                   minuend.z_ - subtrahend.z_);
 }
 
-inline Vector3 operator*(const Vector3& u, const Vector3& v)
+inline Vector3 operator*(const Vector3& multiplicand,
+                         const Vector3& multiplicator)
 {
-    return Vector3(u.x_ * v.x_, u.y_ * v.y_, u.z_ * v.z_);
+    return Vector3(multiplicand.x_ * multiplicator.x_,
+                   multiplicand.y_ * multiplicator.y_,
+                   multiplicand.z_ * multiplicator.z_);
 }
 
-inline Vector3 operator*(double t, const Vector3& v)
+inline Vector3 operator*(double multiplicand, const Vector3& multiplicator)
 {
-    return Vector3(t * v.x_, t * v.y_, t * v.z_);
+    return Vector3(multiplicand * multiplicator.x_,
+                   multiplicand * multiplicator.y_,
+                   multiplicand * multiplicator.z_);
 }
 
-inline Vector3 operator*(const Vector3& v, double t)
+inline Vector3 operator*(const Vector3& multiplicand, double multiplicator)
 {
-    return t * v;
+    return multiplicator * multiplicand;
 }
 
-inline Vector3 operator/(const Vector3& v, double t)
+inline Vector3 operator/(const Vector3& dividend, double divisor)
 {
-    return (1 / t) * v;
+    return (1 / divisor) * dividend;
 }
 
-inline double dot(const Vector3& u, const Vector3& v)
+inline double dot(const Vector3& vector1, const Vector3& vector2)
 {
-    return u.x_ * v.x_ + u.y_ * v.y_ + u.z_ * v.z_;
+    return vector1.x_ * vector2.x_ + vector1.y_ * vector2.y_
+           + vector1.z_ * vector2.z_;
 }
 
-inline Vector3 cross(const Vector3& u, const Vector3& v)
+inline Vector3 cross(const Vector3& vector1, const Vector3& vector2)
 {
-    return Vector3(u.y_ * v.z_ - u.z_ * v.y_,
-                   u.z_ * v.x_ - u.x_ * v.z_,
-                   u.x_ * v.y_ - u.y_ * v.x_);
+    return Vector3(vector1.y_ * vector2.z_ - vector1.z_ * vector2.y_,
+                   vector1.z_ * vector2.x_ - vector1.x_ * vector2.z_,
+                   vector1.x_ * vector2.y_ - vector1.y_ * vector2.x_);
 }
 
-inline Vector3 unit_vector(const Vector3& v)
+inline Vector3 unit_vector(const Vector3& vector)
 {
-    return v / v.length();
+    return vector / vector.length();
 }
