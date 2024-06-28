@@ -81,11 +81,7 @@ float Fixed::toFloat() const
 /// @return
 int Fixed::toInt() const
 {
-    int int_value = value_ >> Fixed::fractional_bits_;
-    if ((value_ & (1 << (Fixed::fractional_bits_ - 1)))
-        && value_ & (1 << (Fixed::fractional_bits_ - 2)))
-        ++int_value;
-    return int_value;
+    return value_ >> Fixed::fractional_bits_;
 }
 
 void Fixed::printValue(std::ostream& stream) const
