@@ -81,11 +81,7 @@ float Fixed::toFloat() const
 /// @return
 int Fixed::toInt() const
 {
-    int int_value = value_ >> Fixed::fractional_bits_;
-    if ((value_ & (1 << (Fixed::fractional_bits_ - 1)))
-        && value_ & (1 << (Fixed::fractional_bits_ - 2)))
-        ++int_value;
-    return int_value;
+    return value_ >> Fixed::fractional_bits_;
 }
 
 void Fixed::printValue(std::ostream& stream) const
@@ -96,7 +92,12 @@ void Fixed::printValue(std::ostream& stream) const
         std::abs(value_ - (integer_part * Fixed::fixed_unit_one_));
     if (!fractional_part)
         return;
-    stream << '.' << (int64_t)fractional_part * (int64_t)390625;
+    stream << '.';
+    if (((int64_t)fractional_part * (int64_t)390625) <= (int64_t)390625)
+        stream << "00";
+    else if (((int64_t)fractional_part * (int64_t)390625) <= (int64_t)3906250)
+        stream << "0";
+    stream << (int64_t)fractional_part * (int64_t)390625;
     // smallest unit of 8 bits fraction is 2^(-8) = 0.00390625
     // 390625 is hence chosen as the base for calculating the fractional
     // representation

@@ -91,7 +91,7 @@ static void writeNewContentToOutfile(const char*   old_string,
         {
             line.erase(to_replace, old_s.length());
             line.insert(to_replace, new_s);
-            to_replace = line.find(old_s);
+            to_replace = line.find(old_s, to_replace + new_s.length());
         }
         outfile << line << "\n";
         if (infile.eof())

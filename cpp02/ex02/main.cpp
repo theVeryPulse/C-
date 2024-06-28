@@ -23,6 +23,14 @@ int main()
     }
     test_comparisons();
     test_arithmetic();
+    {
+        Fixed a;
+        for (size_t i = 0; i < 1000; i++)
+        {
+            a.setRawBits(i);
+            std::cout << i << " as Fixed: " << a << "\n";
+        }
+    }
     return 0;
 }
 
