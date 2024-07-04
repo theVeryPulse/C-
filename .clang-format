@@ -1,6 +1,7 @@
 BasedOnStyle: microsoft
 AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
-ColumnLimit: 80
-PointerAlignment: Left
 BreakBeforeBinaryOperators: NonAssignment
+ColumnLimit: 80
+PenaltyBreakAssignment: '1000'
+PointerAlignment: Left
