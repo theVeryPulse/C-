@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
@@ -73,4 +74,18 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
     return "Bureaucrat's grade cannot goes below 150.";
+}
+
+void Bureaucrat::signForm(Form& form)
+{
+    try
+    {
+        form.beSigned(*this);
+        std::cout << name_ << " signed " << form.getName() << "\n";
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << name_ << " couldn'y sign " << form.getName() << " because "
+                  << e.what() << "\n";
+    }
 }

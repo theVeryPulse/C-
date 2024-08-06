@@ -29,6 +29,7 @@ int main()
         std::cout << jimmy << "\n";
         Form form3("Form 3", 15, 25);
         std::cout << form3 << "\n";
+        std::cout << "form3.beSigned(jimmy)>\n";
         try
         {
             form3.beSigned(jimmy);
@@ -37,6 +38,10 @@ int main()
         {
             std::cerr << "Exception detected: " << e.what() << '\n';
         }
+        std::cout << "jimmy.signForm(form3)>\n";
+        jimmy.signForm(form3);
+        Bureaucrat boss("Boss", 1);
+        boss.signForm(form3);
     }
     return 0;
 }

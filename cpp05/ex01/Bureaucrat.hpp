@@ -5,6 +5,8 @@
 #include <exception>
 #include <string>
 
+class Form;
+
 class Bureaucrat
 {
   public:
@@ -34,6 +36,7 @@ class Bureaucrat
     int         getGrade() const;
     void        incrementGrade();
     void        decrementGrade();
+    void        signForm(Form& form);
 
     //---------------------------------- Data ----------------------------------
 
