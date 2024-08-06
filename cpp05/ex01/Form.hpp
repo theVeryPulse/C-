@@ -2,6 +2,7 @@
 #ifndef FORM_HPP
 #define FORM_HPP
 
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <string>
 
@@ -35,6 +36,7 @@ class Form
     bool        getSigned() const;
     int         getMinimalSignGrade() const;
     int         getMinimalExecuteGrade() const;
+    void        beSigned(const Bureaucrat& bureaucrat);
 
     //---------------------------------- Data ----------------------------------
 

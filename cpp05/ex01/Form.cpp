@@ -2,12 +2,12 @@
 
 const char* Form::GradeTooHighException::what() const throw()
 {
-    return "Form grade requirement cannot be below 1.";
+    return "Grade too low.";
 }
 
 const char* Form::GradeTooLowException::what() const throw()
 {
-    return "Form grade requirement cannot be above 150.";
+    return "Grade too high.";
 }
 
 Form::Form(const std::string& name, int minimal_sign_grade,
@@ -73,4 +73,12 @@ std::ostream& operator<<(std::ostream& os, const Form& f)
        << "Minimal execute grade: " << f.getMinimalExecuteGrade() << ". "
        << "Signed? " << (f.getSigned() ? "Yes" : "No") << ".";
     return os;
+}
+
+void Form::beSigned(const Bureaucrat& bureaucrat)
+{
+    if (bureaucrat.getGrade() <= minimal_sign_grade_)
+        signed_ = true;
+    else
+        throw GradeTooLowException();
 }
