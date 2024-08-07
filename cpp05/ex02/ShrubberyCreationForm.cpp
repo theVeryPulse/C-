@@ -24,17 +24,6 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(
     return *this;
 }
 
-/// @brief Lets a bureaucrat sign the shrubbery creation form. Minimal sign
-///        grade: 145, minimal execute grade: 137.
-/// @param bureaucrat The bureaucrat to sign the form.
-void ShrubberyCreationForm::beSigned(const Bureaucrat& bureaucrat)
-{
-    if (bureaucrat.getGrade() <= getMinimalSignGrade())
-        setSignedStatus(true);
-    else
-        throw AForm::GradeTooLowException();
-}
-
 void ShrubberyCreationForm::executeAction() const
 {
     std::string   filename = target_ + "_shrubbery";

@@ -19,7 +19,6 @@ class PresidentialPardonForm : public AForm
 
     //------------------------------- Functions --------------------------------
 
-    void beSigned(const Bureaucrat& bureaucrat);
     void executeAction() const;
 
     //---------------------------------- Data ----------------------------------

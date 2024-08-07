@@ -6,14 +6,15 @@
 
 int main()
 {
+    Bureaucrat jimmy("Jimmy", 1);
+    Bureaucrat ted("Ted", 150);
+    std::cout << jimmy << "\n";
+    std::cout << ted << "\n\n";
     {
         ShrubberyCreationForm scf("CoolStuff");
-        Bureaucrat            jimmy("Jimmy", 100);
         std::cout << scf << "\n";
-        std::cout << jimmy << "\n";
         try
         {
-            std::cout << "Jimmy trying to execute...\n";
             scf.execute(jimmy);
         }
         catch (const std::exception& e)
@@ -21,24 +22,30 @@ int main()
             std::cout << "error: " << e.what() << "\n";
         }
         scf.beSigned(jimmy);
-        Bureaucrat ted("Ted", 150);
-        std::cout << ted << "\n";
         try
         {
-            std::cout << "Ted trying to execute...\n";
             scf.execute(ted);
         }
         catch (const std::exception& e)
         {
             std::cout << "error: " << e.what() << "\n";
         }
-        std::cout << "Jimmy trying to execute...\n";
         scf.execute(jimmy);
     }
+    std::cout << "\n\n";
     {
         RobotomyRequestForm rqf("Manufacture");
-        std::cout << "\n" << rqf << "\n";
+        try
+        {
+            rqf.execute(jimmy);
+        }
+        catch (const std::exception& e)
+        {
+            std::cout << "error: " << e.what() << "\n";
+        }
+        std::cout << rqf << "\n";
     }
+    std::cout << "\n\n";
     {
         PresidentialPardonForm pdf("Trump");
         std::cout << "\n" << pdf << "\n";

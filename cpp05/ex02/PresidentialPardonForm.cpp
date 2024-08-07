@@ -24,18 +24,6 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(
     return *this;
 }
 
-/// @brief Lets a bureaucrat sign the robotomy request form. Minimal sign
-///        grade: 25, minimal execute grade: 5.
-/// @param bureaucrat The bureaucrat to sign the form.
-void PresidentialPardonForm::beSigned(const Bureaucrat& bureaucrat)
-{
-    if (bureaucrat.getGrade() <= getMinimalSignGrade())
-        setSignedStatus(true);
-    else
-        throw AForm::GradeTooLowException();
-}
-
 void PresidentialPardonForm::executeAction() const
 {
-
 }

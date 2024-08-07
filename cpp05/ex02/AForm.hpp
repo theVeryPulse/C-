@@ -43,7 +43,7 @@ class AForm
     void         setSignedStatus(bool new_status);
     int          getMinimalSignGrade() const;
     int          getMinimalExecuteGrade() const;
-    virtual void beSigned(const Bureaucrat& bureaucrat) = 0;
+    void         beSigned(const Bureaucrat& bureaucrat);
     void         execute(const Bureaucrat& bureaucrat) const;
     virtual void executeAction() const = 0;
 

@@ -86,8 +86,27 @@ std::ostream& operator<<(std::ostream& os, const AForm& f)
     return os;
 }
 
+void AForm::beSigned(const Bureaucrat& bureaucrat)
+{
+    std::cout << bureaucrat.getName() 
+              << " [" << bureaucrat.getGrade() << "] tries to sign "
+              << getName() << " (minimal sign grade: "
+              << minimal_sign_grade_  << ").\n";
+    if (bureaucrat.getGrade() > minimal_sign_grade_)
+        throw GradeTooLowException();
+    if (signed_ == true)
+        return;
+    std::cout << "Form " << getName() << " has been signed by "
+              << bureaucrat.getName() << ".\n";
+    signed_ = true;
+}
+
 void AForm::execute(const Bureaucrat& bureaucrat) const
 {
+    std::cout << bureaucrat.getName() 
+              << " [" << bureaucrat.getGrade() << "] tries to execute "
+              << getName() << " (minimal execute grade: "
+              << minimal_execute_grade_  << ").\n";
     if (signed_ != true)
         throw FormNotSignedException();
     if (bureaucrat.getGrade() > minimal_execute_grade_)

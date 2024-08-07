@@ -19,7 +19,6 @@ class RobotomyRequestForm : public AForm
 
     //------------------------------- Functions --------------------------------
 
-    void beSigned(const Bureaucrat& bureaucrat);
     void executeAction() const;
 
     //---------------------------------- Data ----------------------------------
@@ -38,6 +37,8 @@ class RobotomyRequestForm : public AForm
 
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
+
+    const std::string target_;
 };
 
 #endif /* ROBOTOMY_REQUEST_FORM_H */
