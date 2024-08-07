@@ -34,3 +34,8 @@ void PresidentialPardonForm::beSigned(const Bureaucrat& bureaucrat)
     else
         throw AForm::GradeTooLowException();
 }
+
+void PresidentialPardonForm::executeAction() const
+{
+
+}

@@ -38,3 +38,8 @@ void RobotomyRequestForm::beSigned(const Bureaucrat& bureaucrat)
     else
         throw AForm::GradeTooLowException();
 }
+
+void RobotomyRequestForm::executeAction() const
+{
+    
+}

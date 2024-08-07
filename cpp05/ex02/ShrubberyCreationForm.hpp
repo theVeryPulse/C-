@@ -18,6 +18,7 @@ class ShrubberyCreationForm : public AForm
     //------------------------------- Functions --------------------------------
 
     void beSigned(const Bureaucrat& bureaucrat);
+    void executeAction() const;
 
     //---------------------------------- Data ----------------------------------
 
@@ -35,6 +36,8 @@ class ShrubberyCreationForm : public AForm
 
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
+
+    const std::string target_;
 };
 
 #endif /* SHRUBBERY_CREATION_FORM_HPP */

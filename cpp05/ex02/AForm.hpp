@@ -22,6 +22,11 @@ class AForm
       public:
         const char* what() const throw();
     };
+    class FormNotSignedException : public std::exception
+    {
+      public:
+        const char* what() const throw();
+    };
 
     //----------------- Constructors, Assignments, Destructor ------------------
 
@@ -39,6 +44,8 @@ class AForm
     int          getMinimalSignGrade() const;
     int          getMinimalExecuteGrade() const;
     virtual void beSigned(const Bureaucrat& bureaucrat) = 0;
+    void         execute(const Bureaucrat& bureaucrat) const;
+    virtual void executeAction() const = 0;
 
     //---------------------------------- Data ----------------------------------
 
