@@ -1,6 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
@@ -12,6 +13,10 @@ int main()
     }
     {
         RobotomyRequestForm rqf("Manufacture");
+    }
+    {
+        PresidentialPardonForm pdf("Trump");
+        std::cout << pdf << "\n";
     }
     return 0;
 }
