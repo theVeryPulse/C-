@@ -10,7 +10,7 @@ class ShrubberyCreationForm : public AForm
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
 
-    ShrubberyCreationForm(const std::string& name);
+    ShrubberyCreationForm(const std::string& target);
     ~ShrubberyCreationForm();
     ShrubberyCreationForm(const ShrubberyCreationForm& other);
     ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);

@@ -1,15 +1,15 @@
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string& name)
-    : AForm(name, 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
+    : AForm(target + "_robotomy_request_form", 72, 45)
 {
     std::cout << "[Drilling noise...]\n";
     srand(time(0));
     if (rand() % 2 == 0)
-        std::cout << name << " has been robotomized.\n";
+        std::cout << target << " has been robotomized.\n";
     else
-        std::cout << name << " has not been robotomized.\n";
+        std::cout << target << " has not been robotomized.\n";
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()

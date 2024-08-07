@@ -12,7 +12,7 @@ class RobotomyRequestForm : public AForm
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
 
-    RobotomyRequestForm(const std::string& name);
+    RobotomyRequestForm(const std::string& target);
     ~RobotomyRequestForm();
     RobotomyRequestForm(const RobotomyRequestForm& other);
     RobotomyRequestForm& operator=(const RobotomyRequestForm& other);

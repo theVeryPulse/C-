@@ -3,13 +3,13 @@
 #include <fstream>
 #include <iostream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& name)
-    : AForm(name, 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
+    : AForm(target + "_shrubbery_creation_form", 145, 137)
 {
-    std::string   target = name + "_shrubbery";
-    std::ofstream file(target.c_str(), std::ios::out);
+    std::string   filename = target + "_shrubbery";
+    std::ofstream file(filename.c_str(), std::ios::out);
     if (!file.is_open())
-        throw std::runtime_error("Cannot open file" + target);
+        throw std::runtime_error("Cannot open file" + filename);
     file << "          &&& &&  & &&\n"
          << "      && &\\/&\\|& ()|/ @, &&\n"
          << "      &\\/(/&/&||/& /_/)_&/_&\n"

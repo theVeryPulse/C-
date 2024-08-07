@@ -12,7 +12,7 @@ class PresidentialPardonForm : public AForm
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
 
-    PresidentialPardonForm(const std::string& name);
+    PresidentialPardonForm(const std::string& target);
     ~PresidentialPardonForm();
     PresidentialPardonForm(const PresidentialPardonForm& other);
     PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
