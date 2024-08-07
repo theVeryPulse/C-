@@ -49,8 +49,10 @@ int main()
     std::cout << "\n\n";
     {
         PresidentialPardonForm pdf("Trump");
-        pdf.beSigned(jimmy);
-        pdf.execute(jimmy);
+        jimmy.executeForm(pdf);
+        jimmy.signForm(pdf);
+        ted.executeForm(pdf);
+        jimmy.executeForm(pdf);
         std::cout << pdf << "\n";
     }
     return 0;
