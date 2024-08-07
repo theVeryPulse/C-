@@ -37,6 +37,8 @@ class PresidentialPardonForm : public AForm
 
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
+
+    const std::string target_;
 };
 
 #endif /* PRESIDENTIAL_PARDON_HPP */

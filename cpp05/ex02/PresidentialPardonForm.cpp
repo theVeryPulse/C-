@@ -2,9 +2,8 @@
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
-    : AForm(target + "_presidential_pardon_form", 25, 5)
+    : AForm(target + "_presidential_pardon_form", 25, 5), target_(target)
 {
-    std::cout << target << " has been pardoned by Zaphod Beeblebrox.\n";
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
@@ -26,4 +25,5 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(
 
 void PresidentialPardonForm::executeAction() const
 {
+    std::cout << target_ << " has been pardoned by Zaphod Beeblebrox.\n";
 }

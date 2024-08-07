@@ -43,12 +43,15 @@ int main()
         {
             std::cout << "error: " << e.what() << "\n";
         }
-        std::cout << rqf << "\n";
+        rqf.beSigned(jimmy);
+        rqf.execute(jimmy);
     }
     std::cout << "\n\n";
     {
         PresidentialPardonForm pdf("Trump");
-        std::cout << "\n" << pdf << "\n";
+        pdf.beSigned(jimmy);
+        pdf.execute(jimmy);
+        std::cout << pdf << "\n";
     }
     return 0;
 }
