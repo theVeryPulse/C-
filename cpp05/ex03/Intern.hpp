@@ -1,26 +1,25 @@
 #pragma once
-#ifndef PRESIDENTIAL_PARDON_HPP
-#define PRESIDENTIAL_PARDON_HPP
+#ifndef INTERN_HPP
+#define INTERN_HPP
 
-#include "AForm.hpp"
+#include <string>
 
-class Bureaucrat;
+class AForm;
 
-class PresidentialPardonForm : public AForm
+class Intern
 {
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
 
-    PresidentialPardonForm(const std::string& target);
-    ~PresidentialPardonForm();
-    PresidentialPardonForm(const PresidentialPardonForm& other);
-    PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
+    Intern();
+    ~Intern();
+    Intern(const Intern& other); // Copy constructor
+    Intern& operator=(const Intern& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
 
-    void          executeAction() const;
-    static AForm* create(const std::string& target);
+    AForm* makeForm(const std::string& type, const std::string& target);
 
     //---------------------------------- Data ----------------------------------
 
@@ -33,13 +32,8 @@ class PresidentialPardonForm : public AForm
   private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
-
-    PresidentialPardonForm();
-
     //------------------------------- Functions --------------------------------
     //---------------------------------- Data ----------------------------------
-
-    const std::string target_;
 };
 
-#endif /* PRESIDENTIAL_PARDON_HPP */
+#endif /* INTERN_HPP */

@@ -2,12 +2,13 @@ NAME   := Form
 FILES  :=  \
 	AForm.cpp \
 	Bureaucrat.cpp \
+	Intern.cpp \
 	main.cpp \
 	PresidentialPardonForm.cpp \
 	RobotomyRequestForm.cpp \
 	ShrubberyCreationForm.cpp
 
-FLAGS  := -Wall -Wextra -Werror -std=c++98
+FLAGS  := -Wall -Wextra -Werror -std=c++98 -g
 OFILES := $(patsubst %.cpp, build/%.o, $(FILES))
 
 all: $(NAME)

@@ -31,3 +31,8 @@ void RobotomyRequestForm::executeAction() const
     else
         std::cout << target_ << " has not been robotomized.\n";
 }
+
+AForm* RobotomyRequestForm::create(const std::string& target)
+{
+    return new RobotomyRequestForm(target);
+}

@@ -17,7 +17,8 @@ class ShrubberyCreationForm : public AForm
 
     //------------------------------- Functions --------------------------------
 
-    void executeAction() const;
+    void          executeAction() const;
+    static AForm* create(const std::string& target);
 
     //---------------------------------- Data ----------------------------------
 

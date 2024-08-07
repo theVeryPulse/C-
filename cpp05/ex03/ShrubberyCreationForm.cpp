@@ -46,3 +46,7 @@ void ShrubberyCreationForm::executeAction() const
     std::cout << "Executed, check file: ./" << filename << "\n"; 
 }
 
+AForm* ShrubberyCreationForm::create(const std::string& target)
+{
+    return new ShrubberyCreationForm(target);
+}
