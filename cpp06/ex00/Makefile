@@ -8,7 +8,7 @@ OFILES := $(patsubst %.cpp, build/%.o, $(FILES))
 
 all: $(NAME)
 
-debug: FLAGS = -std=c++98 -g
+debug: FLAGS = -std=c++98 -g -fstandalone-debug
 debug: re
 
 $(NAME): $(OFILES)

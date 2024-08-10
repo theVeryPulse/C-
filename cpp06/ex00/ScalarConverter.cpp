@@ -53,7 +53,7 @@ bool ScalarConverter::isFloat(const std::string& literal)
         if (literal == special_value->for_float)
             return true;
     }
-    if (*(literal.end()) == 'f' && literal.length() > 1)
+    if (*(literal.rbegin()) == 'f' && literal.length() > 1)
         return true;
     return false;
 }
@@ -153,12 +153,30 @@ void ScalarConverter::handleFloat(const std::string& literal)
         }
     }
     std::istringstream iss(literal);
-    float              f;
+
+    float f;
     iss >> f;
-    displayChar(static_cast<int>(f));
-    displayInt(static_cast<int>(f));
-    displayFloat(f);
-    displayDouble(static_cast<double>(f));
+    iss.clear();
+    iss.seekg(0);
+
+    double d;
+    iss >> d;
+    iss.clear();
+    iss.seekg(0);
+
+    if (d >= CHAR_MIN && d <= CHAR_MAX)
+        displayChar(static_cast<int>(d));
+    else
+        std::cout << "char: impossible\n";
+    if (d >= INT_MIN && d <= INT_MAX)
+        displayInt(static_cast<int>(d));
+    else
+        std::cout << "int: impossible\n";
+    if (d >= -FLT_MAX && d <= FLT_MAX)
+        displayFloat(f);
+    else
+        std::cout << "float: impossible\n";
+    displayDouble(d);
 }
 
 void ScalarConverter::handleDouble(const std::string& literal)
