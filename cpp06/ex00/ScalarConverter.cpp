@@ -6,6 +6,9 @@
 #include <sstream>
 #include <string>
 
+const ScalarConverter::SpecialValue ScalarConverter::special_values[3] = {
+    {"nan", "nanf"}, {"+inf", "+inff"}, {"-inf", "-inff"}};
+
 ScalarConverter::ScalarConverter()
 {
 }
@@ -23,28 +26,43 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
     return *this;
 }
 
-bool isChar(const std::string& literal)
+bool ScalarConverter::isChar(const std::string& literal)
 {
     return literal.length() == 1 && isprint(literal[0]) && !isdigit(literal[0]);
 }
 
-bool isInt(const std::string& literal)
+bool ScalarConverter::isInt(const std::string& literal)
 {
     std::istringstream iss(literal);
     int                value;
     return (iss >> value >> std::ws).eof();
 }
 
-bool isFloat(const std::string& literal)
+bool ScalarConverter::isFloat(const std::string& literal)
 {
-    return literal == "nanf" || literal == "+inff" || literal == "-inff"
-           || (literal.find('f') != std::string::npos && literal.length() > 1);
+    for (const SpecialValue* special_value = special_values;
+         special_value < special_values + 3; ++special_value)
+    {
+        if (literal == special_value->for_float)
+            return true;
+    }
+    if (*(literal.end()) == 'f' && literal.length() > 1)
+        return true;
+    return false;
 }
 
-bool isDouble(const std::string& literal)
+bool ScalarConverter::isDouble(const std::string& literal)
 {
-    return literal == "nan" || literal == "+inf" || literal == "-inf"
-           || (literal.find('.') != std::string::npos && literal.length() > 2);
+    for (const SpecialValue* special_value = special_values;
+         special_value < special_values + 3; ++special_value)
+    {
+        if (literal == special_value->for_double)
+            return true;
+    }
+    if (literal.find('.') != std::string::npos && isdigit(*(literal.rbegin()))
+        && literal.length() >= 3)
+        return true;
+    return false;
 }
 
 void displayChar(int c)
@@ -72,7 +90,7 @@ void displayDouble(double d)
     std::cout << "double: " << d << "\n";
 }
 
-void handleChar(const std::string& literal)
+void ScalarConverter::handleChar(const std::string& literal)
 {
     char c = literal[0];
     displayChar(c);
@@ -81,7 +99,7 @@ void handleChar(const std::string& literal)
     displayDouble(static_cast<double>(c));
 }
 
-void handleInt(const std::string& literal)
+void ScalarConverter::handleInt(const std::string& literal)
 {
     std::istringstream iss(literal);
     int                n;
@@ -92,32 +110,68 @@ void handleInt(const std::string& literal)
     displayDouble(n);
 }
 
-void handleFloat(const std::string& literal)
+void ScalarConverter::handleFloat(const std::string& literal)
 {
+
+    for (const SpecialValue* special_value = special_values;
+         special_value < special_values + 3; ++special_value)
+    {
+        if (literal == special_value->for_float)
+        {
+            std::cout << "char: impossible\n"
+                      << "int: impossible\n"
+                      << "float: " << special_value->for_float << "\n"
+                      << "double: " << special_value->for_double << "\n";
+            return;
+        }
+    }
+    std::istringstream iss(literal);
+    float              f;
+    iss >> f;
+    displayChar(static_cast<int>(f));
+    displayInt(static_cast<int>(f));
+    displayFloat(f);
+    displayDouble(static_cast<double>(f));
 }
 
-void handleDouble(const std::string& literal)
+void ScalarConverter::handleDouble(const std::string& literal)
 {
+    for (const SpecialValue* special_value = special_values;
+         special_value < special_values + 3; ++special_value)
+    {
+        if (literal == special_value->for_double)
+        {
+            std::cout << "char: impossible\n"
+                      << "int: impossible\n"
+                      << "float: " << special_value->for_float << "\n"
+                      << "double: " << special_value->for_double << "\n";
+            return;
+        }
+    }
+    std::istringstream iss(literal);
+    double             d;
+    iss >> d;
+    displayChar(static_cast<int>(d));
+    displayInt(static_cast<int>(d));
+    displayFloat(static_cast<float>(d));
+    displayDouble(d);
 }
 
 void ScalarConverter::convert(const std::string& literal)
 {
     static const TypeHandler type_handlers[TYPE_COUNT] = {
-        {&isChar, &handleChar},
-        {&isInt, &handleInt},
-        {&isFloat, &handleFloat},
-        {&isDouble, &handleDouble}};
+        {&isChar, &ScalarConverter::handleChar},
+        {&isInt, &ScalarConverter::handleInt},
+        {&isFloat, &ScalarConverter::handleFloat},
+        {&isDouble, &ScalarConverter::handleDouble}};
     for (const TypeHandler* type_handler = type_handlers;
          type_handler < type_handlers + TYPE_COUNT; ++type_handler)
     {
         if (type_handler->is_type(literal))
         {
             type_handler->handle_literal(literal);
-            break;
+            return;
         }
     }
-
-    // 1. Identify the type
-    // 2. Handle each type
-    // 3. Handle special cases
+    std::cout << "Unrecognised input\n";
 }
