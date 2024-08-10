@@ -194,11 +194,27 @@ void ScalarConverter::handleDouble(const std::string& literal)
         }
     }
     std::istringstream iss(literal);
-    double             d;
+
+    double d;
     iss >> d;
-    displayChar(static_cast<int>(d));
-    displayInt(static_cast<int>(d));
-    displayFloat(static_cast<float>(d));
+    iss.clear();
+    iss.seekg(0);
+
+    float f;
+    iss >> f;
+
+    if (d >= CHAR_MIN && d <= CHAR_MAX)
+        displayChar(static_cast<int>(d));
+    else
+        std::cout << "char: impossible\n";
+    if (d >= INT_MIN && d <= INT_MAX)
+        displayInt(static_cast<int>(d));
+    else
+        std::cout << "int: impossible\n";
+    if (d >= -FLT_MAX && d <= FLT_MAX)
+        displayFloat(f);
+    else
+        std::cout << "float: impossible\n";
     displayDouble(d);
 }
 
