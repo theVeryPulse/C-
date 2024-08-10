@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+#include <climits>
+#include <cfloat>
 
 const ScalarConverter::SpecialValue ScalarConverter::special_values[3] = {
     {"nan", "nanf"}, {"+inf", "+inff"}, {"-inf", "-inff"}};
@@ -19,11 +21,16 @@ ScalarConverter::~ScalarConverter()
 
 ScalarConverter::ScalarConverter(const ScalarConverter& other)
 {
+    if (&other != this)
+        std::cout << "Scalar converter copy constructor\n";
 }
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
 {
-    return *this;
+    if (&other != this)
+        return *this;
+    else
+        return *this;
 }
 
 bool ScalarConverter::isChar(const std::string& literal)
@@ -92,22 +99,42 @@ void displayDouble(double d)
 
 void ScalarConverter::handleChar(const std::string& literal)
 {
-    char c = literal[0];
-    displayChar(c);
-    displayInt(static_cast<int>(c));
-    displayFloat(static_cast<float>(c));
-    displayDouble(static_cast<double>(c));
+    displayChar(literal[0]);
+    displayInt(literal[0]);
+    displayFloat(literal[0]);
+    displayDouble(literal[0]);
 }
 
 void ScalarConverter::handleInt(const std::string& literal)
 {
     std::istringstream iss(literal);
-    int                n;
+
+    int n;
     iss >> n;
-    displayChar(n);
-    displayInt(n);
-    displayFloat(n);
-    displayDouble(n);
+    iss.clear();
+    iss.seekg(0);
+
+    float f;
+    iss >> f;
+    iss.clear();
+    iss.seekg(0);
+
+    double d;
+    iss >> d;
+
+    if (d >= CHAR_MIN && d <= CHAR_MAX)
+        displayChar(n);
+    else
+        std::cout << "char: impossible\n";
+    if (d >= INT_MIN && d <= INT_MAX)
+        displayInt(n);
+    else
+        std::cout << "int: impossible\n";
+    if (d >= -FLT_MAX && d <= FLT_MAX)
+        displayFloat(f);
+    else
+        std::cout << "float: impossible\n";
+    displayDouble(d);
 }
 
 void ScalarConverter::handleFloat(const std::string& literal)
