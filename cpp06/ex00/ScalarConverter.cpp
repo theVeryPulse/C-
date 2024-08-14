@@ -72,7 +72,7 @@ bool ScalarConverter::isDouble(const std::string& literal)
     return false;
 }
 
-void displayChar(int c)
+static void displayChar(int c)
 {
     if (!isascii(c))
         std::cout << "char: impossible\n";
@@ -82,17 +82,17 @@ void displayChar(int c)
         std::cout << "char: Non displayable\n";
 }
 
-void displayInt(int n)
+static void displayInt(int n)
 {
     std::cout << "int: " << n << "\n";
 }
 
-void displayFloat(float f)
+static void displayFloat(float f)
 {
     std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f\n";
 }
 
-void displayDouble(double d)
+static void displayDouble(double d)
 {
     std::cout << "double: " << d << "\n";
 }
