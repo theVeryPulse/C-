@@ -1,4 +1,4 @@
-NAME   := convert
+NAME   := serializer
 FILES  :=  \
 	main.cpp \
 	Serializer.cpp
