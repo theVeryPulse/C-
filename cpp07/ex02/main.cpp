@@ -12,6 +12,9 @@ int main()
     print(int_array.size());
     print(int_array[1]);
 
+    const Array<int> const_int_array(int_array);
+    print(int_array[1]);
+
     Array<std::string> string_array(15);
     string_array[0] = "hello";
     string_array[1] = "world";

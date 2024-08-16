@@ -22,7 +22,8 @@ class Array
 
     unsigned int size() const;
 
-    T& operator[](unsigned int index);
+    T&       operator[](unsigned int index);
+    const T& operator[](unsigned int index) const;
 
     //---------------------------------- Data ----------------------------------
 
@@ -86,13 +87,21 @@ unsigned int Array<T>::size() const
 }
 
 template <typename T>
-void print(T value)
+void print(const T& value)
 {
     std::cout << value << "\n";
 }
 
 template <typename T>
 T& Array<T>::operator[](unsigned int index)
+{
+    if (index >= length_)
+        throw std::exception();
+    return data_[index];
+}
+
+template <typename T>
+const T& Array<T>::operator[](unsigned int index) const
 {
     if (index >= length_)
         throw std::exception();
