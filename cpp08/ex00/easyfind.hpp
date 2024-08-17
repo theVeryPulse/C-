@@ -9,35 +9,30 @@ class ValueNotFound : public std::exception
 {
 };
 
-
 template <typename T>
-typename T::const_iterator easyfind(const T& container, int n)
+typename T::const_iterator easyFind(const T& container, int n)
 {
     if (container.size() == 0)
         throw std::exception();
-    for (typename T::const_iterator iter = container.cbegin();
-         iter != container.cend(); ++iter)
-    {
-        if (*iter == n)
-            return iter;
-    }
-    throw ValueNotFound();
+    typename T::const_iterator iter = std::find(container.cbegin(),
+                                                container.cend(), n);
+    if (*iter != n)
+        throw ValueNotFound();
+    else
+        return iter;
 }
 
 template <typename T>
-typename T::iterator easyfind(T& container, int n)
+typename T::iterator easyFind(T& container, int n)
 {
     if (container.size() == 0)
         throw std::exception();
-    for (typename T::iterator iter = container.begin();
-         iter != container.end(); ++iter)
-    {
-        if (*iter == n)
-            return iter;
-    }
-    throw ValueNotFound();
+    typename T::iterator iter = std::find(container.begin(), container.end(),
+                                          n);
+    if (*iter != n)
+        throw ValueNotFound();
+    else
+        return iter;
 }
 
 #endif /* EASYFIND_HPP */
-
-

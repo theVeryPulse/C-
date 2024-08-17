@@ -6,7 +6,8 @@ int main()
 {
     std::vector<int> int_vec(10);
     int_vec[5] = 42;
-    *easyfind(int_vec, 42) = 43;
-    easyfind(int_vec, 43);
+    *easyFind(int_vec, 42) = 43;
+    easyFind(int_vec, 43);
+    std::cout << "No exception, test complete\n";
     return 0;
 }
