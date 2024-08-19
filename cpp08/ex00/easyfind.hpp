@@ -6,10 +6,6 @@
 #include <exception>
 #include <stdexcept>
 
-class ValueNotFound : public std::exception
-{
-};
-
 template <typename T>
 typename T::const_iterator easyFind(const T& container, int n)
 {
@@ -18,7 +14,7 @@ typename T::const_iterator easyFind(const T& container, int n)
     typename T::const_iterator iter = std::find(container.cbegin(),
                                                 container.cend(), n);
     if (*iter != n)
-        throw ValueNotFound();
+        throw std::runtime_error("easyFind: value not found");
     else
         return iter;
 }
@@ -28,12 +24,11 @@ typename T::iterator easyFind(T& container, int n)
 {
     if (container.size() == 0)
         throw std::logic_error("container is empty");
-    typename T::iterator iter = std::find(container.begin(), container.end(),
-                                          n);
-    if (*iter != n)
-        throw ValueNotFound();
+    typename T::iterator it = std::find(container.begin(), container.end(), n);
+    if (*it != n)
+        throw std::runtime_error("easyFind: value not found");
     else
-        return iter;
+        return it;
 }
 
 #endif /* EASYFIND_HPP */
