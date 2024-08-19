@@ -36,18 +36,10 @@ unsigned int Span::shortestSpan()
         throw std::logic_error("Span: not enough numbers to calculate span");
     std::vector<int> sorted(numbers_);
     std::sort(sorted.begin(), sorted.end());
-#if SPAN_TEST
-    for (unsigned int i = 0; i < sorted.size(); ++i)
-        std::cout << sorted[i] << " ";
-    std::cout << "\n";
-#endif
     long shortest_span = LONG_MAX;
     for (unsigned int i = 1; i < sorted.size(); ++i)
     {
         long difference = abs(sorted[i] - sorted[i - 1]);
-#if SPAN_TEST
-        std::cout << "diff: " << difference << "\n";
-#endif
         if (difference < shortest_span)
             shortest_span = difference;
     }

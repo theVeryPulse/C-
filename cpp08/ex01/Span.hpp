@@ -2,20 +2,12 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
-#ifndef SPAN_TEST
-#define SPAN_TEST 0
-#endif
-
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
 #include <cstddef>
 #include <climits>
 #include <cmath>
-
-#if SPAN_TEST
-#include <iostream>
-#endif
 
 class Span
 {
@@ -58,10 +50,6 @@ class Span
 template <typename InputIterator>
 void Span::addNumber(InputIterator begin, InputIterator end)
 {
-#if SPAN_TEST
-    std::cout << "New size: " << std::distance(begin, end) + numbers_.size()
-              << "\n";
-#endif
     if (std::distance(begin, end) + numbers_.size() > size_)
         throw std::logic_error("Span: number of elements out of size");
     numbers_.insert(numbers_.end(), begin, end);
