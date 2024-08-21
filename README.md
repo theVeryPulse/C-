@@ -53,3 +53,13 @@ In this module, the focus is on type cast C++:
 - `static_cast`: Basic cast between built-in types.
 - `reinterpret_cast`: mostly used for casting between integer types and pointers.
 - `dynamic_cast`: Used to cast pointer of base class to pointer of derived class. This cast could also be used check the type of target object.
+
+### CPP07: Templates
+This module focuses on templates in C++:
+- **function template**: generates functions based on the template.
+- **class template**: generates class and methods based on the template.
+
+### CPP08: Container and Algorithm
+This module introduces you to standard containers and algorithm library in C++:
+- **algorithm library**: find, sort
+- **containers**: `std::vector`, `std::stack`, `std::deque`
