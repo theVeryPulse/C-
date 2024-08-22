@@ -147,8 +147,10 @@ double BitcoinExchange::findPriceOnNearestDate(const std::string& date)
          date_price != date_to_price_.end(); ++date_price)
     {
         struct tm date_item = stringToDate(date_price->first);
-        double    time_diff = fabs(difftime(time1, mktime(&date_item)));
-        if (time_diff < min_diff)
+        double    time_diff = difftime(time1, mktime(&date_item));
+        if (time_diff < 0)
+            break;
+        else if (time_diff < min_diff)
         {
             min_diff              = time_diff;
             price_of_nearest_date = date_price->second;
