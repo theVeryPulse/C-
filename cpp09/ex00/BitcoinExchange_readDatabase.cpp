@@ -1,22 +1,17 @@
 #include "BitcoinExchange.hpp"
 
+static bool headerOk(const std::string& line, const std::string& filename);
+static bool fileOk(const std::ifstream& data_file, const char* filename);
+
 void BitcoinExchange::readDatabase(const char* filename)
 {
     std::ifstream data_file(filename);
-    if (!data_file.is_open())
-    {
-        std::cerr << "error: cannot open " << filename << "\n";
-        std::exit(1);
-    }
-
+    if (!fileOk(data_file, filename))
+        exit(1);
     std::string line;
     std::getline(data_file, line);
-    if (line != "date,exchange_rate")
-    {
-        std::cerr << "error: " << filename << "doesn't have expected header: "
-                  << "\"date,exchange_rate\"\n";
-        std::exit(1);
-    }
+    if (!headerOk(line, filename))
+        exit(1);
 
     while (!data_file.eof())
     {
@@ -76,4 +71,25 @@ bool BitcoinExchange::dataLineFormatOk(const std::string& line,
         std::cerr << "error: incorrect line format in " << filename << ": "
                   << line << "\n";
     return format_ok;
+}
+
+static bool headerOk(const std::string& line, const std::string& filename)
+{
+    if (line != "date,exchange_rate")
+    {
+        std::cerr << "error: " << filename << " doesn't have expected header: "
+                  << "\"date,exchange_rate\"\n";
+        return false;
+    }
+    return true;
+}
+
+static bool fileOk(const std::ifstream& data_file, const char* filename)
+{
+    if (!data_file.is_open())
+    {
+        std::cerr << "error: cannot open " << filename << "\n";
+        return false;
+    }
+    return true;
 }
