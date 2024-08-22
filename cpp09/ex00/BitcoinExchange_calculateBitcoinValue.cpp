@@ -48,8 +48,7 @@ void BitcoinExchange::calculateBitcoinValue(const std::string& input_filename)
         ss >> coin_amount;
         if (coin_amount == 0)
             continue;
-        else if (coin_amount < 0 ||
-                 coin_amount > std::numeric_limits<int>::max())
+        else if (coin_amount < 0 || coin_amount > 1000)
         {
             handleError(NoExit, "invalid coin amount in line -> " + line);
             continue;
