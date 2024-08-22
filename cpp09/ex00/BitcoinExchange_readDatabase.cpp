@@ -24,13 +24,8 @@ void BitcoinExchange::readDatabase(const char* filename)
         std::getline(data_file, line);
         if (line.empty())
             continue;
-        if (!dataLineFormatOk(line))
-        {
-            std::cerr << "error: incorrect line format in " << filename << ": "
-                      << line << "\n";
+        if (!dataLineFormatOk(line, filename))
             std::exit(1);
-        }
-
         std::string date = line.substr(0, 10);
         if (date_to_price_.find(date) != date_to_price_.end())
         {
@@ -62,18 +57,23 @@ void BitcoinExchange::readDatabase(const char* filename)
  *  Shortest possible line has 12 characters:
  * "YYYY-MM-DD,1"
  */
-bool BitcoinExchange::dataLineFormatOk(const std::string& line)
+bool BitcoinExchange::dataLineFormatOk(const std::string& line,
+                                       const std::string& filename)
 {
+    bool format_ok = true;
     if (line.length() < 12)
-        return false;
-    if (!dateFormatOk(line))
-        return false;
-    if (line[0xa] != ',')
-        return false;
+        format_ok = false;
+    else if (!dateFormatOk(line))
+        format_ok = false;
+    else if (line[0xa] != ',')
+        format_ok = false;
 
     std::istringstream iss(line.substr(0xb, line.length()));
     double             price;
     if (!(iss >> price >> std::ws).eof())
-        return false;
-    return true;
+        format_ok = false;
+    if (!format_ok)
+        std::cerr << "error: incorrect line format in " << filename << ": "
+                  << line << "\n";
+    return format_ok;
 }

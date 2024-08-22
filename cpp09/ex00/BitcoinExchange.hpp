@@ -47,7 +47,8 @@ class BitcoinExchange
 
     double findPriceOnNearestDate(const std::string& date);
 
-    static bool dataLineFormatOk(const std::string& line);
+    static bool dataLineFormatOk(const std::string& line,
+                                 const std::string& filename);
     static bool inputLineFormatOk(const std::string& line);
     static bool dateFormatOk(const std::string& line);
 
