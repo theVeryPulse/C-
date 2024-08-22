@@ -141,7 +141,6 @@ double BitcoinExchange::findPriceOnNearestDate(const std::string& date)
                                            atoi(date.substr(8, 2).c_str()));
 
     time_t      time1                 = std::mktime(&tm_date);
-    std::string nearest_date          = date_to_price_.begin()->first;
     double      price_of_nearest_date = date_to_price_.begin()->second;
     double      min_diff              = std::numeric_limits<double>::infinity();
 
