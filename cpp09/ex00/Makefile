@@ -5,7 +5,7 @@ FILES  :=  \
 	BitcoinExchange_readDatabase.cpp \
 	main.cpp
 
-FLAGS  := -Wall -Wextra -Werror -std=c++98 -g
+FLAGS  := -Wall -Wextra -Werror -std=c++98
 OFILES := $(patsubst %.cpp, build/%.o, $(FILES))
 
 all: $(NAME)
