@@ -61,7 +61,10 @@ int performOperation(const std::string& str, int value1, int value2)
     for (const Operation* operation = table; operation < table + 4; ++operation)
     {
         if (str[0] == operation->symbol && str.length() == 1)
+        {
+            std::cout << value1 << " " << str[0] << " " << value2 << "\n";
             return operation->perform(value1, value2);
+        }
     }
     return 0;
 }
@@ -95,15 +98,15 @@ void RPN::calculate(const std::string& input)
     tokens_ = split(input, ' ');
     while (!tokens_.empty())
     {
-        // std::cout << "To process: " << tokens_ << "\n";
-        // std::cout << "Stack: " << values << "\n";
+        std::cout << "To process: " << tokens_ << "\n";
+        std::cout << "Stack: " << values << "\n";
         if (tokens_.begin()->length() == 1
             && valid_symbols_.find(tokens_.begin()[0]) != std::string::npos)
         // take two values from stack and perform operations
         {
-            int value_b = *values.begin();
-            values.pop_front();
             int value_a = *values.begin();
+            values.pop_front();
+            int value_b = *values.begin();
             values.pop_front();
             int result = performOperation(*tokens_.begin(), value_a, value_b);
             values.push_front(result);
@@ -116,7 +119,7 @@ void RPN::calculate(const std::string& input)
             int               value;
             ss >> value;
             tokens_.pop_front();
-            values.push_front(value);
+            values.push_back(value);
         }
         else
         {
@@ -124,5 +127,5 @@ void RPN::calculate(const std::string& input)
             exit(1);
         }
     }
-    std::cout << *values.begin() << "\n";
+    std::cout << " => " << *values.begin() << "\n";
 }
