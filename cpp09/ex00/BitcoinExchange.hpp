@@ -29,8 +29,8 @@ class BitcoinExchange
 
     //------------------------------- Functions --------------------------------
 
-    void readDatabase(const char* filename);
-    void calculateBitcoinValue(const char* input_filename);
+    void readDatabase(const std::string& input_filename);
+    void calculateBitcoinValue(const std::string& input_filename);
 
     //---------------------------------- Data ----------------------------------
 

@@ -1,11 +1,11 @@
 #include "BitcoinExchange.hpp"
 
 static bool headerOk(const std::string& line, const std::string& filename);
-static bool fileOk(const std::ifstream& data_file, const char* filename);
+static bool fileOk(const std::ifstream& data_file, const std::string& filename);
 
-void BitcoinExchange::readDatabase(const char* filename)
+void BitcoinExchange::readDatabase(const std::string& filename)
 {
-    std::ifstream data_file(filename);
+    std::ifstream data_file(filename.c_str());
     if (!fileOk(data_file, filename))
         exit(1);
     std::string line;
@@ -78,7 +78,7 @@ static bool headerOk(const std::string& line, const std::string& filename)
     return true;
 }
 
-static bool fileOk(const std::ifstream& data_file, const char* filename)
+static bool fileOk(const std::ifstream& data_file, const std::string& filename)
 {
     if (!data_file.is_open())
     {

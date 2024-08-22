@@ -10,15 +10,15 @@ static bool dateValueOk(const std::string& date)
         return true;
 }
 
-void BitcoinExchange::calculateBitcoinValue(const char* input_filename)
+void BitcoinExchange::calculateBitcoinValue(const std::string& input_filename)
 {
-    std::ifstream input_file(input_filename);
+    std::ifstream input_file(input_filename.c_str());
     if (!input_file.is_open())
-        handleError(Exit, "cannot open " + std::string(input_filename));
+        handleError(Exit, "cannot open " + input_filename);
     std::string line;
     std::getline(input_file, line);
     if (line != "date | value")
-        handleError(Exit, std::string(input_filename) + " has header: \"" +
+        handleError(Exit, input_filename + " has header: \"" +
                               line + "\". Expected header: \"date | value\".");
     while (!input_file.eof())
     {
@@ -28,9 +28,8 @@ void BitcoinExchange::calculateBitcoinValue(const char* input_filename)
             continue;
         if (!inputLineFormatOk(line))
         {
-            handleError(NoExit, "incorrect line format in " +
-                                    std::string(input_filename) + " -> " +
-                                    line);
+            handleError(NoExit, "incorrect line format in " + input_filename
+                                    + " -> " + line);
             continue;
         }
 
