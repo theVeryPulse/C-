@@ -12,7 +12,6 @@ void BitcoinExchange::readDatabase(const char* filename)
     std::getline(data_file, line);
     if (!headerOk(line, filename))
         exit(1);
-
     while (!data_file.eof())
     {
         line.clear();
@@ -23,16 +22,11 @@ void BitcoinExchange::readDatabase(const char* filename)
             std::exit(1);
         std::string date = line.substr(0, 10);
         if (date_to_price_.find(date) != date_to_price_.end())
-        {
-            std::cerr << "error: " << date << " appeared twice.\n";
-            std::exit(1);
-        }
-
+            handleError(Exit, date + " appeared twice.");
         double            price;
         std::stringstream ss;
         ss << line.substr(line.find(',') + 1, line.length());
         ss >> price;
-
         date_to_price_[date] = price;
     }
 }
@@ -68,8 +62,8 @@ bool BitcoinExchange::dataLineFormatOk(const std::string& line,
     if (!(iss >> price >> std::ws).eof())
         format_ok = false;
     if (!format_ok)
-        std::cerr << "error: incorrect line format in " << filename << ": "
-                  << line << "\n";
+        handleError(NoExit, "incorrect line format in " + filename + " -> "
+                                + line);
     return format_ok;
 }
 

@@ -14,20 +14,12 @@ void BitcoinExchange::calculateBitcoinValue(const char* input_filename)
 {
     std::ifstream input_file(input_filename);
     if (!input_file.is_open())
-    {
-        std::cerr << "error: cannot open " << input_filename << "\n";
-        std::exit(1);
-    }
-
+        handleError(Exit, "cannot open " + std::string(input_filename));
     std::string line;
     std::getline(input_file, line);
     if (line != "date | value")
-    {
-        std::cerr << "error: " << input_filename << " has header: " << line
-                  << ". Expected header: \"date | value\".\n";
-        std::exit(1);
-    }
-
+        handleError(Exit, std::string(input_filename) + " has header: \"" +
+                              line + "\". Expected header: \"date | value\".");
     while (!input_file.eof())
     {
         line.clear();
@@ -36,18 +28,21 @@ void BitcoinExchange::calculateBitcoinValue(const char* input_filename)
             continue;
         if (!inputLineFormatOk(line))
         {
-            std::cerr << "error: incorrect line format in " << input_filename
-                      << ": \"" << line << "\".\n";
+            handleError(NoExit, "incorrect line format in " +
+                                    std::string(input_filename) + " -> " +
+                                    line);
             continue;
         }
 
+        // Parses and checks date
         std::string date = line.substr(0, 10);
         if (!dateValueOk(date))
         {
-            std::cerr << "error: in \"" << date << "\", date is invalid42\n";
+            handleError(NoExit, "invalid date in line -> " + line);
             continue;
         }
 
+        // Parses and checks coin amount
         double            coin_amount;
         std::stringstream ss;
         ss << line.substr(line.find('|') + 2, line.length());
@@ -57,20 +52,20 @@ void BitcoinExchange::calculateBitcoinValue(const char* input_filename)
         else if (coin_amount < 0 ||
                  coin_amount > std::numeric_limits<int>::max())
         {
-            std::cerr << "error: in line: \"" << line
-                      << "\", coin amount is invalid.\n";
+            handleError(NoExit, "invalid coin amount in line -> " + line);
             continue;
         }
-        Map::iterator date_price = date_to_price_.find(date);
 
-        double price;
+        // Finds price in map
+        double        price;
+        Map::iterator date_price = date_to_price_.find(date);
         if (date_price != date_to_price_.end())
             price = date_to_price_[date];
         else
-            price = findPriceOnNearestDate(date);   
+            price = findPriceOnNearestDate(date);
 
         std::cout << date << " => " << coin_amount << " = "
-                    << coin_amount * price << "\n";
+                  << coin_amount * price << "\n";
     }
 }
 
