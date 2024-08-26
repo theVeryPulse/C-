@@ -1,5 +1,6 @@
 #include "RPN.hpp"
 #include <iostream>
+#include <stdexcept>
 #include <sstream>
 #include <cstdlib>
 
@@ -25,11 +26,16 @@ RPN::RPN(const RPN& other) : tokens_(other.tokens_)
 
 RPN& RPN::operator=(const RPN& other)
 {
-    tokens_ = other.tokens_;
+    if (this != &other)
+        tokens_ = other.tokens_;
     return *this;
 }
 
-std::deque<std::string> split(const std::string& s, char delimiter)
+// =============================================================================
+//  Internal Helper Functions
+// =============================================================================
+
+static std::deque<std::string> split(const std::string& s, char delimiter)
 {
     size_t                  start = s.find_first_not_of(delimiter);
     size_t                  end;
@@ -54,7 +60,7 @@ static int divide(int a, int b)   { return a / b; }
 static int multiply(int a, int b) { return a * b; }
 // clang-format on
 
-int performOperation(const std::string& str, int value1, int value2)
+static int performOperation(const std::string& str, int value1, int value2)
 {
     static const Operation table[] = {
         {'+', &add}, {'-', &minus}, {'*', &multiply}, {'/', &divide}};
@@ -66,17 +72,22 @@ int performOperation(const std::string& str, int value1, int value2)
             return operation->perform(value1, value2);
         }
     }
+    throw std::invalid_argument("Invalid operator: " + str);
     return 0;
 }
 
 template <typename T>
-std::ostream& operator<<(std::ostream& os, std::deque<T> split)
+static std::ostream& operator<<(std::ostream& os, std::deque<T> split)
 {
     os << "{";
     for (typename std::deque<T>::const_iterator entry = split.begin();
          entry != split.end(); ++entry)
-        os << " " << *entry << ",";
-    os << " }";
+    {
+        if (entry != split.begin())
+            os << ", ";
+        os << *entry;
+    }
+    os << "}";
     return os;
 }
 
@@ -84,33 +95,36 @@ static bool numberOK(const std::string& str)
 {
     std::stringstream ss(str);
     int               result;
-    if ((ss >> result >> std::ws).eof())
-        return true;
-    else
-        return false;
+    return (ss >> result >> std::ws).eof();
 }
+
+// =============================================================================
+// Public Method
+// =============================================================================
 
 void RPN::calculate(const std::string& input)
 {
     std::deque<int> values;
-    std::string     operation = "";
-
     tokens_ = split(input, ' ');
+
     while (!tokens_.empty())
     {
         std::cout << "To process: " << tokens_ << "\n";
         std::cout << "Stack: " << values << "\n";
-        if (tokens_.begin()->length() == 1
-            && valid_symbols_.find(tokens_.begin()[0]) != std::string::npos)
+
+        const std::string& token = tokens_.front();
+        if (token.length() == 1
+            && valid_symbols_.find(token[0]) != std::string::npos)
         // take two values from stack and perform operations
         {
-            int value_a = *values.begin();
+            if (values.size() < 2)
+                throw std::runtime_error("Not enough values in stack.");
+            int value_a = values.front();
             values.pop_front();
-            int value_b = *values.begin();
+            int value_b = values.front();
             values.pop_front();
-            int result = performOperation(*tokens_.begin(), value_a, value_b);
+            int result = performOperation(token, value_a, value_b);
             values.push_front(result);
-            tokens_.pop_front();
         }
         else if (numberOK(*tokens_.begin()))
         // save the integer value into stack
@@ -118,14 +132,11 @@ void RPN::calculate(const std::string& input)
             std::stringstream ss(*tokens_.begin());
             int               value;
             ss >> value;
-            tokens_.pop_front();
             values.push_back(value);
         }
         else
-        {
-            std::cerr << "error\n";
-            exit(1);
-        }
+            throw std::runtime_error("Invalid token" + token);
+        tokens_.pop_front();
     }
     std::cout << " => " << *values.begin() << "\n";
 }
