@@ -1,7 +1,7 @@
 #include "BitcoinExchange.hpp"
 
 static void checkHeader(const std::string& line, const std::string& filename);
-static void checkFile(const std::ifstream& data_file, const std::string& filename);
+static void checkFile(const std::ifstream& file, const std::string& filename);
 
 void BitcoinExchange::readDatabase(const std::string& filename)
 {
@@ -20,10 +20,10 @@ void BitcoinExchange::readDatabase(const std::string& filename)
             continue;
         if (!dataLineFormatOk(line, filename))
         {
-             throw std::runtime_error("Incorrect line format in " + filename
-                                      + " -> " + line);
+            throw std::runtime_error("Incorrect line format in " + filename
+                                     + " -> " + line);
         }
-        std::string date = line.substr(0, 10);  // YYYY-MM-DD -> 10 chars
+        std::string date = line.substr(0, 10); // YYYY-MM-DD -> 10 chars
         if (date_to_price_.find(date) != date_to_price_.end())
             throw std::runtime_error(date + " appeared twice.");
 
