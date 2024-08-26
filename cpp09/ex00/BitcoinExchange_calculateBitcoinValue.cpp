@@ -4,22 +4,21 @@ static bool dateValueOk(const std::string& date)
 {
     int month = atoi(date.substr(5, 2).c_str());
     int day   = atoi(date.substr(8, 2).c_str());
-    if (month < 1 || month > 12 || day < 1 || day > 31)
-        return false;
-    else
-        return true;
+    return (month >= 1 && month <= 12) && (day >= 1 && day <= 31);
 }
 
 void BitcoinExchange::calculateBitcoinValue(const std::string& input_filename)
 {
     std::ifstream input_file(input_filename.c_str());
     if (!input_file.is_open())
-        handleError(Exit, "cannot open " + input_filename);
+        throw std::runtime_error("Cannot open " + input_filename);
+
     std::string line;
     std::getline(input_file, line);
     if (line != "date | value")
-        handleError(Exit, input_filename + " has header: \"" +
+        throw std::runtime_error(input_filename + " has header: \"" +
                               line + "\". Expected header: \"date | value\".");
+
     while (!input_file.eof())
     {
         line.clear();
@@ -28,7 +27,7 @@ void BitcoinExchange::calculateBitcoinValue(const std::string& input_filename)
             continue;
         if (!inputLineFormatOk(line))
         {
-            handleError(NoExit, "incorrect line format in " + input_filename
+            printErrMsg("Incorrect line format in " + input_filename
                                     + " -> " + line);
             continue;
         }
@@ -37,7 +36,7 @@ void BitcoinExchange::calculateBitcoinValue(const std::string& input_filename)
         std::string date = line.substr(0, 10);
         if (!dateValueOk(date))
         {
-            handleError(NoExit, "invalid date in line -> " + line);
+            printErrMsg("Invalid date in line -> " + line);
             continue;
         }
 
@@ -50,7 +49,7 @@ void BitcoinExchange::calculateBitcoinValue(const std::string& input_filename)
             continue;
         else if (coin_amount < 0 || coin_amount > 1000)
         {
-            handleError(NoExit, "invalid coin amount in line -> " + line);
+            printErrMsg("Invalid coin amount in line -> " + line);
             continue;
         }
 
@@ -58,7 +57,7 @@ void BitcoinExchange::calculateBitcoinValue(const std::string& input_filename)
         double        price;
         Map::iterator date_price = date_to_price_.find(date);
         if (date_price != date_to_price_.end())
-            price = date_to_price_[date];
+            price = date_price->second;
         else
             price = findPriceOnNearestDate(date);
 
@@ -89,20 +88,17 @@ bool BitcoinExchange::inputLineFormatOk(const std::string& line)
         return false;
     if (!dateFormatOk(line))
         return false;
-    std::string to_check = line.substr(0xa, 3);
     if (line.substr(0xa, 3) != " | ")
         return false;
-    std::istringstream iss(line.substr(0xd, line.length()));
+    std::istringstream iss(line.substr(0xd));
     double             amount;
-    if (!(iss >> amount >> std::ws).eof())
-        return false;
-    return true;
+    return (iss >> amount >> std::ws).eof();
 }
 
 static struct tm formatYearMonthDay(int year, int month, int day)
 {
     if (month < 1 || month > 12 || day < 1 || day > 31)
-        throw std::logic_error("invalid date");
+        throw std::logic_error("Invalid date");
     struct tm time;
     time.tm_year   = year - 1900;
     time.tm_mon    = month - 1;
@@ -135,19 +131,16 @@ static struct tm stringToDate(const std::string& str)
  */
 double BitcoinExchange::findPriceOnNearestDate(const std::string& date)
 {
-    struct tm tm_date = formatYearMonthDay(atoi(date.substr(0, 4).c_str()),
-                                           atoi(date.substr(5, 2).c_str()),
-                                           atoi(date.substr(8, 2).c_str()));
-
-    time_t      time1                 = std::mktime(&tm_date);
-    double      price_of_nearest_date = date_to_price_.begin()->second;
-    double      min_diff              = std::numeric_limits<double>::infinity();
+    struct tm tm_date               = stringToDate(date);
+    time_t    time1                 = std::mktime(&tm_date);
+    double    price_of_nearest_date = date_to_price_.begin()->second;
+    double    min_diff              = std::numeric_limits<double>::infinity();
 
     for (Map::const_iterator date_price = date_to_price_.begin();
          date_price != date_to_price_.end(); ++date_price)
     {
         struct tm date_item = stringToDate(date_price->first);
-        double    time_diff = difftime(time1, mktime(&date_item));
+        double    time_diff = difftime(time1, std::mktime(&date_item));
         if (time_diff < 0)
             break;
         else if (time_diff < min_diff)
@@ -155,7 +148,7 @@ double BitcoinExchange::findPriceOnNearestDate(const std::string& date)
             min_diff              = time_diff;
             price_of_nearest_date = date_price->second;
         }
-        // When item is going away from the nearest date, break loop
+        // When item is going away from the nearest lower date, break loop
         else if (time_diff > min_diff)
             break;
     }

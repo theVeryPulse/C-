@@ -42,21 +42,12 @@ class BitcoinExchange
 
   private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
-
-    // Action type for function `handleError`
-    enum Action
-    {
-        Undefined,
-        Exit,
-        NoExit
-    };
-
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
 
     double findPriceOnNearestDate(const std::string& date);
 
-    static void handleError(Action action, const std::string& error_message);
+    static void printErrMsg(const std::string& err_msg);
     static bool dataLineFormatOk(const std::string& line,
                                  const std::string& filename);
     static bool inputLineFormatOk(const std::string& line);

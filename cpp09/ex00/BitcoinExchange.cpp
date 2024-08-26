@@ -45,9 +45,7 @@ bool BitcoinExchange::dateFormatOk(const std::string& line)
 	return true;
 }
 
-void BitcoinExchange::handleError(Action action, const std::string& error_message)
+void BitcoinExchange::printErrMsg(const std::string& err_msg)
 {
-    std::cerr << "error: " << error_message << "\n";
-    if (action == Exit)
-        exit(1);
+	std::cerr << "error: " << err_msg << "\n";
 }

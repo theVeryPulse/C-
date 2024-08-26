@@ -65,10 +65,7 @@ bool BitcoinExchange::dataLineFormatOk(const std::string& line,
     if (!(iss >> price >> std::ws).eof())
         format_ok = false;
     if (!format_ok)
-    {
-        handleError(NoExit, "incorrect line format in " + filename + " -> "
-                                + line);
-    }
+        printErrMsg("incorrect line format in " + filename + " -> " + line);
     return format_ok;
 }
 
