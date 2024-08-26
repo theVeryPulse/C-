@@ -1,17 +1,17 @@
 #include "BitcoinExchange.hpp"
 
-static bool headerOk(const std::string& line, const std::string& filename);
-static bool fileOk(const std::ifstream& data_file, const std::string& filename);
+static void checkHeader(const std::string& line, const std::string& filename);
+static void checkFile(const std::ifstream& data_file, const std::string& filename);
 
 void BitcoinExchange::readDatabase(const std::string& filename)
 {
     std::ifstream data_file(filename.c_str());
-    if (!fileOk(data_file, filename))
-        exit(1);
+    checkFile(data_file, filename);
+
     std::string line;
     std::getline(data_file, line);
-    if (!headerOk(line, filename))
-        exit(1);
+    checkHeader(line, filename);
+
     while (!data_file.eof())
     {
         line.clear();
@@ -19,13 +19,14 @@ void BitcoinExchange::readDatabase(const std::string& filename)
         if (line.empty())
             continue;
         if (!dataLineFormatOk(line, filename))
-            std::exit(1);
-        std::string date = line.substr(0, 10);
+             throw std::runtime_error("Incorrect line format in " + filename
+                                      + " -> " + line);
+        std::string date = line.substr(0, 10);  // YYYY-MM-DD -> 10 chars
         if (date_to_price_.find(date) != date_to_price_.end())
-            handleError(Exit, date + " appeared twice.");
+            throw std::runtime_error(date + " appeared twice.");
+
         double            price;
-        std::stringstream ss;
-        ss << line.substr(line.find(',') + 1, line.length());
+        std::stringstream ss(line.substr(line.find(',') + 1));
         ss >> price;
         date_to_price_[date] = price;
     }
@@ -67,23 +68,20 @@ bool BitcoinExchange::dataLineFormatOk(const std::string& line,
     return format_ok;
 }
 
-static bool headerOk(const std::string& line, const std::string& filename)
+static void checkHeader(const std::string& line, const std::string& filename)
 {
     if (line != "date,exchange_rate")
     {
-        std::cerr << "error: " << filename << " doesn't have expected header: "
-                  << "\"date,exchange_rate\"\n";
-        return false;
+        throw std::runtime_error(
+            "Error: " + filename
+            + " doesn't have expected header: \"date,exchange_rate\"");
     }
-    return true;
 }
 
-static bool fileOk(const std::ifstream& data_file, const std::string& filename)
+static void checkFile(const std::ifstream& file, const std::string& filename)
 {
-    if (!data_file.is_open())
+    if (!file.is_open())
     {
-        std::cerr << "error: cannot open " << filename << "\n";
-        return false;
+        throw std::runtime_error("Error: cannot open " + filename);
     }
-    return true;
 }
