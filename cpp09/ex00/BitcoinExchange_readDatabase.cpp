@@ -19,8 +19,10 @@ void BitcoinExchange::readDatabase(const std::string& filename)
         if (line.empty())
             continue;
         if (!dataLineFormatOk(line, filename))
+        {
              throw std::runtime_error("Incorrect line format in " + filename
                                       + " -> " + line);
+        }
         std::string date = line.substr(0, 10);  // YYYY-MM-DD -> 10 chars
         if (date_to_price_.find(date) != date_to_price_.end())
             throw std::runtime_error(date + " appeared twice.");
@@ -63,8 +65,10 @@ bool BitcoinExchange::dataLineFormatOk(const std::string& line,
     if (!(iss >> price >> std::ws).eof())
         format_ok = false;
     if (!format_ok)
+    {
         handleError(NoExit, "incorrect line format in " + filename + " -> "
                                 + line);
+    }
     return format_ok;
 }
 
@@ -81,7 +85,5 @@ static void checkHeader(const std::string& line, const std::string& filename)
 static void checkFile(const std::ifstream& file, const std::string& filename)
 {
     if (!file.is_open())
-    {
         throw std::runtime_error("Error: cannot open " + filename);
-    }
 }
