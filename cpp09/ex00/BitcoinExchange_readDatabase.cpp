@@ -20,12 +20,12 @@ void BitcoinExchange::readDatabase(const std::string& filename)
             continue;
         if (!dataLineFormatOk(line))
         {
-            throw std::runtime_error("error: Incorrect line format in "
-                                     + filename + " -> " + line);
+            throw std::runtime_error("Incorrect line format in " + filename
+                                     + " -> " + line);
         }
         std::string date = line.substr(0, 10); // YYYY-MM-DD -> 10 chars
         if (date_to_price_.find(date) != date_to_price_.end())
-            throw std::runtime_error("error: " + date + " appeared twice.");
+            throw std::runtime_error(date + " appeared twice.");
 
         double            price;
         std::stringstream ss(line.substr(line.find(',') + 1));
@@ -73,13 +73,12 @@ static void checkHeader(const std::string& line, const std::string& filename)
     if (line != "date,exchange_rate")
     {
         throw std::runtime_error(
-            "error: " + filename
-            + " doesn't have expected header: \"date,exchange_rate\"");
+            filename + " doesn't have expected header: \"date,exchange_rate\"");
     }
 }
 
 static void checkFile(const std::ifstream& file, const std::string& filename)
 {
     if (!file.is_open())
-        throw std::runtime_error("error: cannot open " + filename);
+        throw std::runtime_error("Cannot open " + filename);
 }
