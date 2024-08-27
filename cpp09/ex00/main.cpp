@@ -8,7 +8,17 @@ int main(int argc, const char* argv[])
         std::cerr << "error: expects input file name, for example: input.txt\n";
         return 1;
     }
+
     BitcoinExchange bit_ex;
-    bit_ex.readDatabase("data.csv");
-    bit_ex.calculateBitcoinValue(argv[1]);
+    try
+    {
+        bit_ex.readDatabase("data.csv");
+        bit_ex.calculateBitcoinValue(argv[1]);
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        return 1;
+    }
+    return 0;
 }

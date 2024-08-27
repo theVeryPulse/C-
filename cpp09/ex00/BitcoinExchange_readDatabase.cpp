@@ -18,14 +18,14 @@ void BitcoinExchange::readDatabase(const std::string& filename)
         std::getline(data_file, line);
         if (line.empty())
             continue;
-        if (!dataLineFormatOk(line, filename))
+        if (!dataLineFormatOk(line))
         {
-            throw std::runtime_error("Incorrect line format in " + filename
-                                     + " -> " + line);
+            throw std::runtime_error("error: Incorrect line format in "
+                                     + filename + " -> " + line);
         }
         std::string date = line.substr(0, 10); // YYYY-MM-DD -> 10 chars
         if (date_to_price_.find(date) != date_to_price_.end())
-            throw std::runtime_error(date + " appeared twice.");
+            throw std::runtime_error("error: " + date + " appeared twice.");
 
         double            price;
         std::stringstream ss(line.substr(line.find(',') + 1));
@@ -49,8 +49,7 @@ void BitcoinExchange::readDatabase(const std::string& filename)
  *  Shortest possible line has 12 characters:
  * "YYYY-MM-DD,1"
  */
-bool BitcoinExchange::dataLineFormatOk(const std::string& line,
-                                       const std::string& filename)
+bool BitcoinExchange::dataLineFormatOk(const std::string& line)
 {
     bool format_ok = true;
     if (line.length() < 12)
@@ -64,8 +63,6 @@ bool BitcoinExchange::dataLineFormatOk(const std::string& line,
     double             price;
     if (!(iss >> price >> std::ws).eof())
         format_ok = false;
-    if (!format_ok)
-        printErrMsg("incorrect line format in " + filename + " -> " + line);
     return format_ok;
 }
 
@@ -74,7 +71,7 @@ static void checkHeader(const std::string& line, const std::string& filename)
     if (line != "date,exchange_rate")
     {
         throw std::runtime_error(
-            "Error: " + filename
+            "error: " + filename
             + " doesn't have expected header: \"date,exchange_rate\"");
     }
 }
@@ -82,5 +79,5 @@ static void checkHeader(const std::string& line, const std::string& filename)
 static void checkFile(const std::ifstream& file, const std::string& filename)
 {
     if (!file.is_open())
-        throw std::runtime_error("Error: cannot open " + filename);
+        throw std::runtime_error("error: cannot open " + filename);
 }

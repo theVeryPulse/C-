@@ -11,7 +11,7 @@ void BitcoinExchange::calculateBitcoinValue(const std::string& input_filename)
 {
     std::ifstream input_file(input_filename.c_str());
     if (!input_file.is_open())
-        throw std::runtime_error("Cannot open " + input_filename);
+        throw std::runtime_error("error: Cannot open " + input_filename);
 
     std::string line;
     std::getline(input_file, line);
