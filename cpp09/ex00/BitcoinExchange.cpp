@@ -46,7 +46,7 @@ bool BitcoinExchange::dateFormatOk(const std::string& line)
 
     for (size_t i = 0; i < sizeof(dash_indexes) / sizeof(dash_indexes[0]); ++i)
     {
-        if (line[dash_indexes[i] != '-'])
+        if (line[dash_indexes[i]] != '-')
             return false;
     }
 
