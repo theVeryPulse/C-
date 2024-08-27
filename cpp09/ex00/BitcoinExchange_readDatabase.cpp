@@ -30,6 +30,8 @@ void BitcoinExchange::readDatabase(const std::string& filename)
         double            price;
         std::stringstream ss(line.substr(line.find(',') + 1));
         ss >> price;
+        if (price < 0)
+            throw std::runtime_error("Invalid value in: " + line);
         date_to_price_[date] = price;
     }
 }
