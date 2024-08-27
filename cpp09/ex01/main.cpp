@@ -10,6 +10,16 @@ int main(int argc, const char* argv[])
         std::cerr << "error\n";
         return 1;
     }
+
     RPN rpn;
-    rpn.calculate(argv[1]);  
+    try
+    {
+        rpn.calculate(argv[1]);  
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "error: " << e.what() << "\n";
+        return 1;
+    }
+    return 0;
 }

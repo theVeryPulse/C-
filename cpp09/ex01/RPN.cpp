@@ -135,7 +135,7 @@ void RPN::calculate(const std::string& input)
             values.push_back(value);
         }
         else
-            throw std::runtime_error("Invalid token" + token);
+            throw std::runtime_error("Invalid token: " + token);
         tokens_.pop_front();
     }
     std::cout << " => " << *values.begin() << "\n";
