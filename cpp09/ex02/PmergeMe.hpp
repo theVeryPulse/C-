@@ -18,6 +18,10 @@ class PmergeMe
     //------------------------------- Functions --------------------------------
 
     void sort(std::vector<int>& vec);
+    void sortThree(std::vector<int>& vec);
+    void sortFour(std::vector<int>& vec);
+    void sortFive(std::vector<int>& vec);
+
     void sort(std::list<int>& lst);
 
     //---------------------------------- Data ----------------------------------
