@@ -82,6 +82,19 @@ void checkDuplicates(const std::vector<int>& vec)
     }
 }
 
+bool isSorted(const std::vector<int>& arg_vec)
+{
+    std::vector<int> copy(arg_vec);
+    std::sort(copy.begin(), copy.end());
+    for (std::vector<int>::const_iterator a = arg_vec.begin(), b = copy.begin();
+         a != arg_vec.end(); ++a, ++b)
+    {
+        if (*a != *b)
+            return false;
+    }
+    return true;
+}
+
 int main(int argc, const char* argv[])
 {
     if (argc == 1)
@@ -107,6 +120,11 @@ int main(int argc, const char* argv[])
     catch (const std::exception& e)
     {
         printErrMsg(e.what());
+    }
+    if (isSorted(arg_vec))
+    {
+        std::cout << "Numbers are already sorted.\n";
+        return 0;
     }
 
     std::list<int> arg_lst;
