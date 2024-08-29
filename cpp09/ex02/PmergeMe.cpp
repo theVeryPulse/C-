@@ -1,4 +1,5 @@
 #include "PmergeMe.hpp"
+#include <cmath>
 
 // =============================================================================
 // =============================================================================
@@ -26,6 +27,21 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 //
 // =============================================================================
 
+/**
+ * @brief Calculates the starting element of next group of insertion. Returns
+ *        its order (nth); First outcomes: 1th, 3th, 11th, 21th, 43th
+ * 
+ * @param nth_group
+ * @return int 
+ * @ref *Art of Computer Programming - Volume 3 (Sorting & Searching)* (p.185)
+ * 
+ */
+int nextToInsert(int nth_group)
+{
+    int& k(nth_group);
+    return (std::pow(2, k + 1) + std::pow(-1, k)) / 3.0;
+}
+
 void PmergeMe::sort(std::vector<int>& vec)
 {
     switch (vec.size())
@@ -37,15 +53,6 @@ void PmergeMe::sort(std::vector<int>& vec)
         if (vec[0] > vec[1])
         std::swap(vec[0], vec[1]);
         return;
-        break;
-    case 3:
-        sortThree(vec);
-        break;
-    case 4:
-        sortFour(vec);
-        break;
-    case 5:
-        sortFive(vec);
         break;
     default:
         break;
