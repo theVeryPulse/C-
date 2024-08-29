@@ -1,5 +1,6 @@
 #include "PmergeMe.hpp"
 #include <algorithm>
+#include <stdexcept>
 #include <cmath>
 
 // =============================================================================
@@ -92,29 +93,85 @@ void PmergeMe::sort(std::vector<int>& vec)
             ++original;
         }
     }
+
+    // Insert tails into mains
 }
 
-void PmergeMe::recursiveSort(VecVecInt& tails_mains)
+int key(const std::vector<int>& vec)
 {
-    if (tails_mains.size() == 0 || tails_mains.size() == 1)
-        return;
-    else if (tails_mains.size() == 2
-             && *(--tails_mains[0].end()) > *(--tails_mains[1].end()))
+    if (vec.size() == 0)
+        throw std::invalid_argument("Vector is empty.");
+    return *(--vec.end());
+}
+
+void PmergeMe::copyResultToOriginal(VecVecInt& to_sort, const VecVecInt& sorted)
+{
+    VecVecInt::iterator original_larger_value_with_tails = to_sort.begin();
+    VecInt::iterator original_value = original_larger_value_with_tails->begin();
+
+    VecVecInt::const_iterator sorted_larger_value_with_tails = sorted.begin();
+    VecInt::const_iterator sorted_value;
+
+    while (sorted_larger_value_with_tails != sorted.end())
     {
-        std::swap(tails_mains[0], tails_mains[1]);
+        sorted_value = sorted_larger_value_with_tails->begin();
+        while (sorted_value != sorted_larger_value_with_tails->end())
+        {
+            *original_value = *sorted_value;
+            ++original_value;
+            if (original_value == original_larger_value_with_tails->end())
+            {
+                ++original_larger_value_with_tails;
+                original_value = original_larger_value_with_tails->begin();
+            }
+            ++sorted_value;
+        }
+        ++sorted_larger_value_with_tails;
+    }
+}
+
+void PmergeMe::recursiveSort(VecVecInt& to_sort)
+{
+    if (to_sort.size() <= 1)
+        return;
+    else if (to_sort.size() == 2 && key(to_sort[0]) > key(to_sort[1]))
+    {
+        std::swap(to_sort[0], to_sort[1]);
         return;
     }
 
     // Group elements into pairs, sort with each pair.
-    VecVecInt::iterator tail = tails_mains.begin();
-    VecVecInt::iterator main = tail + 1;
-    while (tail != tails_mains.end() && main != tails_mains.end())
+    VecVecInt::iterator smaller = to_sort.begin();
+    VecVecInt::iterator larger  = smaller + 1;
+    while (smaller != to_sort.end() && larger != to_sort.end())
     {
-        if (*(--tail->end()) > *(--main->end()))
-            std::swap(tail, main);
-        tail += 2;
-        main += 2;
+        if (key(*smaller) > key(*larger))
+            std::swap(*smaller, *larger);
+        smaller += 2;
+        larger += 2;
     }
+
+    // Recursively sort the pairs (of vectors) by the larger element.
+    VecVecInt larger_values_with_tails;
+    smaller = to_sort.begin();
+    larger  = smaller + 1;
+    while (smaller != to_sort.end() && larger != to_sort.end())
+    {
+        larger_values_with_tails.push_back(std::vector<int>());
+        VecVecInt::iterator larger_value_with_tails = --larger_values_with_tails
+                                                            .end();
+        larger_value_with_tails->insert(larger_value_with_tails->end(),
+                                        smaller->begin(), smaller->end());
+        larger_value_with_tails->insert(larger_value_with_tails->end(),
+                                        larger->begin(), larger->end());
+        smaller += 2;
+        larger += 2;
+    }
+    recursiveSort(larger_values_with_tails);
+    copyResultToOriginal(to_sort, larger_values_with_tails);
+
+    // Insert tails into mains
+
 }
 
 void PmergeMe::sort(std::list<int>& lst)

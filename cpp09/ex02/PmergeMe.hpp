@@ -47,6 +47,7 @@ class PmergeMe
 
     void sort(std::vector<Pair>& pairs);
     void recursiveSort(VecVecInt& tails_mains);
+    void copyResultToOriginal(VecVecInt& to_sort, const VecVecInt& sorted);
 
     //---------------------------------- Data ----------------------------------
 };
