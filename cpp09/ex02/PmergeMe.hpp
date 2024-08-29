@@ -18,9 +18,6 @@ class PmergeMe
     //------------------------------- Functions --------------------------------
 
     void sort(std::vector<int>& vec);
-    void sortThree(std::vector<int>& vec);
-    void sortFour(std::vector<int>& vec);
-    void sortFive(std::vector<int>& vec);
 
     void sort(std::list<int>& lst);
 
@@ -34,10 +31,26 @@ class PmergeMe
 
   private:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
+
+    struct Pair
+    {
+        int tail;
+        int main;
+    };
+
+    typedef std::vector<int> VecInt;
+    typedef std::vector<std::vector<int> > VecVecInt;
+
+
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
+
+    void sort(std::vector<Pair>& pairs);
+    void recursiveSort(VecVecInt& tails_mains);
+
     //---------------------------------- Data ----------------------------------
 };
+
 
 #endif /* PMERGE_ME_H */
 

@@ -1,4 +1,5 @@
 #include "PmergeMe.hpp"
+#include <algorithm>
 #include <cmath>
 
 // =============================================================================
@@ -44,63 +45,77 @@ int nextToInsert(int nth_group)
 
 void PmergeMe::sort(std::vector<int>& vec)
 {
-    switch (vec.size())
-    {
-    case 1:
+    if (vec.size() == 0 || vec.size() == 1)
         return;
-        break;
-    case 2:
-        if (vec[0] > vec[1])
+    else if (vec.size() == 2 && vec[0] > vec[1])
+    {
         std::swap(vec[0], vec[1]);
         return;
-        break;
-    default:
-        break;
     }
 
-    std::vector<int>::iterator a = vec.begin();
-    std::vector<int>::iterator b = ++vec.begin();
-    while (a != vec.end() && b != vec.end())
+    // Group elements into pairs, sort with each pair.
+    VecInt::iterator tail = vec.begin();
+    VecInt::iterator main = tail + 1;
+    while (tail != vec.end() && main != vec.end())
     {
-        if (*a > *b)
-            std::swap(*a, *b);
-        a += 2;
-        b += 2;
+        if (*tail > *main)
+            std::swap(*tail, *main);
+        tail += 2;
+        main += 2;
     }
-}
 
-void PmergeMe::sortThree(std::vector<int>& vec)
-{
-    if (vec[0] > vec[1])
-        std::swap(vec[0], vec[1]);
-    int a = vec[0];
-    int b = vec[1];
-    int c = vec[2];
-    //                           (a < b), insert c
-    if (vec[2] < vec[0]) //      (a < b), (c < a)          => (c < a < b)
+    // Sort the pairs by the larger element.
+    VecVecInt pairs;
+    tail = vec.begin();
+    main = tail + 1;
+    while (tail != vec.end() && main != vec.end())    
     {
-        vec[0] = c;
-        vec[1] = a;
-        vec[2] = b;
+        pairs.push_back(std::vector<int>());
+        VecVecInt::iterator tails_and_main = --pairs.end();
+        tails_and_main->push_back(*tail);
+        tails_and_main->push_back(*main);
+        tail += 2;
+        main += 2;
     }
-    else if (vec[2] < vec[1]) // (a < b), (a < c), (c < b) => (a < c < b)
+    recursiveSort(pairs);
+
+    VecInt::iterator original = vec.begin();
+    for (VecVecInt::iterator tails_main = pairs.begin();
+         tails_main != pairs.end();
+         ++tails_main)
     {
-        vec[1] = c;
-        vec[2] = b;
+        for (VecInt::iterator sorted = tails_main->begin();
+             sorted != tails_main->end();
+             ++sorted)
+        {
+            *original = *sorted;
+            ++original;
+        }
     }
-    // else: already sorted      (a < b), (a < c), (b < c) => (a < b < c)
 }
 
-void PmergeMe::sortFour(std::vector<int>& vec)
+void PmergeMe::recursiveSort(VecVecInt& tails_mains)
 {
-    (void)vec;
-}
+    if (tails_mains.size() == 0 || tails_mains.size() == 1)
+        return;
+    else if (tails_mains.size() == 2
+             && *(--tails_mains[0].end()) > *(--tails_mains[1].end()))
+    {
+        std::swap(tails_mains[0], tails_mains[1]);
+        return;
+    }
 
-void PmergeMe::sortFive(std::vector<int>& vec)
-{
-    (void)vec;
+    // Group elements into pairs, sort with each pair.
+    VecVecInt::iterator tail = tails_mains.begin();
+    VecVecInt::iterator main = tail + 1;
+    while (tail != tails_mains.end() && main != tails_mains.end())
+    {
+        if (*(--tail->end()) > *(--main->end()))
+            std::swap(tail, main);
+        tail += 2;
+        main += 2;
+    }
 }
-
 
 void PmergeMe::sort(std::list<int>& lst)
 {
