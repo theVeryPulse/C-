@@ -120,6 +120,7 @@ int main(int argc, const char* argv[])
     catch (const std::exception& e)
     {
         printErrMsg(e.what());
+        return 1;
     }
     if (isSorted(arg_vec))
     {
