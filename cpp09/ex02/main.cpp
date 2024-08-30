@@ -42,34 +42,6 @@ void addIntegersToContainer(T& container, const char** argv)
         container.push_back(std::atoi(*arg));
 }
 
-std::ostream& operator<<(std::ostream& os, const std::vector<int>& vec)
-{
-    os << "{";
-    for (std::vector<int>::const_iterator num = vec.begin(); num != vec.end();
-         ++num)
-    {
-        if (num != vec.begin())
-            os << ", ";
-        os << *num;
-    }
-    os << "}";
-    return os;
-}
-
-std::ostream& operator<<(std::ostream& os, const std::list<int>& lst)
-{
-    os << "{";
-    for (std::list<int>::const_iterator num = lst.begin(); num != lst.end();
-         ++num)
-    {
-        if (num != lst.begin())
-            os << ", ";
-        os << *num;
-    }
-    os << "}";
-    return os;
-}
-
 void checkDuplicates(const std::vector<int>& vec)
 {
     std::vector<int> copy(vec);

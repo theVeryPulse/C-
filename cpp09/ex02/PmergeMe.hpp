@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <list>
+#include <iostream>
 
 class PmergeMe
 {
@@ -18,7 +19,6 @@ class PmergeMe
     //------------------------------- Functions --------------------------------
 
     void sort(std::vector<int>& vec);
-
     void sort(std::list<int>& lst);
 
     //---------------------------------- Data ----------------------------------
@@ -41,17 +41,18 @@ class PmergeMe
     typedef std::vector<int> VecInt;
     typedef std::vector<std::vector<int> > VecVecInt;
 
-
     //----------------- Constructors, Assignments, Destructor ------------------
     //------------------------------- Functions --------------------------------
 
     void sort(std::vector<Pair>& pairs);
-    void recursiveSort(VecVecInt& tails_mains);
+    void recursiveSort(VecInt& larger_elements);
     void copyResultToOriginal(VecVecInt& to_sort, const VecVecInt& sorted);
 
     //---------------------------------- Data ----------------------------------
 };
 
+std::ostream& operator<<(std::ostream& os, const std::vector<int>& vec);
+std::ostream& operator<<(std::ostream& os, const std::list<int>& lst);
 
 #endif /* PMERGE_ME_H */
 
