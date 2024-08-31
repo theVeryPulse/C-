@@ -3,8 +3,11 @@ FILES  :=  \
 	main.cpp \
 	PmergeMe.cpp
 
-FLAGS  := -Wall -Wextra -Werror -std=c++98
+FLAGS  := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 OFILES := $(patsubst %.cpp, build/%.o, $(FILES))
+DEPS   := $(patsubst %.o, %.d, $(OFILES))
+
+-include $(DEPS)
 
 all: $(NAME)
 
