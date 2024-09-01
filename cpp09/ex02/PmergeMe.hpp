@@ -47,6 +47,8 @@ class PmergeMe
     void sort(std::vector<Pair>& pairs);
     void recursiveSort(VecInt& larger_elements);
     void copyResultToOriginal(VecVecInt& to_sort, const VecVecInt& sorted);
+    int  findInsertPos(VecInt::const_iterator begin, VecInt::const_iterator end,
+                       const int to_insert);
 
     //---------------------------------- Data ----------------------------------
 };

@@ -66,10 +66,11 @@ void PmergeMe::sort(std::vector<int>& vec)
             larger += 2;
         }
     }
+    VecInt larger_elements;
+    VecInt smaller_elements;
     {
         // Sort the larger element from pairs.
         VecInt::iterator larger = vec.begin() + 1;
-        VecInt           larger_elements;
         while (larger < vec.end())    
         {
             larger_elements.push_back(*larger);
@@ -81,7 +82,6 @@ void PmergeMe::sort(std::vector<int>& vec)
         // Sort the pairs based on the larger elements
         larger = larger_elements.begin();
         VecInt sorted_by_larger;
-        VecInt smaller_elements;
         while (larger != larger_elements.end())
         {
             VecInt::iterator smaller;
@@ -104,13 +104,41 @@ void PmergeMe::sort(std::vector<int>& vec)
 
     }
 
-    // Insert tails into mains
-    // size_t smaller_elements_left = smaller_elements.size();
-    // while (smaller_elements_left > 0)
-    // {
-    //     (void)nextToInsert(1);
+    // Insert smaller elements into large elements
+    VecInt sorted;
+    sorted.push_back(smaller_elements[0]);
+    sorted.insert(sorted.end(), larger_elements.begin(), larger_elements.end());
+    size_t smaller_elements_left = smaller_elements.size() - 1;
+    int insert_group = 2; // first group only has the first smaller
+    while (smaller_elements_left > 0)
+    {
+        int first_to_insert = nextToInsert(insert_group) - 1; // -1 to get index from order
+        int last_to_insert = nextToInsert(insert_group - 1);
+        if (first_to_insert > smaller_elements.size() - 1)
+            first_to_insert = smaller_elements.size() - 1;
+        int elements_in_group = first_to_insert - last_to_insert + 1;
+        VecInt::const_iterator smaller = smaller_elements.begin() + first_to_insert;
+        int index_to_insert = first_to_insert;
+        while (elements_in_group > 0)
+        {
+            std::cout << "next to insert: " << *smaller << "\n";
+            /* int insert_pos = findInsertPos(sorted.begin(),
+                std::find(sorted.begin(), sorted.end(), larger_elements[index_to_insert]),
+                *smaller);
+            sorted.insert(sorted.begin() + insert_pos, *smaller); */
+            --smaller;
+            --elements_in_group;
+            --smaller_elements_left;
+        }
+        ++insert_group;
+    }
+}
 
-    // }
+int PmergeMe::findInsertPos(VecInt::const_iterator begin,
+                            VecInt::const_iterator end,
+                            const int to_insert)
+{
+    return 0;
 }
 
 void PmergeMe::recursiveSort(VecInt& larger_elements)
