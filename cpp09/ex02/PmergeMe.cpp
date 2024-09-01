@@ -32,7 +32,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 
 /**
  * @brief Calculates the starting element of next group of insertion. Returns
- *        its order (nth); First outcomes: 1th, 3th, 11th, 21th, 43th
+ *        its order (nth); First outcomes: 1th, 3th, 5th, 11th, 21th, 43th
  * 
  * @param nth_group
  * @return int 
