@@ -45,7 +45,21 @@ int nextToInsert(int nth_group)
     return (std::pow(2, k + 1) + std::pow(-1, k)) / 3.0;
 }
 
-void PmergeMe::sort(std::vector<int>& vec)
+void PmergeMe::sortWithinPairs(VecInt& nums)
+{
+    VecInt::iterator smaller = nums.begin();
+    VecInt::iterator larger  = smaller + 1;
+    while (smaller < nums.end() && larger < nums.end())
+    {
+        if (*smaller > *larger)
+            std::swap(*smaller, *larger);
+        smaller += 2;
+        larger += 2;
+    }
+    std::cout << "Sorted in pairs: " << nums << "\n";
+}
+
+void PmergeMe::sort(VecInt& vec)
 {
     if (vec.size() <= 1)
         return;
@@ -54,19 +68,7 @@ void PmergeMe::sort(std::vector<int>& vec)
         std::swap(vec[0], vec[1]);
         return;
     }
-    {
-        // Group elements into pairs, sort with each pair.
-        VecInt::iterator smaller = vec.begin();
-        VecInt::iterator larger  = smaller + 1;
-        while (smaller < vec.end() && larger < vec.end())
-        {
-            if (*smaller > *larger)
-                std::swap(*smaller, *larger);
-            smaller += 2;
-            larger += 2;
-        }
-        std::cout << "Sorted in pairs: " << vec << "\n";
-    }
+    sortWithinPairs(vec);
     VecInt larger_elements;
     VecInt smaller_elements;
     {
