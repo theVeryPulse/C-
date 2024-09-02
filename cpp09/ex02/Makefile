@@ -1,7 +1,8 @@
 NAME   := PmergeMe
 FILES  :=  \
 	main.cpp \
-	PmergeMe.cpp
+	PmergeMe.cpp \
+	PmergeMe_sort_vector.cpp
 
 FLAGS  := -Wall -Wextra -Werror -std=c++98 -MMD -MP
 OFILES := $(patsubst %.cpp, build/%.o, $(FILES))

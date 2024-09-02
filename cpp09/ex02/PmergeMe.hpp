@@ -48,6 +48,7 @@ class PmergeMe
     //------------------------------- Functions --------------------------------
 
     void sortWithinPairs(VecInt& nums);
+    int  nextToInsert(int nth_group);
 
     VecInt::iterator findInsertPos(VecInt::iterator       begin,
                                    VecInt::const_iterator end,
