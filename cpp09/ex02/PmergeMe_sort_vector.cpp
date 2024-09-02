@@ -12,10 +12,9 @@ void PmergeMe::sortWithinPairs(VecInt& nums)
         smaller += 2;
         larger += 2;
     }
-    std::cout << "Sorted in pairs: " << nums << "\n";
 }
 
-void PmergeMe::sort(VecInt& vec)
+void PmergeMe::sort(VecInt& vec, bool print_message)
 {
     if (vec.size() <= 1)
         return;
@@ -25,6 +24,8 @@ void PmergeMe::sort(VecInt& vec)
         return;
     }
     sortWithinPairs(vec);
+    if (print_message)
+        std::cout << "Sorted in pairs: " << vec << "\n";
     VecInt larger_elements;
     VecInt smaller_elements;
     {
@@ -35,10 +36,11 @@ void PmergeMe::sort(VecInt& vec)
             larger_elements.push_back(*larger);
             larger += 2;
         }
-        std::cout << "recursively sort: larger elements["
-                  << larger_elements.size() << "] = " << larger_elements
-                  << "\n";
-        sort(larger_elements);
+        if (print_message)
+            std::cout << "recursively sort: larger elements["
+                      << larger_elements.size() << "] = " << larger_elements
+                      << "\n";
+        sort(larger_elements, print_message);
         // Sort the pairs based on the larger elements
         larger = larger_elements.begin();
         VecInt sorted_by_larger;
@@ -53,11 +55,12 @@ void PmergeMe::sort(VecInt& vec)
         }
         if (vec.size() % 2 != 0)
             smaller_elements.push_back(*vec.rbegin());
-        std::cout << "Sorted by larger elements: " << sorted_by_larger << "\n"
-                  << "larger elements[" << larger_elements.size() << "]"
-                  << " = " << larger_elements << "\n"
-                  << "smaller elements[" << smaller_elements.size() << "]"
-                  << " = " << smaller_elements << "\n";
+        if (print_message)
+            std::cout << "Sorted by larger elements: " << sorted_by_larger
+                      << "\nlarger elements[" << larger_elements.size() << "]"
+                      << " = " << larger_elements << "\n"
+                      << "smaller elements[" << smaller_elements.size() << "]"
+                      << " = " << smaller_elements << "\n";
 
         for (size_t i = 0; i < sorted_by_larger.size(); ++i)
             vec[i] = sorted_by_larger[i];
@@ -82,7 +85,8 @@ void PmergeMe::sort(VecInt& vec)
                                          + first_to_insert;
         while (elements_in_group > 0)
         {
-            std::cout << "next to insert: " << *smaller << "\n";
+            if (print_message)
+                std::cout << "next to insert: " << *smaller << "\n";
             VecInt::const_iterator end;
             if (first_to_insert == smaller_elements.size() - 1
                 && smaller_elements.size() % 2 != 0)
@@ -92,7 +96,8 @@ void PmergeMe::sort(VecInt& vec)
                                 larger_elements[first_to_insert]);
             sorted.insert(findInsertPos(sorted.begin(), end, *smaller),
                           *smaller);
-            std::cout << "after insert: " << sorted << "\n";
+            if (print_message)
+                std::cout << "after insert: " << sorted << "\n";
             --smaller;
             --elements_in_group;
             --smaller_elements_left;

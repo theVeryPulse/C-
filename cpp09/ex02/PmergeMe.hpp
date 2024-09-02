@@ -17,7 +17,7 @@ class PmergeMe
 
     //------------------------------- Functions --------------------------------
 
-    void sort(std::vector<int>& vec);
+    void sort(std::vector<int>& vec, bool print_message = true);
     void sort(std::list<int>& lst);
 
     //---------------------------------- Data ----------------------------------
