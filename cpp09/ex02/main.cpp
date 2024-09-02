@@ -103,11 +103,11 @@ int main(int argc, const char* argv[])
     std::list<int> arg_lst;
     addIntegersToContainer(arg_lst, nums);
     std::cout << "Original vector: " << arg_vec << "\n";
-    std::cout << "Original list: " << arg_lst << "\n";
+    // std::cout << "Original list: " << arg_lst << "\n";
 
     PmergeMe pm;
     pm.sort(arg_vec);
     std::cout << "Sorted vector: " << arg_vec << "\n";
-    pm.sort(arg_lst);
-    std::cout << "Sorted list: " << arg_lst << "\n";
+    // pm.sort(arg_lst);
+    // std::cout << "Sorted list: " << arg_lst << "\n";
 }
