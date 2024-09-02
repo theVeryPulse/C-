@@ -9,9 +9,8 @@ DEPS   := $(patsubst %.o, %.d, $(OFILES))
 
 
 all: $(NAME)
-include $(DEPS)
 
-debug: FLAGS = -std=c++98 -g -fstandalone-debug
+debug: FLAGS := -std=c++98 -g -fstandalone-debug
 debug: re
 
 $(NAME): $(OFILES)
@@ -31,4 +30,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+-include $(DEPS)
+
+.PHONY: all clean fclean re
