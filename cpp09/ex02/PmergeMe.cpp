@@ -118,26 +118,24 @@ void PmergeMe::sort(VecInt& vec)
     {
         size_t first_to_insert = nextToInsert(insert_group) - 1;
         // -1 to get index from order
-        size_t last_to_insert = nextToInsert(insert_group - 1);
         if (first_to_insert > smaller_elements.size() - 1)
             first_to_insert = smaller_elements.size() - 1;
-        int elements_in_group = first_to_insert - last_to_insert + 1;
+        int elements_in_group = first_to_insert + 1
+                                - nextToInsert(insert_group - 1);
         VecInt::const_iterator smaller = smaller_elements.begin()
                                          + first_to_insert;
-        size_t index_to_insert = first_to_insert;
         while (elements_in_group > 0)
         {
             std::cout << "next to insert: " << *smaller << "\n";
             VecInt::const_iterator end;
-            if (index_to_insert == smaller_elements.size() - 1
+            if (first_to_insert == smaller_elements.size() - 1
                 && smaller_elements.size() % 2 != 0)
                 end = sorted.end();
             else
                 end = std::find(sorted.begin(), sorted.end(),
-                                larger_elements[index_to_insert]);
-            VecInt::iterator insert_pos = findInsertPos(sorted.begin(), end,
-                                                        *smaller);
-            sorted.insert(insert_pos, *smaller);
+                                larger_elements[first_to_insert]);
+            sorted.insert(findInsertPos(sorted.begin(), end, *smaller),
+                          *smaller);
             std::cout << "after insert: " << sorted << "\n";
             --smaller;
             --elements_in_group;
