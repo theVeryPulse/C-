@@ -11,10 +11,9 @@ class PmergeMe
   public:
     //--------------- Types: Classes, Enums, and Aliases (using) ---------------
     //----------------- Constructors, Assignments, Destructor ------------------
+
     PmergeMe();
     ~PmergeMe();
-    PmergeMe(const PmergeMe& other); // Copy constructor
-    PmergeMe& operator=(const PmergeMe& other); // Copy assignment operator
 
     //------------------------------- Functions --------------------------------
 
@@ -38,17 +37,19 @@ class PmergeMe
         int main;
     };
 
-    typedef std::vector<int> VecInt;
+    typedef std::vector<int>               VecInt;
     typedef std::vector<std::vector<int> > VecVecInt;
 
     //----------------- Constructors, Assignments, Destructor ------------------
+
+    PmergeMe(const PmergeMe& other);            // Copy constructor
+    PmergeMe& operator=(const PmergeMe& other); // Copy assignment operator
+
     //------------------------------- Functions --------------------------------
 
-    void sort(std::vector<Pair>& pairs);
-    void recursiveSort(VecInt& larger_elements);
-    void copyResultToOriginal(VecVecInt& to_sort, const VecVecInt& sorted);
-    int  findInsertPos(VecInt::const_iterator begin, VecInt::const_iterator end,
-                       const int to_insert);
+    VecInt::iterator findInsertPos(VecInt::iterator       begin,
+                                   VecInt::const_iterator end,
+                                   const int              to_insert);
 
     //---------------------------------- Data ----------------------------------
 };
@@ -57,5 +58,3 @@ std::ostream& operator<<(std::ostream& os, const std::vector<int>& vec);
 std::ostream& operator<<(std::ostream& os, const std::list<int>& lst);
 
 #endif /* PMERGE_ME_H */
-
-
