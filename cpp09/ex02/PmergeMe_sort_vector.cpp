@@ -27,26 +27,30 @@ void PmergeMe::sort(VecInt& vec, bool print_message)
     if (print_message)
         std::cout << "Sorted in pairs: " << vec << "\n";
     VecInt larger_elements;
-    VecInt smaller_elements;
     {
-        // Sort the larger element from pairs.
-        VecInt::iterator larger = vec.begin() + 1;
+        VecInt::const_iterator larger = vec.begin() + 1;
         while (larger < vec.end())
         {
             larger_elements.push_back(*larger);
             larger += 2;
         }
+    }
+    {
+        // Sort the larger element from pairs.
         if (print_message)
             std::cout << "recursively sort: larger elements["
                       << larger_elements.size() << "] = " << larger_elements
                       << "\n";
         sort(larger_elements, print_message);
+    }
+    VecInt smaller_elements;
+    {
         // Sort the pairs based on the larger elements
-        larger = larger_elements.begin();
+        VecInt::const_iterator larger = larger_elements.begin();
         VecInt sorted_by_larger;
         while (larger != larger_elements.end())
         {
-            VecInt::iterator smaller;
+            VecInt::const_iterator smaller;
             smaller = std::find(vec.begin(), vec.end(), *larger) - 1;
             sorted_by_larger.push_back(*smaller);
             smaller_elements.push_back(*smaller);
@@ -54,16 +58,13 @@ void PmergeMe::sort(VecInt& vec, bool print_message)
             ++larger;
         }
         if (vec.size() % 2 != 0)
-            smaller_elements.push_back(*vec.rbegin());
+            smaller_elements.push_back(vec.back());
         if (print_message)
             std::cout << "Sorted by larger elements: " << sorted_by_larger
                       << "\nlarger elements[" << larger_elements.size() << "]"
                       << " = " << larger_elements << "\n"
                       << "smaller elements[" << smaller_elements.size() << "]"
                       << " = " << smaller_elements << "\n";
-
-        for (size_t i = 0; i < sorted_by_larger.size(); ++i)
-            vec[i] = sorted_by_larger[i];
     }
 
     // Insert smaller elements into large elements
