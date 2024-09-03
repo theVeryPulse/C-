@@ -28,11 +28,13 @@ int main()
                      98, 23, 95, 15, 46, 49, 32, 77, 68, 16, 80, 37, 99,
                      20, 42, 30, 73, 10, 3,  92, 35, 7,  2,  85};
 
+    checkSortResult(test1, sizeof(test1) / sizeof(test1[0]));
+
     int test2[47] = {91, 63, 42, 13, 21, 19, 2,  17, 96, 62, 77, 64,
                      43, 52, 95, 49, 27, 51, 8,  65, 1,  57, 50, 26,
                      12, 80, 33, 28, 78, 3,  68, 48, 84, 56, 32, 59,
                      31, 30, 16, 85, 38, 54, 20, 61, 6,  94, 87};
-    checkSortResult(test1, sizeof(test1) / sizeof(test1[0]));
+
     checkSortResult(test2, sizeof(test2) / sizeof(test2[0]));
     return 0;
 }
