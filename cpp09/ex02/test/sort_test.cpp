@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include <algorithm>
 
+#define PRINT_MESSAGE false
+
 static void checkSortResult(const int* test, size_t len)
 {
     std::vector<int> check;
@@ -13,7 +15,7 @@ static void checkSortResult(const int* test, size_t len)
     }
     std::sort(correct.begin(), correct.end());
     PmergeMe pm;
-    pm.sort(check);
+    pm.sort(check, PRINT_MESSAGE);
     for (size_t i = 0; i < len; ++i)
     {
         if (check[i] != correct[i])
