@@ -35,7 +35,7 @@ void checkPositiveInt(const char** argv)
     }
 }
 
-template<typename T>
+template <typename T>
 void addIntegersToContainer(T& container, const char** argv)
 {
     for (const char** arg = argv; *arg != NULL; ++arg)
@@ -46,7 +46,8 @@ void checkDuplicates(const std::vector<int>& vec)
 {
     std::vector<int> copy(vec);
     std::sort(copy.begin(), copy.end());
-    for (std::vector<int>::const_iterator a = copy.begin(), b = copy.begin() + 1;
+    for (std::vector<int>::const_iterator a = copy.begin(),
+                                          b = copy.begin() + 1;
          b != copy.end(); ++a, ++b)
     {
         if (*a == *b)
@@ -79,6 +80,7 @@ int main(int argc, const char* argv[])
     catch (const std::exception& e)
     {
         printErrMsg(e.what());
+        return 1;
     }
     if (argc == 2)
         return 0;
@@ -102,12 +104,14 @@ int main(int argc, const char* argv[])
 
     std::list<int> arg_lst;
     addIntegersToContainer(arg_lst, nums);
-    std::cout << "Original vector: " << arg_vec << "\n";
-    // std::cout << "Original list: " << arg_lst << "\n";
 
     PmergeMe pm;
+
+    std::cout << "Original vector: " << arg_vec << "\n";
     pm.sort(arg_vec);
     std::cout << "Sorted vector: " << arg_vec << "\n";
-    // pm.sort(arg_lst);
-    // std::cout << "Sorted list: " << arg_lst << "\n";
+
+    std::cout << "Original list: " << arg_lst << "\n";
+    pm.sort(arg_lst);
+    std::cout << "Sorted list: " << arg_lst << "\n";
 }

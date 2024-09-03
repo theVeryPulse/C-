@@ -45,19 +45,6 @@ int PmergeMe::nextToInsert(int nth_group)
     return (std::pow(2, k + 1) + std::pow(-1, k)) / 3.0;
 }
 
-void PmergeMe::sort(std::list<int>& lst)
-{
-    std::list<int>::iterator a = lst.begin();
-    std::list<int>::iterator b = ++lst.begin();
-    while (a != lst.end() && b != lst.end())
-    {
-        if (*a > *b)
-            std::swap(*a, *b);
-        ++(++a);
-        ++(++b);
-    }
-}
-
 std::ostream& operator<<(std::ostream& os, const std::vector<int>& vec)
 {
     os << "{";

@@ -18,7 +18,8 @@ class PmergeMe
     //------------------------------- Functions --------------------------------
 
     void sort(std::vector<int>& vec, bool print_message = true);
-    void sort(std::list<int>& lst);
+    void sort(std::list<int>& lst, bool print_message = true,
+              std::string print_padding = "");
 
     //---------------------------------- Data ----------------------------------
 
@@ -37,8 +38,8 @@ class PmergeMe
         int main;
     };
 
-    typedef std::vector<int>               VecInt;
-    typedef std::vector<std::vector<int> > VecVecInt;
+    typedef std::vector<int> VecInt;
+    typedef std::list<int>   ListInt;
 
     //----------------- Constructors, Assignments, Destructor ------------------
 
@@ -50,10 +51,12 @@ class PmergeMe
     void sortWithinPairs(VecInt& nums);
     int  nextToInsert(int nth_group);
 
-    VecInt::iterator findInsertPos(VecInt::iterator       begin,
-                                   VecInt::const_iterator end,
-                                   const int              to_insert);
-
+    VecInt::iterator  findInsertPos(VecInt::iterator       begin,
+                                    VecInt::const_iterator end,
+                                    const int              to_insert);
+    ListInt::iterator findInsertPos(ListInt::iterator       begin,
+                                    ListInt::const_iterator end,
+                                    const int               to_insert);
     //---------------------------------- Data ----------------------------------
 };
 
