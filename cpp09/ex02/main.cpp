@@ -1,12 +1,12 @@
 #include "PmergeMe.hpp"
-#include <iostream>
-#include <vector>
-#include <list>
-#include <cstdlib>
-#include <algorithm>
-#include <sstream>
-#include <limits>
-#include <stdexcept>
+#include <iostream> // cout
+#include <vector> // vector
+#include <list> // list
+#include <algorithm> // std::sort
+#include <sstream> // istringstream
+#include <limits> // numeric_limits
+#include <stdexcept> // std::invalid_argument ...
+#include <ctime>
 
 void printErrMsg(const std::string& msg, bool newline = true)
 {
@@ -105,13 +105,23 @@ int main(int argc, const char* argv[])
     std::list<int> arg_lst;
     addIntegersToContainer(arg_lst, nums);
 
-    PmergeMe pm;
+    std::cout << "Before: " << arg_vec << "\n";
 
-    std::cout << "Original vector: " << arg_vec << "\n";
-    pm.sort(arg_vec);
-    std::cout << "Sorted vector: " << arg_vec << "\n";
+    PmergeMe     pm;
+    std::clock_t start;
+    std::clock_t end;
 
-    std::cout << "Original list: " << arg_lst << "\n";
-    pm.sort(arg_lst);
-    std::cout << "Sorted list: " << arg_lst << "\n";
+    start = std::clock();
+    pm.sort(arg_vec, false);
+    end = std::clock();
+    double vec_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    std::cout << "Sorted: " << arg_vec << "\n";
+
+    start = std::clock();
+    pm.sort(arg_lst, false);
+    end = std::clock();
+    double list_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+
+    std::cout << "Sorting vector: " << vec_time << "s\n";
+    std::cout << "Sorting list: " << list_time << "s\n";
 }
