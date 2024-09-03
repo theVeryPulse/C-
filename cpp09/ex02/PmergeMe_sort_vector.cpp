@@ -89,7 +89,7 @@ void PmergeMe::sort(VecInt& vec, bool print_message)
                 std::cout << "next to insert: " << *smaller << "\n";
             VecInt::const_iterator end;
             if (first_to_insert == smaller_elements.size() - 1
-                && smaller_elements.size() % 2 != 0)
+                && smaller_elements.size() != larger_elements.size())
                 end = sorted.end();
             else
                 end = std::find(sorted.begin(), sorted.end(),
